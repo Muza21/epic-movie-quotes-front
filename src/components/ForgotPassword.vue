@@ -27,7 +27,9 @@
     <div class="text-sm font-semibold py-6 flex justify-center">
       <a href="#" class="font-normal flex justify-center"
         ><IconReturn class="my-auto mr-3" />
-        <span class="text-[#6C757D]"> Back to log in </span>
+        <router-link :to="{ name: 'login' }" class="text-[#6C757D]">
+          Back to log in
+        </router-link>
       </a>
     </div>
   </popup-layout>

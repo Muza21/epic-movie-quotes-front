@@ -45,7 +45,9 @@
         :to="{ name: 'login' }"
         class="font-normal flex justify-center"
         ><IconReturn class="my-auto mr-3" />
-        <span class="text-[#6C757D]"> Back to log in </span>
+        <router-link :to="{ name: 'login' }" class="text-[#6C757D]">
+          Back to log in
+        </router-link>
       </router-link>
     </div>
   </popup-layout>

@@ -31,8 +31,10 @@
               >Remember me
             </span>
           </label>
-          <a src="#" class="flex items-center text-[#0D6EFD]"
-            >Forgot password</a
+          <router-link
+            :to="{ name: 'forgot-password' }"
+            class="flex items-center text-[#0D6EFD]"
+            >Forgot password</router-link
           >
         </div>
         <button
@@ -51,10 +53,15 @@
     </form>
 
     <div class="text-sm font-semibold py-6 flex justify-center">
-      <a href="#" class="text-[#6C757D] font-normal hover:border-teal-500"
-        >Do not have an account?
-        <span class="font-semibold text-[#0D6EFD]"> SignUp </span>
-      </a>
+      <div class="text-[#6C757D] font-normal hover:border-teal-500">
+        Do not have an account?
+        <router-link
+          :to="{ name: 'signup' }"
+          class="font-semibold text-[#0D6EFD]"
+        >
+          SignUp
+        </router-link>
+      </div>
     </div>
   </popup-layout>
 </template>

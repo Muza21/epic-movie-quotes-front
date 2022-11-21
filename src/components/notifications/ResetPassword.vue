@@ -18,9 +18,12 @@
     </form>
 
     <div class="text-sm font-semibold py-6 flex justify-center">
-      <a href="#" class="font-normal flex justify-center">
+      <router-link
+        :to="{ name: 'landing' }"
+        class="font-normal flex justify-center"
+      >
         <span class="text-[#6C757D]"> Skip&#44; I&#39;ll confirm later </span>
-      </a>
+      </router-link>
     </div>
   </popup-layout>
 </template>
