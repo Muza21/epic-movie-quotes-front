@@ -7,6 +7,13 @@ const router = createRouter({
       path: "/",
       name: "landing",
       component: () => import("@/views/LandingPage.vue"),
+      children: [
+        {
+          path: "signup",
+          name: "signup",
+          component: () => import("@/components/SignUp.vue"),
+        },
+      ],
     },
   ],
 });
