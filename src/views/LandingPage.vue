@@ -47,7 +47,9 @@
   <div class="border-8 border-red-500">
     <VerifiedSuccessfully />
   </div>
-  <div class="border-8 border-red-500"></div>
+  <div class="border-8 border-red-500">
+    <ResetedPassword />
+  </div>
   <footer class="py-4 px-10 bg-[#11101A]">
     <div class="text-[#DDCCAA]">&#169; MOVIE QUOTES. ALL RIGHTS RESERVED.</div>
   </footer>
@@ -61,6 +63,7 @@ import NewPassword from "@/components/NewPassword.vue";
 import ResetPassword from "@/components/notifications/ResetPassword.vue";
 import RegisteredSuccessfully from "@/components/notifications/RegisteredSuccessfully.vue";
 import VerifiedSuccessfully from "@/components/notifications/VerifiedSuccessfully.vue";
+import ResetedPassword from "@/components/notifications/ResetedPassword.vue";
 
 export default {
   data() {
@@ -75,6 +78,7 @@ export default {
     ResetPassword,
     RegisteredSuccessfully,
     VerifiedSuccessfully,
+    ResetedPassword,
   },
   computed: {},
 
