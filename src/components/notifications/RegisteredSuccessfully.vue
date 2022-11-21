@@ -5,7 +5,7 @@
         <div class="w-full relative">
           <div class="md:mt-6">
             <div>
-              <EmailSent class="mx-auto" />
+              <IconSent class="mx-auto" />
             </div>
             <div class="text-center text-3xl text-white">Thank you&#33;</div>
             <div class="text-center font-base text-white">
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import EmailSent from "@/components/icons/EmailSent.vue";
+import IconSent from "@/components/icons/IconSent.vue";
 
 export default {
   data() {
@@ -37,7 +37,7 @@ export default {
   },
 
   components: {
-    EmailSent,
+    IconSent,
   },
   computed: {},
 
