@@ -6,7 +6,7 @@
           <div class="md:mt-6">
             <div class="text-center text-3xl text-white">Create an account</div>
             <div class="text-center font-base text-[#6C757D]">
-              Start Your journey!
+              Start Your journey&#33;
             </div>
             <form class="mt-8" x-data="{password: '',password_confirm: ''}">
               <div class="mx-auto max-w-lg">

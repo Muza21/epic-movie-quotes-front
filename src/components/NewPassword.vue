@@ -8,7 +8,8 @@
               Create new password
             </div>
             <div class="text-center font-base text-[#6C757D]">
-              Your new password must be different from previous used passwords!
+              Your new password must be different from previous used
+              passwords&#33;
             </div>
             <form class="mt-8" x-data="{password: '',password_confirm: ''}">
               <div class="mx-auto max-w-lg">

@@ -8,7 +8,7 @@
               Log in to your account
             </div>
             <div class="text-center font-base text-[#6C757D]">
-              Welcome back! Please eneter your details!
+              Welcome back&#33; Please eneter your details&#33;
             </div>
             <form class="mt-8" x-data="{password: '',password_confirm: ''}">
               <div class="mx-auto max-w-lg">
