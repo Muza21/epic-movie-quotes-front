@@ -35,6 +35,9 @@
   <div class="border-8 border-red-500">
     <ForgotPassword />
   </div>
+  <div class="border-8 border-red-500">
+    <NewPassword />
+  </div>
   <footer class="py-4 px-10 bg-[#11101A]">
     <div class="text-[#DDCCAA]">&#169; MOVIE QUOTES. ALL RIGHTS RESERVED.</div>
   </footer>
@@ -44,6 +47,7 @@
 import SignUp from "@/components/SignUp.vue";
 import LogIn from "@/components/LogIn.vue";
 import ForgotPassword from "@/components/ForgotPassword.vue";
+import NewPassword from "@/components/NewPassword.vue";
 
 export default {
   data() {
@@ -54,6 +58,7 @@ export default {
     SignUp,
     LogIn,
     ForgotPassword,
+    NewPassword,
   },
   computed: {},
 
