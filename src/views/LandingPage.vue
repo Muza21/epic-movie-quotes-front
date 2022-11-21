@@ -16,7 +16,35 @@
     </div>
   </header>
   <div class="bg-[#11101A] py-36">
-    <h1 class="text-center text-3xl text-[#DDCCAA]">This is an landing page</h1>
+    <h1 class="text-center text-3xl text-[#DDCCAA]">
+      Find any quote in millions of movie lines
+    </h1>
+    <div class="flex items-center justify-center">
+      <button class="bg-[#E31221] px-4 py-2 rounded-lg text-white">
+        Get Started
+      </button>
+    </div>
   </div>
   <img src="src/assets/Rectangle.jpg" alt="pic" />
+  <SignUp />
+  <footer class="py-4 px-10 bg-[#11101A]">
+    <div class="text-[#DDCCAA]">&#169; MOVIE QUOTES. ALL RIGHTS RESERVED.</div>
+  </footer>
 </template>
+
+<script>
+import SignUp from "@/components/SignUp.vue";
+
+export default {
+  data() {
+    return {};
+  },
+
+  components: {
+    SignUp,
+  },
+  computed: {},
+
+  methods: {},
+};
+</script>
