@@ -4,9 +4,7 @@
       <div class="relative flex flex-wrap">
         <div class="w-full relative">
           <div class="md:mt-6">
-            <div class="text-center font-semibold text-white">
-              Create an account
-            </div>
+            <div class="text-center text-3xl text-white">Create an account</div>
             <div class="text-center font-base text-[#6C757D]">
               Start Your journey!
             </div>
