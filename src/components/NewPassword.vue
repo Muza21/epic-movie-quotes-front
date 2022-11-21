@@ -1,10 +1,5 @@
 <template>
   <popup-layout>
-    <!-- <div class="container max-w-full mx-auto bg-[#222030] md:py-24 px-6">
-    <div class="max-w-sm mx-auto px-6">
-      <div class="relative flex flex-wrap">
-        <div class="w-full relative">
-          <div class="md:mt-6"> -->
     <div class="text-center text-3xl text-white">Create new password</div>
     <div class="text-center font-base text-[#6C757D]">
       Your new password must be different from previous used passwords&#33;
@@ -53,11 +48,6 @@
         <span class="text-[#6C757D]"> Back to log in </span>
       </router-link>
     </div>
-    <!-- </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
   </popup-layout>
 </template>
 

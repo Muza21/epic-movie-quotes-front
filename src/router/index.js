@@ -28,6 +28,32 @@ const router = createRouter({
           name: "new-password",
           component: () => import("@/components/NewPassword.vue"),
         },
+
+        //notifications
+        {
+          path: "registered",
+          name: "registered",
+          component: () =>
+            import("@/components/notifications/RegisteredSuccessfully.vue"),
+        },
+        {
+          path: "reseted-password",
+          name: "reseted-password",
+          component: () =>
+            import("@/components/notifications/ResetedPassword.vue"),
+        },
+        {
+          path: "change-password",
+          name: "change-password",
+          component: () =>
+            import("@/components/notifications/ResetPassword.vue"),
+        },
+        {
+          path: "verified",
+          name: "verified",
+          component: () =>
+            import("@/components/notifications/VerifiedSuccessfully.vue"),
+        },
       ],
     },
   ],

@@ -1,10 +1,5 @@
 <template>
   <popup-layout>
-    <!-- <div class="container max-w-full mx-auto bg-[#222030] md:py-24 px-6">
-    <div class="max-w-sm mx-auto px-6">
-      <div class="relative flex flex-wrap">
-        <div class="w-full relative">
-          <div class="md:mt-6"> -->
     <div class="text-center text-3xl text-white">Log in to your account</div>
     <div class="text-center font-base text-[#6C757D]">
       Welcome back&#33; Please eneter your details&#33;
@@ -61,11 +56,6 @@
         <span class="font-semibold text-[#0D6EFD]"> SignUp </span>
       </a>
     </div>
-    <!-- </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
   </popup-layout>
 </template>
 
