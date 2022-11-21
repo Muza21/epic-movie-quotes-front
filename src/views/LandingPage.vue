@@ -8,14 +8,12 @@
           <router-link
             :to="{ name: 'signup' }"
             class="mx-2 bg-[#E31221] px-4 py-2 rounded-lg text-white"
-            @click="toggleModal"
           >
             Sign Up
           </router-link>
           <router-link
             :to="{ name: 'login' }"
             class="mx-2 px-4 py-2 rounded-lg text-white border border-white"
-            @click="toggleModal"
           >
             Log In
           </router-link>
@@ -31,15 +29,14 @@
       <router-link
         :to="{ name: 'signup' }"
         class="bg-[#E31221] px-4 py-2 rounded-lg text-white"
-        @click="toggleModal"
       >
         <h1 id="begin">Get Started</h1>
       </router-link>
     </div>
   </div>
-  <ModalView :modalActive="modalActive">
+  <v-modal :open="open" @close="open = false">
     <router-view />
-  </ModalView>
+  </v-modal>
   <img src="src/assets/Rectangle.jpg" alt="pic" />
 
   <footer class="py-4 px-10 bg-[#11101A]">
@@ -48,26 +45,39 @@
 </template>
 
 <script>
-import ModalView from "@/components/ModalView.vue";
-import { ref } from "vue";
-
 export default {
-  data() {
-    return {};
+  created() {
+    this.checkModal();
   },
-
-  components: {
-    ModalView,
+  watch: {
+    $route(to, from) {
+      console.log(to, from);
+      this.checkModal();
+    },
+    open(to, from) {
+      console.log(to, from);
+      if (to == false) {
+        if (this.$route.params.modal) {
+          this.$router.push("/");
+        }
+      }
+    },
   },
-  setup() {
-    const modalActive = ref(false);
-    const toggleModal = () => {
-      modalActive.value = !modalActive.value;
-    };
-    return { modalActive, toggleModal };
+  methods: {
+    checkModal() {
+      if (
+        this.$route.params.modal &&
+        this.modalContents[this.$route.params.modal]
+      ) {
+        this.open = true;
+        this.currentModal = this.$route.params.modal;
+      } else {
+        this.open = false;
+      }
+    },
+    showModal(name) {
+      this.$router.push(name).catch(() => {});
+    },
   },
-  computed: {},
-
-  methods: {},
 };
 </script>
