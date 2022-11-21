@@ -5,12 +5,21 @@
         <RouterLink to="/" class="text-[#DDCCAA]">MOVIE QUOTES</RouterLink>
         <div>
           <span class="mx-2 text-white">Eng</span>
-          <span class="mx-2 bg-[#E31221] px-4 py-2 rounded-lg text-white"
-            >Sign Up</span
+          <router-link
+            :to="{ name: 'signup' }"
+            class="mx-2 bg-[#E31221] px-4 py-2 rounded-lg text-white"
+            @click="toggleModal"
           >
-          <span class="mx-2 px-4 py-2 rounded-lg text-white border border-white"
-            >Log In</span
+            Sign Up
+          </router-link>
+
+          <router-link
+            :to="{ name: 'login' }"
+            class="mx-2 px-4 py-2 rounded-lg text-white border border-white"
+            @click="toggleModal"
           >
+            Log In
+          </router-link>
         </div>
       </nav>
     </div>
@@ -40,7 +49,6 @@
   <ModalView :modalActive="modalActive">
     <router-view />
   </ModalView>
-  <!-- <button @click="toggleModal" type="button">Open Modal</button> -->
   <img src="src/assets/Rectangle.jpg" alt="pic" />
   <!--<div class="border-8 border-red-500">
     <SignUp />
