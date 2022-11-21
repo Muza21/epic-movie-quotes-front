@@ -27,6 +27,7 @@
   </div>
   <img src="src/assets/Rectangle.jpg" alt="pic" />
   <SignUp />
+  <LogIn />
   <footer class="py-4 px-10 bg-[#11101A]">
     <div class="text-[#DDCCAA]">&#169; MOVIE QUOTES. ALL RIGHTS RESERVED.</div>
   </footer>
@@ -34,6 +35,7 @@
 
 <script>
 import SignUp from "@/components/SignUp.vue";
+import LogIn from "@/components/LogIn.vue";
 
 export default {
   data() {
@@ -42,6 +44,7 @@ export default {
 
   components: {
     SignUp,
+    LogIn,
   },
   computed: {},
 
