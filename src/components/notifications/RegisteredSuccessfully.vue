@@ -20,14 +20,7 @@
   </popup-layout>
 </template>
 
-<script>
+<script setup>
 import IconSent from "@/components/icons/IconSent.vue";
 import PopupLayout from "@/components/PopupLayout.vue";
-
-export default {
-  components: {
-    IconSent,
-    PopupLayout,
-  },
-};
 </script>

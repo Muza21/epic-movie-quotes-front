@@ -19,14 +19,7 @@
   </popup-layout>
 </template>
 
-<script>
+<script setup>
 import IconCheckmark from "@/components/icons/IconCheckmark.vue";
 import PopupLayout from "@/components/PopupLayout.vue";
-
-export default {
-  components: {
-    IconCheckmark,
-    PopupLayout,
-  },
-};
 </script>

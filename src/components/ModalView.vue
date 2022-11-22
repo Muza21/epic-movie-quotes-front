@@ -1,11 +1,14 @@
 <template>
-  <div v-show="open" class="modal">
+  <div v-show="props.open" class="modal">
     <slot />
   </div>
 </template>
 
-<script>
-export default {
-  props: ["open"],
-};
+<script setup>
+const props = defineProps({
+  open: {
+    type: Boolean,
+    default: false,
+  },
+});
 </script>

@@ -35,21 +35,7 @@
   </popup-layout>
 </template>
 
-<script>
+<script setup>
 import IconReturn from "@/components/icons/IconReturn.vue";
 import PopupLayout from "@/components/PopupLayout.vue";
-
-export default {
-  data() {
-    return {};
-  },
-
-  components: {
-    IconReturn,
-    PopupLayout,
-  },
-  computed: {},
-
-  methods: {},
-};
 </script>

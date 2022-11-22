@@ -70,14 +70,7 @@
   </popup-layout>
 </template>
 
-<script>
+<script setup>
 import IconGoogle from "@/components/icons/IconGoogle.vue";
 import PopupLayout from "@/components/PopupLayout.vue";
-
-export default {
-  components: {
-    IconGoogle,
-    PopupLayout,
-  },
-};
 </script>

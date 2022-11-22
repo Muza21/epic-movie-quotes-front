@@ -44,40 +44,4 @@
   </footer>
 </template>
 
-<script>
-export default {
-  created() {
-    this.checkModal();
-  },
-  watch: {
-    $route(to, from) {
-      console.log(to, from);
-      this.checkModal();
-    },
-    open(to, from) {
-      console.log(to, from);
-      if (to == false) {
-        if (this.$route.params.modal) {
-          this.$router.push("/");
-        }
-      }
-    },
-  },
-  methods: {
-    checkModal() {
-      if (
-        this.$route.params.modal &&
-        this.modalContents[this.$route.params.modal]
-      ) {
-        this.open = true;
-        this.currentModal = this.$route.params.modal;
-      } else {
-        this.open = false;
-      }
-    },
-    showModal(name) {
-      this.$router.push(name).catch(() => {});
-    },
-  },
-};
-</script>
+<script setup></script>
