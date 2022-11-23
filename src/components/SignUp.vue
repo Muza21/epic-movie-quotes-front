@@ -72,5 +72,5 @@
 
 <script setup>
 import IconGoogle from "@/components/icons/IconGoogle.vue";
-import PopupLayout from "@/components/PopupLayout.vue";
+import PopupLayout from "@/components/layouts/PopupLayout.vue";
 </script>

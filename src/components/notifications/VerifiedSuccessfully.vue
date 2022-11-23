@@ -21,5 +21,5 @@
 
 <script setup>
 import IconCheckmark from "@/components/icons/IconCheckmark.vue";
-import PopupLayout from "@/components/PopupLayout.vue";
+import PopupLayout from "@/components/layouts/PopupLayout.vue";
 </script>

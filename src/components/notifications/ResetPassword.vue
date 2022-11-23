@@ -30,5 +30,5 @@
 
 <script setup>
 import IconSent from "@/components/icons/IconSent.vue";
-import PopupLayout from "@/components/PopupLayout.vue";
+import PopupLayout from "@/components/layouts/PopupLayout.vue";
 </script>

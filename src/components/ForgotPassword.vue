@@ -37,5 +37,5 @@
 
 <script setup>
 import IconReturn from "@/components/icons/IconReturn.vue";
-import PopupLayout from "@/components/PopupLayout.vue";
+import PopupLayout from "@/components/layouts/PopupLayout.vue";
 </script>
