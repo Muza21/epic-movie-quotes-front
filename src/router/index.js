@@ -60,6 +60,13 @@ const router = createRouter({
       path: "/profile",
       name: "profile",
       component: () => import("@/views/ProfilePage.vue"),
+      children: [
+        {
+          path: "new-email",
+          name: "new-email",
+          component: () => import("@/components/NewEmail.vue"),
+        },
+      ],
     },
     {
       path: "/newsfeed",
