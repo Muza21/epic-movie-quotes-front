@@ -36,7 +36,6 @@
               <p class="mx-2">10</p>
               <IconHeart />
             </div>
-            <!-- component -->
 
             <div class="text-white p-6 antialiased flex">
               <img
