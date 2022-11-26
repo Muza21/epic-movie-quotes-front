@@ -1,11 +1,14 @@
 <template>
-  <header class="py-4 px-16 bg-[#11101A]">
+  <header class="py-4 px-16 bg-[#222030]">
     <div class="wrapper">
       <nav class="flex justify-between">
         <RouterLink to="/" class="text-[#DDCCAA]">MOVIE QUOTES</RouterLink>
         <div class="flex items-center">
           <div class="mx-4">
             <IconNotification />
+            <UsersNotifications
+              class="absolute -translate-x-[515px] -translate-y-[20px] z-50"
+            />
           </div>
           <span class="flex items-center mx-4 text-white"
             >Eng <IconDropdown class="ml-2" />
@@ -31,4 +34,5 @@
 <script setup>
 import IconNotification from "@/components/icons/IconNotification.vue";
 import IconDropdown from "@/components/icons/IconDropdown.vue";
+import UsersNotifications from "../notifications/UsersNotifications.vue";
 </script>
