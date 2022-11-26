@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#222030] h-[100vh]">
+  <div class="bg-[#222030]">
     <NavigationBar />
     <div class="flex flex-col justify-between">
       <div class="flex">
@@ -18,9 +18,7 @@
                   class="w-full px-4 lg:w-3/12 lg:order-2 flex justify-center"
                 >
                   <div class="relative">
-                    <div
-                      class="rounded-full overflow-hidden bg-red-400 w-32 h-32"
-                    >
+                    <div class="rounded-full overflow-hidden w-32 h-32">
                       <img alt="..." src="/src/assets/ProfilePic.jpg" />
                     </div>
                   </div>

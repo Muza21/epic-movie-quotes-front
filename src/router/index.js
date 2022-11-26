@@ -61,6 +61,16 @@ const router = createRouter({
       name: "profile",
       component: () => import("@/views/ProfilePage.vue"),
     },
+    {
+      path: "/newsfeed",
+      name: "newsfeed",
+      component: () => import("@/views/NewsFeed.vue"),
+    },
+    {
+      path: "/movielist",
+      name: "movielist",
+      component: () => import("@/views/MovieList.vue"),
+    },
   ],
 });
 
