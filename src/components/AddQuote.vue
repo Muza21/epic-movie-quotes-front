@@ -1,7 +1,9 @@
 <template>
   <form-layout>
     <template v-slot:header>
-      <div class="text-center text-3xl text-white mx-14 my-6">Add movie</div>
+      <div class="w-full px-10">
+        <div class="text-center text-3xl text-white mx-14 my-6">Add quote</div>
+      </div>
     </template>
     <form class="mt-8">
       <div class="mx-auto px-4">
@@ -16,55 +18,46 @@
             </div>
           </div>
         </div>
-        <div class="py-1">
-          <input
-            placeholder="Movie name"
-            class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+
+        <div class="mb-3 flex items-center w-full">
+          <img
+            class="w-72 h-40 object-cover rounded-xl"
+            src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
           />
-        </div>
-        <div class="py-1">
-          <input
-            placeholder="ფილმის სახელი"
-            class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
-          />
-        </div>
-        <div class="py-1">
-          <div class="p-2 flex items-center w-full border-2 border-[#6C757D]">
-            <div class="mx-3 flex-1">
-              <div class="flex items-center">
-                <div class="p-2 ml-2 bg-[#6C757D] text-white flex items-center">
-                  Genre name <IconCross class="w-3 h-3" />
-                </div>
-                <input type="file" class="hidden" />
+          <div class="mx-3 flex-1">
+            <div class="my-3">
+              <h2 class="text-xl font-semibold text-[#DDCCAA]">
+                dynamic movie name
+              </h2>
+            </div>
+            <div class="my-3 flex">
+              <div
+                class="px-2 py-1 text-white bg-[#6C757D] text-center rounded-md mr-2"
+              >
+                dynamic genre
               </div>
+            </div>
+            <div class="my-3 flex">
+              <h2 class="text-xl text-white">Director:</h2>
+              <h2 class="ml-2 text-xl text-white">Dynamic director name</h2>
             </div>
           </div>
         </div>
+
         <div class="py-1">
-          <input
-            placeholder="Director"
-            class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
-          />
-        </div>
-        <div class="py-1">
-          <input
-            placeholder="რეჟისორი"
+          <textarea
+            placeholder="Quote in English"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
         </div>
         <div class="py-1">
           <textarea
-            placeholder="Movie description"
+            placeholder="ციტატა ქართულ ენაზე"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
         </div>
-        <div class="py-1">
-          <textarea
-            placeholder="ფილმის აღწერა"
-            class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
-          />
-        </div>
-        <div class="py-1">
+
+        <div class="py-1 mt-8">
           <div class="p-2 flex items-center w-full border-2 border-[#6C757D]">
             <IconPhoto />
             <div class="mx-3 flex-1">
@@ -84,7 +77,7 @@
         <button
           class="mt-3 text-lg font-semibold bg-[#E31221] w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
         >
-          Add movie
+          Save Changes
         </button>
       </div>
     </form>
@@ -94,5 +87,4 @@
 <script setup>
 import FormLayout from "@/components/layouts/FormLayout.vue";
 import IconPhoto from "@/components/icons/IconPhoto.vue";
-import IconCross from "@/components/icons/IconCross.vue";
 </script>

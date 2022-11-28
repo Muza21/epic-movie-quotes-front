@@ -16,7 +16,7 @@
   <v-modal :open="open" @close="open = false">
     <router-view />
   </v-modal>
-  <img src="src/assets/Rectangle.jpg" alt="pic" />
+  <img src="/src/assets/Rectangle.jpg" alt="pic" />
 
   <footer class="py-4 px-10 bg-[#11101A]">
     <div class="text-[#DDCCAA]">&#169; MOVIE QUOTES. ALL RIGHTS RESERVED.</div>
