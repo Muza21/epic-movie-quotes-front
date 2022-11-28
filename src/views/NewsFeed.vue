@@ -82,6 +82,9 @@
         </div>
       </div>
     </div>
+    <v-modal :open="open" @close="open = false">
+      <router-view />
+    </v-modal>
   </div>
 </template>
 

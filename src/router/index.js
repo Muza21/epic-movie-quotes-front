@@ -72,6 +72,13 @@ const router = createRouter({
       path: "/newsfeed",
       name: "newsfeed",
       component: () => import("@/views/NewsFeed.vue"),
+      children: [
+        {
+          path: "new-quote",
+          name: "new-quote",
+          component: () => import("@/components/NewQuote.vue"),
+        },
+      ],
     },
     {
       path: "/movielist",
