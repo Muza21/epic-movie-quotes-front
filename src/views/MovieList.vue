@@ -15,9 +15,6 @@
               <button class="bg-[#E31221] px-4 py-2 rounded-lg text-white">
                 <IconAdd class="my-auto mr-3" />Add movie
               </button>
-              <!-- <button class="bg-[#E31221] px-4 py-2 rounded-lg text-white">
-                <IconAdd class="my-auto mr-3" />Add movie
-              </button> -->
             </div>
           </div>
           <div>
@@ -165,6 +162,5 @@
 <script setup>
 import NavigationBar from "@/components/layouts/NavigationBar.vue";
 import SideBar from "@/components/layouts/SideBar.vue";
-import IconChat from "../components/icons/IconChat.vue";
-// import IconAdd from "../components/icons/IconAdd.vue";
+import IconChat from "@/components/icons/IconChat.vue";
 </script>

@@ -13,7 +13,7 @@
           >
             <img
               class="w-20 h-20 object-cover rounded-full"
-              src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+              src="/src/assets/ProfilePic.jpg"
             />
             <div class="mx-3 flex-1">
               <div class="flex justify-between">
@@ -34,7 +34,7 @@
           >
             <img
               class="w-20 h-20 object-cover rounded-full"
-              src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+              src="/src/assets/ProfilePic.jpg"
             />
             <div class="mx-3 flex-1">
               <div class="flex justify-between">
@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-import IconTriangle from "../icons/IconTriangle.vue";
-import IconChat from "../icons/IconChat.vue";
-import RedHeart from "../icons/RedHeart.vue";
+import IconTriangle from "@/components/icons/IconTriangle.vue";
+import IconChat from "@/components/icons/IconChat.vue";
+import RedHeart from "@/components/icons/RedHeart.vue";
 </script>

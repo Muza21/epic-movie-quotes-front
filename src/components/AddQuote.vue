@@ -22,7 +22,7 @@
         <div class="mb-3 flex items-center w-full">
           <img
             class="w-72 h-40 object-cover rounded-xl"
-            src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            src="/src/assets/ProfilePic.jpg"
           />
           <div class="mx-3 flex-1">
             <div class="my-3">
