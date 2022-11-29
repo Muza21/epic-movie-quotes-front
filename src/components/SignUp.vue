@@ -4,7 +4,7 @@
     <div class="text-center font-base text-[#6C757D]">
       Start Your journey&#33;
     </div>
-    <ValidationForm class="mt-8" x-data="{password: '',password_confirm: ''}">
+    <ValidationForm @submit="onSubmit" class="mt-8">
       <div class="mx-auto max-w-lg">
         <div class="py-1">
           <span class="px-1 text-sm text-white">Username</span>
@@ -76,4 +76,20 @@
 import IconGoogle from "@/components/icons/IconGoogle.vue";
 import PopupLayout from "@/components/layouts/PopupLayout.vue";
 import { Form as ValidationForm, Field } from "vee-validate";
+
+import axiosInstance from "@/config/axios/index.js";
+
+const onSubmit = async (values) => {
+  try {
+    const response = await axiosInstance.post(`/signup`, {
+      username: values.username,
+      email: values.email,
+      password: values.password,
+      password_confirm: values.password_confirm,
+    });
+    console.log(response);
+  } catch (err) {
+    console.log(err);
+  }
+};
 </script>
