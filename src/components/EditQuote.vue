@@ -6,11 +6,11 @@
           <IconTrash />
           <p class="text-[#CED4DA] ml-2">Delete</p>
         </div>
-        <div class="text-center text-3xl text-white mx-14 my-6">Add movie</div>
+        <div class="text-center text-3xl text-white mx-14 my-6">Edit quote</div>
         <IconCross />
       </div>
     </template>
-    <form class="mt-8">
+    <ValidationForm class="mt-8">
       <div class="mx-auto px-4">
         <div class="my-10 rounded-xl bg-[#11101A]">
           <div class="flex items-center mb-6 rounded-md">
@@ -25,14 +25,18 @@
         </div>
 
         <div class="py-1">
-          <textarea
+          <Field
+            as="textarea"
             placeholder="Quote on English"
+            name="quote_en"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
         </div>
         <div class="py-1">
-          <textarea
+          <Field
+            as="textarea"
             placeholder="ციტატა ქართულ ენაზე"
+            name="quote_ka"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
         </div>
@@ -64,7 +68,7 @@
           Save Changes
         </button>
       </div>
-    </form>
+    </ValidationForm>
   </form-layout>
 </template>
 
@@ -73,4 +77,5 @@ import FormLayout from "@/components/layouts/FormLayout.vue";
 import IconPhoto from "@/components/icons/IconPhoto.vue";
 import IconCross from "@/components/icons/IconCross.vue";
 import IconTrash from "@/components/icons/IconTrash.vue";
+import { Form as ValidationForm, Field } from "vee-validate";
 </script>

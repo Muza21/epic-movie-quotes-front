@@ -7,7 +7,7 @@
     <div class="text-center font-base text-white">
       We have sent a password recover instructions to your email
     </div>
-    <form class="mt-8">
+    <div class="mt-8">
       <div class="mx-auto max-w-lg">
         <button
           class="mt-3 text-lg font-semibold bg-[#E31221] w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
@@ -15,7 +15,7 @@
           Go to my email
         </button>
       </div>
-    </form>
+    </div>
 
     <div class="text-sm font-semibold py-6 flex justify-center">
       <router-link

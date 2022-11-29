@@ -1,12 +1,13 @@
 <template>
   <newemail-layout>
-    <form class="mt-8">
+    <ValidationForm class="mt-8">
       <div class="mx-auto max-w-lg">
         <div class="py-1">
           <span class="px-1 text-sm text-white">New email</span>
-          <input
+          <Field
             placeholder="Enter new email"
             type="email"
+            name="email"
             class="text-md block p-3 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
         </div>
@@ -18,10 +19,11 @@
           </button>
         </div>
       </div>
-    </form>
+    </ValidationForm>
   </newemail-layout>
 </template>
 
 <script setup>
 import NewemailLayout from "@/components/layouts/NewemailLayout.vue";
+import { Form as ValidationForm, Field } from "vee-validate";
 </script>

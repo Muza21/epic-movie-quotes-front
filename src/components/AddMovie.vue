@@ -3,7 +3,7 @@
     <template v-slot:header>
       <div class="text-center text-3xl text-white mx-14 my-6">Add movie</div>
     </template>
-    <form class="mt-8">
+    <ValidationForm class="mt-8">
       <div class="mx-auto px-4">
         <div class="my-10 rounded-xl bg-[#11101A]">
           <div class="flex items-center mb-6 rounded-md">
@@ -17,14 +17,16 @@
           </div>
         </div>
         <div class="py-1">
-          <input
+          <Field
             placeholder="Movie name"
+            name="movie_name_en"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
         </div>
         <div class="py-1">
-          <input
+          <Field
             placeholder="ფილმის სახელი"
+            name="movie_name_ka"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
         </div>
@@ -35,32 +37,38 @@
                 <div class="p-2 ml-2 bg-[#6C757D] text-white flex items-center">
                   Genre name <IconCross class="w-3 h-3" />
                 </div>
-                <input type="file" class="hidden" />
+                <Field name="picture" type="file" class="hidden" />
               </div>
             </div>
           </div>
         </div>
         <div class="py-1">
-          <input
+          <Field
             placeholder="Director"
+            name="director_name_en"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
         </div>
         <div class="py-1">
-          <input
+          <Field
             placeholder="რეჟისორი"
+            name="director_name_ka"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
         </div>
         <div class="py-1">
-          <textarea
+          <Field
+            as="textarea"
             placeholder="Movie description"
+            name="movie_description_en"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
         </div>
         <div class="py-1">
-          <textarea
+          <Field
+            as="textarea"
             placeholder="ფილმის აღწერა"
+            name="movie_description_ka"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
         </div>
@@ -87,7 +95,7 @@
           Add movie
         </button>
       </div>
-    </form>
+    </ValidationForm>
   </form-layout>
 </template>
 
@@ -95,4 +103,5 @@
 import FormLayout from "@/components/layouts/FormLayout.vue";
 import IconPhoto from "@/components/icons/IconPhoto.vue";
 import IconCross from "@/components/icons/IconCross.vue";
+import { Form as ValidationForm, Field } from "vee-validate";
 </script>

@@ -5,7 +5,7 @@
         Write new quote
       </div>
     </template>
-    <form class="mt-8">
+    <ValidationForm class="mt-8">
       <div class="mx-auto px-4">
         <div class="my-10 rounded-xl bg-[#11101A]">
           <div class="flex items-center mb-6 rounded-md">
@@ -19,14 +19,18 @@
           </div>
         </div>
         <div class="py-1">
-          <textarea
+          <Field
+            as="textarea"
             placeholder="Start create new quote"
+            name="quote_en"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
         </div>
         <div class="py-1">
-          <textarea
+          <Field
+            as="textarea"
             placeholder="ახალი ციტატა"
+            name="quote_ka"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
         </div>
@@ -41,7 +45,7 @@
                 <button class="p-2 ml-2 bg-[#9747FF] rounded-lg text-white">
                   Choose file
                 </button>
-                <input type="file" class="hidden" />
+                <Field name="picture" type="file" class="hidden" />
               </div>
             </div>
           </div>
@@ -63,7 +67,7 @@
           Post
         </button>
       </div>
-    </form>
+    </ValidationForm>
   </form-layout>
 </template>
 
@@ -72,4 +76,5 @@ import FormLayout from "@/components/layouts/FormLayout.vue";
 import IconPhoto from "@/components/icons/IconPhoto.vue";
 import IconCamera from "@/components/icons/IconCamera.vue";
 import IconDropdown from "@/components/icons/IconDropdown.vue";
+import { Form as ValidationForm, Field } from "vee-validate";
 </script>
