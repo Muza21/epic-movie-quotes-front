@@ -7,7 +7,7 @@
     <div class="text-center font-base text-white">
       Your account has been activated.
     </div>
-    <form class="mt-8">
+    <div class="mt-8">
       <div class="mx-auto max-w-lg">
         <button
           class="mt-3 text-lg font-semibold bg-[#E31221] w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
@@ -15,11 +15,11 @@
           Go to my news feed
         </button>
       </div>
-    </form>
+    </div>
   </popup-layout>
 </template>
 
 <script setup>
 import IconCheckmark from "@/components/icons/IconCheckmark.vue";
-import PopupLayout from "@/components/PopupLayout.vue";
+import PopupLayout from "@/components/layouts/PopupLayout.vue";
 </script>

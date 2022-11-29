@@ -4,39 +4,41 @@
     <div class="text-center font-base text-[#6C757D]">
       Start Your journey&#33;
     </div>
-    <form class="mt-8" x-data="{password: '',password_confirm: ''}">
+    <ValidationForm class="mt-8" x-data="{password: '',password_confirm: ''}">
       <div class="mx-auto max-w-lg">
         <div class="py-1">
           <span class="px-1 text-sm text-white">Username</span>
-          <input
+          <Field
             placeholder=""
             type="text"
+            name="username"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
         </div>
         <div class="py-1">
           <span class="px-1 text-sm text-white">Email</span>
-          <input
+          <Field
             placeholder=""
             type="email"
+            name="email"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
         </div>
         <div class="py-1">
           <span class="px-1 text-sm text-white">Password</span>
-          <input
+          <Field
             placeholder=""
             type="password"
-            x-model="password"
+            name="password"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
         </div>
         <div class="py-1">
           <span class="px-1 text-sm text-white">Password Confirm</span>
-          <input
+          <Field
             placeholder=""
             type="password"
-            x-model="password_confirm"
+            name="password_confirm"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
         </div>
@@ -54,7 +56,7 @@
           </div>
         </button>
       </div>
-    </form>
+    </ValidationForm>
 
     <div class="text-sm font-semibold py-6 flex justify-center">
       <div class="text-[#6C757D] font-normal hover:border-teal-500">
@@ -72,5 +74,6 @@
 
 <script setup>
 import IconGoogle from "@/components/icons/IconGoogle.vue";
-import PopupLayout from "@/components/PopupLayout.vue";
+import PopupLayout from "@/components/layouts/PopupLayout.vue";
+import { Form as ValidationForm, Field } from "vee-validate";
 </script>

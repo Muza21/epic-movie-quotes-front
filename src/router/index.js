@@ -56,6 +56,52 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: "/profile",
+      name: "profile",
+      component: () => import("@/views/ProfilePage.vue"),
+      children: [
+        {
+          path: "new-email",
+          name: "new-email",
+          component: () => import("@/components/NewEmail.vue"),
+        },
+      ],
+    },
+    {
+      path: "/newsfeed",
+      name: "newsfeed",
+      component: () => import("@/views/NewsFeed.vue"),
+      children: [
+        {
+          path: "new-quote",
+          name: "new-quote",
+          component: () => import("@/components/NewQuote.vue"),
+        },
+      ],
+    },
+    {
+      path: "/movielist",
+      name: "movielist",
+      component: () => import("@/views/MovieList.vue"),
+      children: [
+        {
+          path: "add-movie",
+          name: "add-movie",
+          component: () => import("@/components/AddMovie.vue"),
+        },
+        {
+          path: "edit-quote",
+          name: "edit-quote",
+          component: () => import("@/components/EditQuote.vue"),
+        },
+        {
+          path: "add-quote",
+          name: "add-quote",
+          component: () => import("@/components/AddQuote.vue"),
+        },
+      ],
+    },
   ],
 });
 
