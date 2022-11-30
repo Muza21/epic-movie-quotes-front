@@ -12,8 +12,12 @@
             placeholder=""
             type="text"
             name="username"
+            rules="required|min:3"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
+          <div>
+            <ErrorMessage class="ml-4 text-orange-600" name="username" />
+          </div>
         </div>
         <div class="py-1">
           <span class="px-1 text-sm text-white">Email</span>
@@ -21,8 +25,12 @@
             placeholder=""
             type="email"
             name="email"
+            rules="required|email|min:3"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
+          <div>
+            <ErrorMessage class="ml-4 text-orange-600" name="email" />
+          </div>
         </div>
         <div class="py-1">
           <span class="px-1 text-sm text-white">Password</span>
@@ -30,8 +38,12 @@
             placeholder=""
             type="password"
             name="password"
+            rules="required|min:7"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
+          <div>
+            <ErrorMessage class="ml-4 text-orange-600" name="password" />
+          </div>
         </div>
         <div class="py-1">
           <span class="px-1 text-sm text-white">Password Confirm</span>
@@ -39,8 +51,15 @@
             placeholder=""
             type="password"
             name="password_confirm"
+            rules="required|min:7"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
+          <div>
+            <ErrorMessage
+              class="ml-4 text-orange-600"
+              name="password_confirm"
+            />
+          </div>
         </div>
 
         <button
@@ -75,7 +94,7 @@
 <script setup>
 import IconGoogle from "@/components/icons/IconGoogle.vue";
 import PopupLayout from "@/components/layouts/PopupLayout.vue";
-import { Form as ValidationForm, Field } from "vee-validate";
+import { Form as ValidationForm, Field, ErrorMessage } from "vee-validate";
 
 import axiosInstance from "@/config/axios/index.js";
 
