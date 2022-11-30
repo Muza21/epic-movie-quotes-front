@@ -50,14 +50,14 @@
           <Field
             placeholder=""
             type="password"
-            name="password_confirm"
-            rules="required|min:7"
+            name="password_confirmation"
+            rules="required|min:7|confirmed:password"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
           <div>
             <ErrorMessage
               class="ml-4 text-orange-600"
-              name="password_confirm"
+              name="password_confirmation"
             />
           </div>
         </div>
@@ -104,7 +104,7 @@ const onSubmit = async (values) => {
       username: values.username,
       email: values.email,
       password: values.password,
-      password_confirm: values.password_confirm,
+      password_confirmation: values.password_confirmation,
     });
     console.log(response);
   } catch (err) {
