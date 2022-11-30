@@ -117,10 +117,6 @@ const errorData = reactive({
   emailError: "",
 });
 
-// function verifyNotification() {
-//   router.push({ name: "registered" });
-// }
-
 function clearError() {
   errorData.usernameError = "";
   errorData.emailError = "";
