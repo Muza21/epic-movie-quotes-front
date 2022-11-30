@@ -49,7 +49,7 @@ const router = createRouter({
             import("@/components/notifications/ResetPassword.vue"),
         },
         {
-          path: "verified",
+          path: "verified/:id/:token",
           name: "verified",
           component: () =>
             import("@/components/notifications/VerifiedSuccessfully.vue"),
