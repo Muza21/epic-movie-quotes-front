@@ -15,8 +15,10 @@
             rules="required|min:3"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
-          <div v-if="store.usernameError">
-            <div class="ml-4 text-orange-600">{{ store.usernameError }}</div>
+          <div v-if="errorData.usernameError">
+            <div class="ml-4 text-orange-600">
+              {{ errorData.usernameError }}
+            </div>
           </div>
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="username" />
@@ -31,8 +33,8 @@
             rules="required|email|min:3"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
-          <div v-if="store.emailError">
-            <div class="ml-4 text-orange-600">{{ store.emailError }}</div>
+          <div v-if="errorData.emailError">
+            <div class="ml-4 text-orange-600">{{ errorData.emailError }}</div>
           </div>
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="email" />
@@ -102,11 +104,12 @@ import IconGoogle from "@/components/icons/IconGoogle.vue";
 import PopupLayout from "@/components/layouts/PopupLayout.vue";
 import { Form as ValidationForm, Field, ErrorMessage } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
+import { reactive } from "vue";
 
-import { errorMessagesStore } from "@/stores/index.js";
-
-const store = errorMessagesStore();
-
+const errorData = reactive({
+  usernameError: "",
+  emailError: "",
+});
 const onSubmit = async (values) => {
   try {
     const response = await axiosInstance.post(`/signup`, {
@@ -119,10 +122,10 @@ const onSubmit = async (values) => {
   } catch (err) {
     if (err.response.status === 422) {
       if (err.response.data.errors.username) {
-        store.usernameError = err.response.data.errors.username[0];
+        errorData.usernameError = err.response.data.errors.username[0];
       }
       if (err.response.data.errors.email) {
-        store.emailError = err.response.data.errors.email[0];
+        errorData.emailError = err.response.data.errors.email[0];
       }
     }
     console.log(err);
