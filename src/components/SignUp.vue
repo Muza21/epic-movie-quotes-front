@@ -95,7 +95,6 @@
 import IconGoogle from "@/components/icons/IconGoogle.vue";
 import PopupLayout from "@/components/layouts/PopupLayout.vue";
 import { Form as ValidationForm, Field, ErrorMessage } from "vee-validate";
-
 import axiosInstance from "@/config/axios/index.js";
 
 const onSubmit = async (values) => {
@@ -108,6 +107,14 @@ const onSubmit = async (values) => {
     });
     console.log(response);
   } catch (err) {
+    if (err.response.status === 422) {
+      if (err.response.data.errors.username) {
+        alert(err.response.data.errors.username[0]);
+      }
+      if (err.response.data.errors.email) {
+        alert(err.response.data.errors.email[0]);
+      }
+    }
     console.log(err);
   }
 };
