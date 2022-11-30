@@ -7,7 +7,7 @@
           <div class="mx-4">
             <IconNotification />
             <UsersNotifications
-              class="absolute -translate-x-[515px] -translate-y-[20px] z-50"
+              class="absolute hidden -translate-x-[515px] -translate-y-[20px] z-50"
             />
           </div>
           <span class="flex items-center mx-4 text-white"

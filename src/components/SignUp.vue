@@ -4,7 +4,7 @@
     <div class="text-center font-base text-[#6C757D]">
       Start Your journey&#33;
     </div>
-    <ValidationForm class="mt-8" x-data="{password: '',password_confirm: ''}">
+    <ValidationForm @submit="onSubmit" class="mt-8">
       <div class="mx-auto max-w-lg">
         <div class="py-1">
           <span class="px-1 text-sm text-white">Username</span>
@@ -12,8 +12,17 @@
             placeholder=""
             type="text"
             name="username"
+            rules="required|min:3"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
+          <div v-if="errorData.usernameError">
+            <div class="ml-4 text-orange-600">
+              {{ errorData.usernameError }}
+            </div>
+          </div>
+          <div>
+            <ErrorMessage class="ml-4 text-orange-600" name="username" />
+          </div>
         </div>
         <div class="py-1">
           <span class="px-1 text-sm text-white">Email</span>
@@ -21,8 +30,15 @@
             placeholder=""
             type="email"
             name="email"
+            rules="required|email|min:3"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
+          <div v-if="errorData.emailError">
+            <div class="ml-4 text-orange-600">{{ errorData.emailError }}</div>
+          </div>
+          <div>
+            <ErrorMessage class="ml-4 text-orange-600" name="email" />
+          </div>
         </div>
         <div class="py-1">
           <span class="px-1 text-sm text-white">Password</span>
@@ -30,17 +46,28 @@
             placeholder=""
             type="password"
             name="password"
+            rules="required|min:7"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
+          <div>
+            <ErrorMessage class="ml-4 text-orange-600" name="password" />
+          </div>
         </div>
         <div class="py-1">
           <span class="px-1 text-sm text-white">Password Confirm</span>
           <Field
             placeholder=""
             type="password"
-            name="password_confirm"
+            name="password_confirmation"
+            rules="required|min:7|confirmed:password"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
+          <div>
+            <ErrorMessage
+              class="ml-4 text-orange-600"
+              name="password_confirmation"
+            />
+          </div>
         </div>
 
         <button
@@ -75,5 +102,33 @@
 <script setup>
 import IconGoogle from "@/components/icons/IconGoogle.vue";
 import PopupLayout from "@/components/layouts/PopupLayout.vue";
-import { Form as ValidationForm, Field } from "vee-validate";
+import { Form as ValidationForm, Field, ErrorMessage } from "vee-validate";
+import axiosInstance from "@/config/axios/index.js";
+import { reactive } from "vue";
+
+const errorData = reactive({
+  usernameError: "",
+  emailError: "",
+});
+const onSubmit = async (values) => {
+  try {
+    const response = await axiosInstance.post(`/signup`, {
+      username: values.username,
+      email: values.email,
+      password: values.password,
+      password_confirmation: values.password_confirmation,
+    });
+    console.log(response);
+  } catch (err) {
+    if (err.response.status === 422) {
+      if (err.response.data.errors.username) {
+        errorData.usernameError = err.response.data.errors.username[0];
+      }
+      if (err.response.data.errors.email) {
+        errorData.emailError = err.response.data.errors.email[0];
+      }
+    }
+    console.log(err);
+  }
+};
 </script>
