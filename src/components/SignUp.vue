@@ -117,9 +117,9 @@ const errorData = reactive({
   emailError: "",
 });
 
-function verifyNotification() {
-  router.push({ name: "registered" });
-}
+// function verifyNotification() {
+//   router.push({ name: "registered" });
+// }
 
 function clearError() {
   errorData.usernameError = "";
@@ -134,6 +134,7 @@ const onSubmit = async (values) => {
       password: values.password,
       password_confirmation: values.password_confirmation,
     });
+    router.push({ name: "registered" });
     console.log(response);
   } catch (err) {
     if (err.response.status === 422) {
