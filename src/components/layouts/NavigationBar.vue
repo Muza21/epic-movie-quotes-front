@@ -1,7 +1,7 @@
 <template>
   <header class="py-4 px-16 bg-[#222030]">
     <div class="wrapper">
-      <nav class="flex justify-between">
+      <nav class="flex justify-between items-center">
         <RouterLink to="/" class="text-[#DDCCAA]">MOVIE QUOTES</RouterLink>
         <div class="flex items-center">
           <div class="mx-4">
