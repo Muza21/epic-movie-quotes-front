@@ -149,5 +149,5 @@ import IconComment from "@/components/icons/IconComment.vue";
 import IconPencil from "@/components/icons/IconPencil.vue";
 import IconTrash from "@/components/icons/IconTrash.vue";
 import IconThreedots from "@/components/icons/IconThreedots.vue";
-import IconEyes from "../components/icons/IconEyes.vue";
+import IconEyes from "@/components/icons/IconEyes.vue";
 </script>

@@ -5,7 +5,15 @@
         <RouterLink to="/" class="text-[#DDCCAA]">MOVIE QUOTES</RouterLink>
         <div class="flex items-center">
           <div class="mx-4">
-            <IconNotification />
+            <div class="relative">
+              <IconNotification />
+              <div
+                class="w-[25px] h-[25px] absolute -top-[5px] -right-[10px] flex items-center justify-center rounded-full bg-[#E33812] text-white font-semibold"
+              >
+                3
+              </div>
+            </div>
+
             <UsersNotifications
               class="absolute hidden -translate-x-[515px] -translate-y-[20px] z-50"
             />

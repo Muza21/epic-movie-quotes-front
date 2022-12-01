@@ -9,6 +9,19 @@
           </div>
         </div>
         <div
+          class="w-[400px] h-[130px] bg-[#BADBCC] rounded-lg absolute right-11 top-8 hidden"
+        >
+          <div class="flex justify-between items-center p-4">
+            <IconGreencheck class="w-6 h-6" />
+            <p class="text-[#0F5132] font-sans">A simple alert—check it out!</p>
+            <IconCross :svgColor="black" class="w-4 h-4" />
+          </div>
+          <p class="p-4 text-center">
+            Please check email to verify new address
+          </p>
+        </div>
+
+        <div
           class="w-full h-full md:w-[1000px] mx-auto bg-[#11101A] rounded-lg m-24 overflow-y-auto"
         >
           <div class="flex items-center justify-center py-16 px-52">
@@ -95,4 +108,6 @@
 <script setup>
 import NavigationBar from "@/components/layouts/NavigationBar.vue";
 import SideBar from "@/components/layouts/SideBar.vue";
+import IconCross from "@/components/icons/IconCross.vue";
+import IconGreencheck from "@/components/icons/IconGreencheck.vue";
 </script>
