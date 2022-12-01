@@ -16,43 +16,7 @@
   <v-modal :open="open" @close="open = false">
     <router-view />
   </v-modal>
-  <!-- <div>
-    <div class="relative">
-      <img src="/src/assets/image1.png" alt="pic" />
-      <div class="absolute text-white top-[50%] -translate-y-2/3">
-        <q>You have to leave somethig behind to go forward</q>
-        <p>Interstellar, 2014</p>
-      </div>
-    </div>
-    <div>
-      <img src="/src/assets/image2.png" alt="pic" />
-      <div>
-        <q
-          >I think we’re just gonna have to be secretly in love with earch other
-          and leave it that</q
-        >
-        <p>The Royal Tenenbaums,2001</p>
-      </div>
-    </div>
-    <div>
-      <img src="/src/assets/image3.png" alt="pic" />
-      <div>
-        <q
-          >I think we’re just gonna have to be secretly in love with earch other
-          and leave it that</q
-        >
-        <p>The Royal Tenenbaums,2001</p>
-      </div>
-    </div>
 
-    <div>
-      <q
-        >I think we’re just gonna have to be secretly in love with earch other
-        and leave it that</q
-      >
-      <p>Interstellar, 2014</p>
-    </div>
-  </div> -->
   <div class="gap-0 relative">
     <img
       class="sticky w-full z-0 top-0"
