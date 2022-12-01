@@ -102,6 +102,11 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: "/callback",
+      name: "callback",
+      component: () => import("@/views/CallbackGoogle.vue"),
+    },
   ],
 });
 

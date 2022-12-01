@@ -77,16 +77,17 @@
         >
           Get started
         </button>
-        <button
-          class="mt-3 text-lg font-semibold w-full text-white rounded-lg border border-white px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
-        >
-          <div class="flex justify-center">
-            <IconGoogle class="my-auto mr-3" />Sign up with Google
-          </div>
-        </button>
       </div>
     </ValidationForm>
-
+    <form :action="link">
+      <button
+        class="mt-3 text-lg font-semibold w-full text-white rounded-lg border border-white px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+      >
+        <div class="flex justify-center">
+          <IconGoogle class="my-auto mr-3" />Sign up with Google
+        </div>
+      </button>
+    </form>
     <div class="text-sm font-semibold py-6 flex justify-center">
       <div class="text-[#6C757D] font-normal hover:border-teal-500">
         Already have an account?
@@ -109,6 +110,8 @@ import axiosInstance from "@/config/axios/index.js";
 import { reactive } from "vue";
 
 import { useRouter } from "vue-router";
+
+const link = import.meta.env.VITE_BACKEND_API_URL + "/redirect";
 
 const router = useRouter();
 
