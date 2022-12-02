@@ -8,6 +8,7 @@
       <div class="mx-auto max-w-lg">
         <div class="py-1">
           <span class="px-1 text-sm text-white">Username</span>
+          <span class="text-[#DC3545]">&#42;</span>
           <Field
             placeholder=""
             type="text"
@@ -27,6 +28,7 @@
         </div>
         <div class="py-1">
           <span class="px-1 text-sm text-white">Email</span>
+          <span class="text-[#DC3545]">&#42;</span>
           <Field
             placeholder=""
             type="email"
@@ -44,11 +46,12 @@
         </div>
         <div class="py-1">
           <span class="px-1 text-sm text-white">Password</span>
+          <span class="text-[#DC3545]">&#42;</span>
           <Field
             placeholder=""
             type="password"
             name="password"
-            rules="required|min:7"
+            rules="required"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
           <div>
@@ -57,11 +60,12 @@
         </div>
         <div class="py-1">
           <span class="px-1 text-sm text-white">Password Confirm</span>
+          <span class="text-[#DC3545]">&#42;</span>
           <Field
             placeholder=""
             type="password"
             name="password_confirmation"
-            rules="required|min:7|confirmed:password"
+            rules="required|confirmed:password"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
           <div>
