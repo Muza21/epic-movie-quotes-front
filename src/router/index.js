@@ -90,15 +90,22 @@ const router = createRouter({
           name: "add-movie",
           component: () => import("@/components/AddMovie.vue"),
         },
-        {
-          path: "edit-quote",
-          name: "edit-quote",
-          component: () => import("@/components/EditQuote.vue"),
-        },
+      ],
+    },
+    {
+      path: "/movie-description",
+      name: "movie-description",
+      component: () => import("@/views/MovieDescription.vue"),
+      children: [
         {
           path: "add-quote",
           name: "add-quote",
           component: () => import("@/components/AddQuote.vue"),
+        },
+        {
+          path: "edit-quote",
+          name: "edit-quote",
+          component: () => import("@/components/EditQuote.vue"),
         },
       ],
     },
