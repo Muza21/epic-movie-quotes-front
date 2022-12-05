@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import isAuthenticated from "@/router/guards";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,6 +8,7 @@ const router = createRouter({
       path: "/",
       name: "landing",
       component: () => import("@/views/LandingPage.vue"),
+      beforeEnter: !isAuthenticated,
       children: [
         {
           path: "signup",
@@ -60,6 +62,7 @@ const router = createRouter({
       path: "/profile",
       name: "profile",
       component: () => import("@/views/ProfilePage.vue"),
+      beforeEnter: isAuthenticated,
       children: [
         {
           path: "new-email",
@@ -72,6 +75,7 @@ const router = createRouter({
       path: "/newsfeed",
       name: "newsfeed",
       component: () => import("@/views/NewsFeed.vue"),
+      beforeEnter: isAuthenticated,
       children: [
         {
           path: "new-quote",
@@ -84,6 +88,7 @@ const router = createRouter({
       path: "/movielist",
       name: "movielist",
       component: () => import("@/views/MovieList.vue"),
+      beforeEnter: isAuthenticated,
       children: [
         {
           path: "add-movie",
@@ -96,6 +101,7 @@ const router = createRouter({
       path: "/movie-description",
       name: "movie-description",
       component: () => import("@/views/MovieDescription.vue"),
+      beforeEnter: isAuthenticated,
       children: [
         {
           path: "add-quote",

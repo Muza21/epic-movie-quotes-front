@@ -8,6 +8,7 @@
       <div class="mx-auto max-w-lg">
         <div class="py-1">
           <span class="px-1 text-sm text-white">Password</span>
+          <span class="text-[#DC3545]">&#42;</span>
           <Field
             placeholder=""
             type="password"
@@ -17,6 +18,7 @@
         </div>
         <div class="py-1">
           <span class="px-1 text-sm text-white">Password Confirm</span>
+          <span class="text-[#DC3545]">&#42;</span>
           <Field
             placeholder=""
             type="password"

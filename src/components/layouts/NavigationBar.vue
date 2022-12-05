@@ -4,7 +4,7 @@
       <nav class="flex justify-between items-center">
         <RouterLink to="/" class="text-[#DDCCAA]">MOVIE QUOTES</RouterLink>
         <div class="flex items-center">
-          <div class="mx-4">
+          <div v-if="authStore.authenticated" class="mx-4">
             <div class="relative">
               <IconNotification />
               <div
@@ -22,17 +22,26 @@
             >Eng <IconDropdown class="ml-2" />
           </span>
           <router-link
+            v-if="!authStore.authenticated"
             :to="{ name: 'signup' }"
             class="mx-4 bg-[#E31221] px-4 py-2 rounded-lg text-white"
           >
             Sign Up
           </router-link>
           <router-link
+            v-if="!authStore.authenticated"
             :to="{ name: 'login' }"
             class="mx-4 px-4 py-2 rounded-lg text-white border border-white"
           >
             Log In
           </router-link>
+          <ValidationForm v-if="authStore.authenticated" @submit="onSubmit">
+            <button
+              class="mx-4 px-4 py-2 rounded-lg text-white border border-white"
+            >
+              Log Out
+            </button>
+          </ValidationForm>
         </div>
       </nav>
     </div>
@@ -43,4 +52,22 @@
 import IconNotification from "@/components/icons/IconNotification.vue";
 import IconDropdown from "@/components/icons/IconDropdown.vue";
 import UsersNotifications from "@/components/notifications/UsersNotifications.vue";
+import { Form as ValidationForm } from "vee-validate";
+import axiosInstance from "@/config/axios/index.js";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
+const router = useRouter();
+const authStore = useAuthStore();
+
+const onSubmit = async () => {
+  try {
+    const response = await axiosInstance.post(`/logout`);
+    console.log(authStore.authenticated);
+    authStore.authenticated = false;
+    router.push({ name: "landing" });
+    console.log(response);
+  } catch (err) {
+    console.log(err);
+  }
+};
 </script>
