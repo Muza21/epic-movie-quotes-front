@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-
+import isAuthenticated from "@/router/guards";
+// import { useAuthStore } from "@/stores/auth";
+// import { AxiosInstance } from "@/config/axios/index.js";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -60,6 +62,7 @@ const router = createRouter({
       path: "/profile",
       name: "profile",
       component: () => import("@/views/ProfilePage.vue"),
+      beforeEnter: isAuthenticated,
       children: [
         {
           path: "new-email",
@@ -72,6 +75,7 @@ const router = createRouter({
       path: "/newsfeed",
       name: "newsfeed",
       component: () => import("@/views/NewsFeed.vue"),
+      beforeEnter: isAuthenticated,
       children: [
         {
           path: "new-quote",
@@ -84,6 +88,7 @@ const router = createRouter({
       path: "/movielist",
       name: "movielist",
       component: () => import("@/views/MovieList.vue"),
+      beforeEnter: isAuthenticated,
       children: [
         {
           path: "add-movie",
@@ -96,6 +101,7 @@ const router = createRouter({
       path: "/movie-description",
       name: "movie-description",
       component: () => import("@/views/MovieDescription.vue"),
+      beforeEnter: isAuthenticated,
       children: [
         {
           path: "add-quote",
@@ -116,5 +122,22 @@ const router = createRouter({
     },
   ],
 });
+
+// router.beforeEach(async (to, from, next) => {
+//   const authStore = useAuthStore();
+
+//   if (authStore.authenticated === null) {
+//     try {
+//       await AxiosInstance.get(`/me`);
+//       authStore.authenticated = true;
+//     } catch (err) {
+//       authStore.authenticated = false;
+//     }
+//     // finally {
+//     //   return next();
+//     // }
+//   }
+//   return next();
+// });
 
 export default router;

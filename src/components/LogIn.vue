@@ -13,8 +13,14 @@
             type="username"
             name="username"
             rules="required|min:3"
+            @focus="clearError"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
+          <div v-if="errorData.authError">
+            <div class="ml-4 text-orange-600">
+              {{ errorData.authError }}
+            </div>
+          </div>
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="username" />
           </div>
@@ -26,6 +32,7 @@
             type="password"
             name="password"
             rules="required"
+            @focus="clearError"
             class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
           />
           <div>
@@ -58,13 +65,6 @@
         >
           Sign in
         </button>
-        <!-- <button
-          class="mt-3 text-lg font-semibold w-full text-white rounded-lg border border-white px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
-        >
-          <div class="flex justify-center">
-            <IconGoogle class="my-auto mr-3" />Sign in with Google
-          </div>
-        </button> -->
       </div>
     </ValidationForm>
 
@@ -99,25 +99,47 @@ import { Form as ValidationForm, Field, ErrorMessage } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+import { reactive } from "vue";
+// import { setJwtToken } from "@/helpers/jwt/index.js";
 
 const link = import.meta.env.VITE_BACKEND_API_URL + "/redirect";
 
 const router = useRouter();
 const authStore = useAuthStore();
+
 let rememberMe = true;
+
+const errorData = reactive({
+  authError: "",
+});
+
+function clearError() {
+  errorData.authError = "";
+}
 
 const onSubmit = async (values) => {
   try {
-    console.log(values);
     const response = await axiosInstance.post(`/login`, {
       username: values.username,
       password: values.password,
       remember: values.remember,
     });
+    axiosInstance.defaults.withCredentials = true;
     authStore.authenticated = true;
+
     router.push({ name: "newsfeed" });
     console.log(response);
   } catch (err) {
+    if (err.response.status === 422) {
+      if (err.response.data.errors.username) {
+        errorData.authError = err.response.data.errors.username[0];
+      }
+    }
+    if (err.response.status === 401) {
+      if (err.response.data) {
+        errorData.authError = err.response.data;
+      }
+    }
     console.log(err);
   }
 };
