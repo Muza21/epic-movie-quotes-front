@@ -62,7 +62,7 @@ const authStore = useAuthStore();
 const onSubmit = async () => {
   try {
     const response = await axiosInstance.post(`/logout`);
-    axiosInstance.defaults.withCredentials = true;
+    console.log(authStore.authenticated);
     authStore.authenticated = false;
     router.push({ name: "landing" });
     console.log(response);

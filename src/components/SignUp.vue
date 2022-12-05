@@ -83,7 +83,7 @@
         </button>
       </div>
     </ValidationForm>
-    <form :action="link">
+    <!-- <form :action="link">
       <button
         class="mt-3 text-lg font-semibold w-full text-white rounded-lg border border-white px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
       >
@@ -91,7 +91,9 @@
           <IconGoogle class="my-auto mr-3" />Sign up with Google
         </div>
       </button>
-    </form>
+    </form> -->
+    <GoogleLogin>Sign up with Google</GoogleLogin>
+
     <div class="text-sm font-semibold py-6 flex justify-center">
       <div class="text-[#6C757D] font-normal hover:border-teal-500">
         Already have an account?
@@ -107,15 +109,16 @@
 </template>
 
 <script setup>
-import IconGoogle from "@/components/icons/IconGoogle.vue";
+// import IconGoogle from "@/components/icons/IconGoogle.vue";
 import PopupLayout from "@/components/layouts/PopupLayout.vue";
 import { Form as ValidationForm, Field, ErrorMessage } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
 import { reactive } from "vue";
+import GoogleLogin from "@/components/GoogleLogin.vue";
 
 import { useRouter } from "vue-router";
 
-const link = import.meta.env.VITE_BACKEND_API_URL + "/redirect";
+// const link = import.meta.env.VITE_BACKEND_API_URL + "/redirect";
 
 const router = useRouter();
 

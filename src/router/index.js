@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import isAuthenticated from "@/router/guards";
+
 // import { useAuthStore } from "@/stores/auth";
 // import { AxiosInstance } from "@/config/axios/index.js";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -9,6 +11,7 @@ const router = createRouter({
       path: "/",
       name: "landing",
       component: () => import("@/views/LandingPage.vue"),
+      beforeEnter: !isAuthenticated,
       children: [
         {
           path: "signup",
@@ -132,10 +135,9 @@ const router = createRouter({
 //       authStore.authenticated = true;
 //     } catch (err) {
 //       authStore.authenticated = false;
+//     } finally {
+//       return next();
 //     }
-//     // finally {
-//     //   return next();
-//     // }
 //   }
 //   return next();
 // });
