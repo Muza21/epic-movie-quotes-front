@@ -11,35 +11,32 @@
           <div class="ml-4">
             <h2 class="text-lg font-semibold text-white">Nino Tabagari</h2>
             <span class="flex items-center space-x-1">
-              <a
-                rel="noopener noreferrer"
-                href="#"
+              <router-link
+                :to="{ name: 'profile' }"
                 class="text-xs hover:underline text-[#CED4DA] dark:text-gray-400"
-                >Edit your profile</a
+                >Edit your profile</router-link
               >
             </span>
           </div>
         </li>
         <li class="dark:bg-gray-800 dark:text-gray-50">
-          <a
-            rel="noopener noreferrer"
-            href="#"
+          <router-link
+            :to="{ name: 'newsfeed' }"
             class="flex items-center p-2 rounded-md"
           >
             <IconHouseVue />
             <span class="ml-6 text-white">News feed</span>
-          </a>
+          </router-link>
         </li>
         <li>
-          <a
-            rel="noopener noreferrer"
-            href="#"
+          <router-link
+            :to="{ name: 'movielist' }"
             class="flex items-center p-2 rounded-md"
           >
             <IconCameraVue />
 
             <span class="ml-6 text-white">List of movies</span>
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -49,4 +46,5 @@
 <script setup>
 import IconCameraVue from "@/components/icons/IconCamera.vue";
 import IconHouseVue from "@/components/icons/IconHouse.vue";
+import { RouterLink } from "vue-router";
 </script>

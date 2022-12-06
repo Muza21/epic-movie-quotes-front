@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { useAuthStore } from "@/stores/auth";
-import router from "@/router/index";
+// import router from "@/router/index";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_API_URL,
@@ -24,7 +24,7 @@ axiosInstance.interceptors.response.use(
       const authStore = useAuthStore();
       authStore.authenticated = false;
       // this should redirect on 401 error page
-      router.push("/");
+      // router.push("/");
     }
     return Promise.reject(error);
   }

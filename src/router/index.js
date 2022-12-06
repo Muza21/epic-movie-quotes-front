@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import isAuthenticated from "@/router/guards";
+import { useAuthStore } from "@/stores/auth";
+import axiosInstance from "@/config/axios/index.js";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,7 +10,6 @@ const router = createRouter({
       path: "/",
       name: "landing",
       component: () => import("@/views/LandingPage.vue"),
-      beforeEnter: !isAuthenticated,
       children: [
         {
           path: "signup",
@@ -123,4 +124,19 @@ const router = createRouter({
   ],
 });
 
+router.beforeEach(async (to, from, next) => {
+  const authStore = useAuthStore();
+
+  if (authStore.authenticated === null) {
+    try {
+      await axiosInstance.get(`/me`);
+      authStore.authenticated = true;
+    } catch (err) {
+      authStore.authenticated = false;
+    } finally {
+      return next();
+    }
+  }
+  return next();
+});
 export default router;
