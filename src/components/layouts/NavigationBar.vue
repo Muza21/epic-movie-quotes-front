@@ -5,22 +5,43 @@
         <RouterLink to="/" class="text-[#DDCCAA]">MOVIE QUOTES</RouterLink>
         <div class="flex items-center">
           <div v-if="authStore.authenticated" class="mx-4">
-            <div class="relative">
-              <IconNotification />
-              <div
-                class="w-[25px] h-[25px] absolute -top-[5px] -right-[10px] flex items-center justify-center rounded-full bg-[#E33812] text-white font-semibold"
-              >
-                3
+            <button @click="toggleNotification">
+              <div class="relative">
+                <IconNotification />
+                <div
+                  class="w-[25px] h-[25px] absolute -top-[5px] -right-[10px] flex items-center justify-center rounded-full bg-[#E33812] text-white font-semibold"
+                >
+                  3
+                </div>
               </div>
-            </div>
-
+            </button>
             <UsersNotifications
-              class="absolute hidden -translate-x-[515px] -translate-y-[20px] z-50"
+              v-if="view.notificationView"
+              class="absolute -translate-x-[515px] -translate-y-[20px] z-50"
             />
           </div>
-          <span class="flex items-center mx-4 text-white"
-            >Eng <IconDropdown class="ml-2" />
-          </span>
+          <div>
+            <button @click="toggleLanguage">
+              <span class="flex items-center mx-4 text-white"
+                >Eng <IconDropdown class="ml-2" />
+              </span>
+            </button>
+            <div
+              v-if="view.languageView"
+              class="absolute w-36 h-[112px] rounded-lg bg-[#11101A] mt-2"
+            >
+              <div class="py-1 hover:bg-gray-800">
+                <a href="#" class="flex items-center p-3 rounded-md">
+                  <span class="ml-4 text-white">English</span>
+                </a>
+              </div>
+              <div class="py-1 hover:bg-gray-800">
+                <a href="#" class="flex items-center p-3 rounded-md">
+                  <span class="ml-4 text-white">ქართული</span>
+                </a>
+              </div>
+            </div>
+          </div>
           <router-link
             v-if="!authStore.authenticated"
             :to="{ name: 'signup' }"
@@ -56,9 +77,24 @@ import { Form as ValidationForm } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+
+import { reactive } from "vue";
+
+const view = reactive({
+  notificationView: false,
+  languageView: false,
+});
+
 const router = useRouter();
 const authStore = useAuthStore();
 
+function toggleNotification() {
+  view.notificationView = !view.notificationView;
+}
+
+const toggleLanguage = () => {
+  view.languageView = !view.languageView;
+};
 const onSubmit = async () => {
   try {
     const response = await axiosInstance.post(`/logout`);

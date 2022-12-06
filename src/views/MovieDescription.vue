@@ -87,39 +87,10 @@
                   </div>
                 </div>
                 <div class="p-6">
-                  <IconThreedots />
-                  <div class="absolute w-60 h-[168px] bg-[#24222F] mt-2">
-                    <div class="py-1 hover:bg-gray-800">
-                      <a
-                        rel="noopener noreferrer"
-                        href="#"
-                        class="flex items-center p-3 rounded-md"
-                      >
-                        <IconEyes class="ml-6" />
-                        <span class="ml-6 text-white">View quote</span>
-                      </a>
-                    </div>
-                    <div class="py-1 hover:bg-gray-800">
-                      <a
-                        rel="noopener noreferrer"
-                        href="#"
-                        class="flex items-center p-3 rounded-md"
-                      >
-                        <IconPencil class="ml-6" />
-                        <span class="ml-6 text-white">Edit</span>
-                      </a>
-                    </div>
-                    <div class="py-1 hover:bg-gray-800">
-                      <a
-                        rel="noopener noreferrer"
-                        href="#"
-                        class="flex items-center p-3 rounded-md"
-                      >
-                        <IconTrash class="ml-6" />
-                        <span class="ml-6 text-white">Delete</span>
-                      </a>
-                    </div>
-                  </div>
+                  <button class="py-2" @click="toggleCrudOperationView">
+                    <IconThreedots />
+                  </button>
+                  <QuoteCrud v-if="view.crudView" />
                 </div>
               </div>
               <div
@@ -146,8 +117,16 @@ import NavigationBar from "@/components/layouts/NavigationBar.vue";
 import SideBar from "@/components/layouts/SideBar.vue";
 import IconHeart from "@/components/icons/IconHeart.vue";
 import IconComment from "@/components/icons/IconComment.vue";
-import IconPencil from "@/components/icons/IconPencil.vue";
-import IconTrash from "@/components/icons/IconTrash.vue";
 import IconThreedots from "@/components/icons/IconThreedots.vue";
-import IconEyes from "@/components/icons/IconEyes.vue";
+
+import { reactive } from "vue";
+import QuoteCrud from "@/components/QuoteCrud.vue";
+
+const view = reactive({
+  crudView: false,
+});
+
+function toggleCrudOperationView() {
+  view.crudView = !view.crudView;
+}
 </script>

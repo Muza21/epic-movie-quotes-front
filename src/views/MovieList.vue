@@ -12,29 +12,34 @@
           <div class="flex justify-between mx-20 mt-5">
             <h2 class="text-white text-xl">My list of movies Total 25</h2>
             <div>
-              <button class="bg-[#E31221] px-4 py-2 rounded-lg text-white">
+              <router-link
+                :to="{ name: 'add-movie' }"
+                class="bg-[#E31221] px-4 py-2 rounded-lg text-white"
+              >
                 <IconAdd class="my-auto mr-3" />Add movie
-              </button>
+              </router-link>
             </div>
           </div>
           <div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-10 m-20">
-              <div
-                class="flex flex-col drop-shadow hover:drop-shadow-lg hover:opacity-70 rounded-md"
-              >
-                <img
-                  src="/src/assets/movie1.png"
-                  alt="Fiction Product"
-                  class="object-cover rounded-tl-md rounded-tr-md"
-                />
-                <div class="my-2">
-                  <h3 class="text-xl text-white">Movie title</h3>
+              <router-link :to="{ name: 'movie-description' }">
+                <div
+                  class="flex flex-col drop-shadow hover:drop-shadow-lg hover:opacity-70 rounded-md"
+                >
+                  <img
+                    src="/src/assets/movie1.png"
+                    alt="Fiction Product"
+                    class="object-cover rounded-tl-md rounded-tr-md"
+                  />
+                  <div class="my-2">
+                    <h3 class="text-xl text-white">Movie title</h3>
+                  </div>
+                  <div class="flex my-2 text-xl text-white">
+                    <p class="mr-2">4</p>
+                    <IconChat />
+                  </div>
                 </div>
-                <div class="flex my-2 text-xl text-white">
-                  <p class="mr-2">4</p>
-                  <IconChat />
-                </div>
-              </div>
+              </router-link>
 
               <div
                 class="flex flex-col drop-shadow hover:drop-shadow-lg hover:opacity-70 rounded-md"
