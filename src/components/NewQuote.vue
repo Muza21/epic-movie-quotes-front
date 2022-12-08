@@ -42,15 +42,27 @@
                 <h2 class="text-xl font-semibold text-white">
                   Drag and drop your image here or
                 </h2>
-                <button class="p-2 ml-2 bg-[#9747FF] rounded-lg text-white">
-                  Choose file
-                </button>
-                <Field name="picture" type="file" class="hidden" />
+                <Field
+                  type="file"
+                  id="movie_picture"
+                  name="movie_picture"
+                  class="hidden"
+                  accept="image/jpeg, image/png"
+                  rules="required"
+                  @change="onFileSelected"
+                />
+                <label
+                  for="movie_picture"
+                  refs="movie_picture"
+                  class="p-2 ml-2 bg-[#9747FF] rounded-lg text-white cursor-pointer"
+                >
+                  Choose a file
+                </label>
               </div>
             </div>
           </div>
         </div>
-        <div class="py-1">
+        <div class="py-1" @click="toggleChooseMovie">
           <div class="p-2 flex items-center w-full border-2 border-[#6C757D]">
             <IconCamera />
             <div class="mx-3 flex-1">
@@ -59,6 +71,21 @@
                 <IconDropdown />
               </div>
             </div>
+          </div>
+        </div>
+        <div
+          v-if="movie.chooseMovie"
+          class="absolute w-full h-[112px] rounded-lg bg-[#6C757D] mt-2"
+        >
+          <div class="py-1 hover:bg-gray-800">
+            <a href="#" class="flex items-center p-3 rounded-md">
+              <span class="ml-4 text-white">Movie Name1</span>
+            </a>
+          </div>
+          <div class="py-1 hover:bg-gray-800">
+            <a href="#" class="flex items-center p-3 rounded-md">
+              <span class="ml-4 text-white">Movie Name2</span>
+            </a>
           </div>
         </div>
         <button
@@ -77,4 +104,15 @@ import IconPhoto from "@/components/icons/IconPhoto.vue";
 import IconCamera from "@/components/icons/IconCamera.vue";
 import IconDropdown from "@/components/icons/IconDropdown.vue";
 import { Form as ValidationForm, Field } from "vee-validate";
+// import axiosInstance from "@/config/axios/index.js";
+
+import { reactive } from "vue";
+
+const movie = reactive({
+  chooseMovie: false,
+});
+
+const toggleChooseMovie = () => {
+  movie.chooseMovie = !movie.chooseMovie;
+};
 </script>
