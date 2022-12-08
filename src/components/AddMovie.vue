@@ -172,29 +172,14 @@ const onSubmit = async (values) => {
     formData.append("movie_description_en", values.movie_description_en);
     formData.append("movie_description_ka", values.movie_description_ka);
     formData.append("movie_picture", values.movie_picture);
-    // values.each(formData, (value, key) => {
-    //   formData.append(key, value);
-    // });
+
     console.log(formData);
     console.log(values.movie_picture);
-    const response = await axiosInstance.post(
-      `/add-movie`,
-      formData,
-      // {
-      //   movie_name_en: values.movie_name_en,
-      //   movie_name_ka: values.movie_name_ka,
-      //   director_name_en: values.director_name_en,
-      //   director_name_ka: values.director_name_ka,
-      //   movie_description_en: values.movie_description_en,
-      //   movie_description_ka: values.movie_description_ka,
-      //   movie_picture: formData,
-      // },
-      {
-        headers: {
-          "Content-Type": "multipart/form-data;",
-        },
-      }
-    );
+    const response = await axiosInstance.post(`/add-movie`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data;",
+      },
+    });
     router.push({ name: "movielist" });
     console.log(response);
   } catch (err) {

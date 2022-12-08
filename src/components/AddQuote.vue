@@ -61,7 +61,7 @@
           />
         </div>
 
-        <div class="py-1 mt-8">
+        <div class="py-1">
           <div class="p-2 flex items-center w-full border-2 border-[#6C757D]">
             <IconPhoto />
             <div class="mx-3 flex-1">
@@ -69,13 +69,27 @@
                 <h2 class="text-xl font-semibold text-white">
                   Drag and drop your image here or
                 </h2>
-                <button class="p-2 ml-2 bg-[#9747FF] rounded-lg text-white">
-                  Choose file
-                </button>
-                <Field name="quote_picture" type="file" class="hidden" />
+                <Field
+                  type="file"
+                  id="movie_picture"
+                  name="movie_picture"
+                  class="hidden"
+                  accept="image/jpeg, image/png"
+                  rules="required"
+                  @change="onFileSelected"
+                />
+                <label
+                  for="movie_picture"
+                  refs="movie_picture"
+                  class="p-2 ml-2 bg-[#9747FF] rounded-lg text-white cursor-pointer"
+                  >Choose a file</label
+                >
               </div>
             </div>
           </div>
+        </div>
+        <div>
+          <ErrorMessage class="ml-4 text-orange-600" name="movie_picture" />
         </div>
 
         <button
