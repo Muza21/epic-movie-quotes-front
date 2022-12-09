@@ -3,11 +3,7 @@
     <NavigationBar />
     <div class="flex flex-col justify-between">
       <div class="flex">
-        <div class="flex flex-col h-screen overflow-y-auto">
-          <div class="flex flex-col justify-between">
-            <SideBar />
-          </div>
-        </div>
+        <SideBar />
         <div class="w-full">
           <div
             class="flex justify-between max-w-4xl rounded-xl md:w-[1000px] mx-auto"

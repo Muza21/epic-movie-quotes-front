@@ -3,11 +3,7 @@
     <NavigationBar />
     <div class="flex flex-col justify-between">
       <div class="flex">
-        <div class="flex flex-col h-screen overflow-y-auto">
-          <div class="flex flex-col justify-between">
-            <SideBar />
-          </div>
-        </div>
+        <SideBar />
         <div class="w-full">
           <div class="flex justify-between mx-20 mt-5">
             <h2 class="text-white text-xl">My list of movies Total 25</h2>

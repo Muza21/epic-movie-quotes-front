@@ -3,11 +3,7 @@
     <NavigationBar />
     <div class="flex flex-col justify-between">
       <div class="flex">
-        <div class="flex flex-col h-screen overflow-y-auto">
-          <div class="flex flex-col justify-between">
-            <SideBar />
-          </div>
-        </div>
+        <SideBar />
         <div class="w-full">
           <h1 class="text-white text-2xl p-6 mx-20">Movie description</h1>
 
@@ -104,7 +100,7 @@
         </div>
       </div>
     </div>
-    <v-modal :open="open" @close="open = false">
+    <v-modal>
       <router-view />
     </v-modal>
   </div>
@@ -124,7 +120,6 @@ import { useRoute } from "vue-router";
 
 const route = useRoute();
 const crudPanel = ref(false);
-// const movie = reactive({});
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
 
