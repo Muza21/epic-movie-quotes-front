@@ -20,7 +20,7 @@
           <Field
             placeholder="Movie name"
             name="movie_name_en"
-            rules="required"
+            rules="required|alpha"
             class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
           <div>
@@ -80,7 +80,7 @@
           <Field
             placeholder="Director"
             name="director_name_en"
-            rules="required"
+            rules="required|alpha"
             class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
           <div>
