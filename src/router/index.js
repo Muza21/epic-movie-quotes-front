@@ -124,7 +124,7 @@ const router = createRouter({
     {
       path: "/view-quote",
       name: "view-quote",
-      component: () => import("@/views/ViewQuote.vue"),
+      component: () => import("@/components/ViewQuote.vue"),
     },
     {
       path: "/callback",

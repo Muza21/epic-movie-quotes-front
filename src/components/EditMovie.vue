@@ -1,7 +1,7 @@
 <template>
   <form-layout>
     <template v-slot:header>
-      <div class="text-center text-3xl text-white mx-14 my-6">Add movie</div>
+      <div class="text-center text-3xl text-white mx-14 my-6">Edit movie</div>
     </template>
     <ValidationForm class="mt-8" @submit="onSubmit">
       <div class="mx-auto px-4">
@@ -18,10 +18,10 @@
         </div>
         <div class="py-1">
           <Field
-            placeholder="Movie name"
+            v-model="data.movie.title"
             name="movie_name_en"
             rules="required|alpha"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            class="text-white text-lg block px-3 py-2 rounded-lg w-full placeholder:text-white placeholder:text-lg bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="movie_name_en" />
@@ -29,7 +29,7 @@
         </div>
         <div class="py-1">
           <Field
-            placeholder="ფილმის სახელი"
+            v-model="data.movie.title"
             name="movie_name_ka"
             rules="required"
             class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
@@ -49,7 +49,7 @@
                 <div class="p-2 ml-2 bg-[#6C757D] text-white flex items-center">
                   {{ genre }}
 
-                  <div @click="deleteGenre" class="p-2 cursor-pointer">
+                  <div @click="deleteGenre(genre)" class="p-2 cursor-pointer">
                     <IconCross class="w-3 h-3" />
                   </div>
                 </div>
@@ -78,7 +78,7 @@
         </div>
         <div class="py-1">
           <Field
-            placeholder="Director"
+            v-model="data.movie.director"
             name="director_name_en"
             rules="required|alpha"
             class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
@@ -92,7 +92,7 @@
         </div>
         <div class="py-1">
           <Field
-            placeholder="რეჟისორი"
+            v-model="data.movie.director"
             name="director_name_ka"
             rules="required"
             class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
@@ -106,7 +106,7 @@
         </div>
         <div class="py-1">
           <Field
-            placeholder="Year"
+            v-model="data.movie.year"
             name="year"
             rules="required|integer"
             class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
@@ -117,7 +117,7 @@
         </div>
         <div class="py-1">
           <Field
-            placeholder="Budget"
+            v-model="data.movie.budget"
             name="budget"
             rules="required|integer"
             class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
@@ -129,7 +129,7 @@
         <div class="py-1">
           <Field
             as="textarea"
-            placeholder="Movie description"
+            v-model="data.movie.description"
             name="movie_description_en"
             rules="required"
             class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
@@ -144,7 +144,7 @@
         <div class="py-1">
           <Field
             as="textarea"
-            placeholder="ფილმის აღწერა"
+            v-model="data.movie.description"
             name="movie_description_ka"
             rules="required"
             class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
@@ -170,7 +170,6 @@
                   name="movie_picture"
                   class="hidden"
                   accept="image/jpeg, image/png"
-                  rules="required"
                 />
                 <label
                   for="movie_picture"
@@ -201,14 +200,19 @@ import IconPhoto from "@/components/icons/IconPhoto.vue";
 import IconCross from "@/components/icons/IconCross.vue";
 import { Form as ValidationForm, Field, ErrorMessage } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
-import { useRouter } from "vue-router";
-import { onMounted, ref, reactive } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { onMounted, onBeforeMount, ref, reactive } from "vue";
 
 const router = useRouter();
+const route = useRoute();
 
 const genres = reactive({});
 const chooseGenres = ref(false);
 const selectedGenres = ref([]);
+const data = reactive({
+  movie: {},
+  genres: {},
+});
 
 const reactiveSelectedGenres = reactive({});
 
@@ -222,11 +226,11 @@ const selectGenre = (e) => {
   }
   chooseGenres.value = false;
   reactiveSelectedGenres.values = selectedGenres.value;
-  console.log(reactiveSelectedGenres.values);
 };
 
-const deleteGenre = (e) => {
-  console.log(e);
+const deleteGenre = (genre) => {
+  selectedGenres.value.splice(selectedGenres.value.indexOf(genre), 1);
+  reactiveSelectedGenres.values = selectedGenres.value;
 };
 
 const onSubmit = async (values) => {
@@ -236,31 +240,49 @@ const onSubmit = async (values) => {
     formData.append("movie_name_ka", values.movie_name_ka);
     formData.append("director_name_en", values.director_name_en);
     formData.append("director_name_ka", values.director_name_ka);
-    formData.append("genre", JSON.stringify(selectedGenres.value));
+    formData.append("genre", JSON.stringify(reactiveSelectedGenres.values));
     formData.append("year", values.year);
     formData.append("budget", values.budget);
     formData.append("movie_description_en", values.movie_description_en);
     formData.append("movie_description_ka", values.movie_description_ka);
     formData.append("movie_picture", values.movie_picture);
+    formData.append("_method", "PATCH");
 
-    const response = await axiosInstance.post(`/add-movie`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data;",
-      },
-    });
-    router.push({ name: "movielist" });
+    console.log(formData);
+    const response = await axiosInstance.post(
+      `/edit-movie/${route.params.id}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data;",
+        },
+      }
+    );
+    router.push({ name: "movie-description", params: { id: route.params.id } });
     console.log(response);
   } catch (err) {
     console.log(err);
   }
 };
-
-onMounted(() => {
+onBeforeMount(() => {
   axiosInstance
     .get(`/genres`)
     .then((response) => {
       genres.values = response.data.genres;
       console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+onMounted(() => {
+  axiosInstance
+    .get(`/movie-description/${route.params.id}`)
+    .then((response) => {
+      data.movie = response.data;
+      data.genres = JSON.parse(data.movie.genre);
+      reactiveSelectedGenres.values = data.genres;
     })
     .catch((err) => {
       console.log(err);

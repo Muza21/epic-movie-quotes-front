@@ -163,7 +163,7 @@ onMounted(() => {
     .then((response) => {
       data.movie = response.data;
       data.genres = JSON.parse(data.movie.genre);
-      console.log(data.genres);
+      console.log(data.movie.thumbnail);
     })
     .catch((err) => {
       console.log(err);

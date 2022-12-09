@@ -49,13 +49,14 @@
                 <div class="p-2 ml-2 bg-[#6C757D] text-white flex items-center">
                   {{ genre }}
 
-                  <div @click="deleteGenre" class="p-2 cursor-pointer">
+                  <div @click="deleteGenre(genre)" class="p-2 cursor-pointer">
                     <IconCross class="w-3 h-3" />
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
           <div>
             <div
               v-if="chooseGenres"
@@ -222,11 +223,11 @@ const selectGenre = (e) => {
   }
   chooseGenres.value = false;
   reactiveSelectedGenres.values = selectedGenres.value;
-  console.log(reactiveSelectedGenres.values);
 };
 
-const deleteGenre = (e) => {
-  console.log(e);
+const deleteGenre = (genre) => {
+  selectedGenres.value.splice(selectedGenres.value.indexOf(genre), 1);
+  reactiveSelectedGenres.values = selectedGenres.value;
 };
 
 const onSubmit = async (values) => {
