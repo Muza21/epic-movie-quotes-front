@@ -9,6 +9,34 @@
           </div>
         </div>
         <div class="w-full">
+          <div
+            class="flex justify-between max-w-4xl rounded-xl md:w-[1000px] mx-auto"
+          >
+            <router-link
+              :to="{ name: 'new-quote' }"
+              class="flex p-4 bg-[#24222F] rounded-lg w-52"
+            >
+              <IconNewquote />
+              <p class="text-white ml-2">Write new quote</p>
+            </router-link>
+            <ValidationForm class="flex items-center">
+              <div class="relative">
+                <div
+                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                >
+                  <IconSearch />
+                </div>
+                <Field
+                  type="text"
+                  id="search"
+                  name="search"
+                  class="bg-[#24222F] w-[688px] py-4 pr-4 pl-12 border-b border-[#EFEFEF] text-white text-sm rounded-lg placeholder-[#CED4DA]"
+                  placeholder="Enter @ to search movies, Enter # to search quotes "
+                  required
+                />
+              </div>
+            </ValidationForm>
+          </div>
           <article
             class="max-w-4xl my-10 rounded-xl md:w-[1000px] bg-[#11101A] mx-auto"
           >
@@ -91,6 +119,9 @@
 <script setup>
 import NavigationBar from "@/components/layouts/NavigationBar.vue";
 import SideBar from "@/components/layouts/SideBar.vue";
-import IconHeart from "../components/icons/IconHeart.vue";
-import IconComment from "../components/icons/IconComment.vue";
+import IconHeart from "@/components/icons/IconHeart.vue";
+import IconComment from "@/components/icons/IconComment.vue";
+import IconNewquote from "@/components/icons/IconNewquote.vue";
+import IconSearch from "@/components/icons/IconSearch.vue";
+import { Form as ValidationForm, Field } from "vee-validate";
 </script>
