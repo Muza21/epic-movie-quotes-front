@@ -236,7 +236,7 @@ const onSubmit = async (values) => {
     formData.append("movie_name_ka", values.movie_name_ka);
     formData.append("director_name_en", values.director_name_en);
     formData.append("director_name_ka", values.director_name_ka);
-    formData.append("genre", selectedGenres.value);
+    formData.append("genre", JSON.stringify(selectedGenres.value));
     formData.append("year", values.year);
     formData.append("budget", values.budget);
     formData.append("movie_description_en", values.movie_description_en);
