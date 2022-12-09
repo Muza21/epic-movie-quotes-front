@@ -80,6 +80,14 @@
         </div>
         <div class="py-1">
           <Field
+            placeholder="Year"
+            name="year"
+            rules="required"
+            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+          />
+        </div>
+        <div class="py-1">
+          <Field
             as="textarea"
             placeholder="Movie description"
             name="movie_description_en"
@@ -169,12 +177,14 @@ const onSubmit = async (values) => {
     formData.append("movie_name_ka", values.movie_name_ka);
     formData.append("director_name_en", values.director_name_en);
     formData.append("director_name_ka", values.director_name_ka);
+    formData.append("genre", values.genre);
+    formData.append("year", values.year);
+    formData.append("budget", values.budget);
     formData.append("movie_description_en", values.movie_description_en);
     formData.append("movie_description_ka", values.movie_description_ka);
     formData.append("movie_picture", values.movie_picture);
 
     console.log(formData);
-    console.log(values.movie_picture);
     const response = await axiosInstance.post(`/add-movie`, formData, {
       headers: {
         "Content-Type": "multipart/form-data;",

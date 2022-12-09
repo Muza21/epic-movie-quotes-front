@@ -74,7 +74,7 @@
           </div>
         </div>
         <div
-          v-if="movie.chooseMovie"
+          v-if="chooseMovie"
           class="absolute w-full h-[112px] rounded-lg bg-[#6C757D] mt-2"
         >
           <div class="py-1 hover:bg-gray-800">
@@ -104,15 +104,12 @@ import IconPhoto from "@/components/icons/IconPhoto.vue";
 import IconCamera from "@/components/icons/IconCamera.vue";
 import IconDropdown from "@/components/icons/IconDropdown.vue";
 import { Form as ValidationForm, Field } from "vee-validate";
-// import axiosInstance from "@/config/axios/index.js";
 
-import { reactive } from "vue";
+import { ref } from "vue";
 
-const movie = reactive({
-  chooseMovie: false,
-});
+const chooseMovie = ref(false);
 
 const toggleChooseMovie = () => {
-  movie.chooseMovie = !movie.chooseMovie;
+  chooseMovie.value = !chooseMovie.value;
 };
 </script>
