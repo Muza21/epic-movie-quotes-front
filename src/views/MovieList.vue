@@ -49,7 +49,7 @@
                     </h3>
                   </div>
                   <div class="flex my-2 text-xl text-white">
-                    <p class="mr-2">4</p>
+                    <p class="mr-2">{{ movie.quotes_number }}</p>
                     <IconChat />
                   </div>
                 </router-link>

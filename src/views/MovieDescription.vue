@@ -18,10 +18,22 @@
                 <h2 class="text-4xl text-[#DDCCAA]">
                   {{ data.movie.title }} &#40;{{ data.movie.year }}&#41;
                 </h2>
-                <div class="ml-4 flex py-4 px-8 rounded-lg bg-[#24222F]">
-                  <IconPencil class="mr-5" />
-                  <div class="border-r border-[#6C757D]"></div>
-                  <IconTrash class="ml-5" />
+                <div class="ml-4 flex rounded-lg bg-[#24222F]">
+                  <router-link
+                    :to="{ name: 'edit-movie' }"
+                    class="hover:bg-slate-800 rounded-md py-4 px-5"
+                  >
+                    <IconPencil />
+                  </router-link>
+                  <div
+                    class="border-2 border-r h-6 mt-[14px] border-[#6C757D]"
+                  ></div>
+                  <div
+                    @click="deleteMovie"
+                    class="hover:bg-slate-800 rounded-md py-4 px-5 cursor-pointer"
+                  >
+                    <IconTrash />
+                  </div>
                 </div>
               </div>
 
@@ -111,14 +123,18 @@ import NavigationBar from "@/components/layouts/NavigationBar.vue";
 import SideBar from "@/components/layouts/SideBar.vue";
 import IconHeart from "@/components/icons/IconHeart.vue";
 import IconComment from "@/components/icons/IconComment.vue";
+import IconPencil from "@/components/icons/IconPencil.vue";
+import IconTrash from "@/components/icons/IconTrash.vue";
 import IconThreedots from "@/components/icons/IconThreedots.vue";
 import QuoteCrud from "@/components/QuoteCrud.vue";
 import axiosInstance from "@/config/axios/index.js";
 
 import { reactive, ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
+const router = useRouter();
+
 const crudPanel = ref(false);
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
@@ -130,6 +146,16 @@ const data = reactive({
 function toggleCrudOperationView() {
   crudPanel.value = !crudPanel.value;
 }
+
+const deleteMovie = async () => {
+  try {
+    const response = await axiosInstance.post(`/delete-movie/${data.movie.id}`);
+    router.push({ name: "movielist" });
+    console.log(response);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 onMounted(() => {
   axiosInstance
