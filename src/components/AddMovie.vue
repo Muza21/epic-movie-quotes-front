@@ -108,7 +108,7 @@
           <Field
             placeholder="Year"
             name="year"
-            rules="required"
+            rules="required|integer"
             class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
           <div>
@@ -119,7 +119,7 @@
           <Field
             placeholder="Budget"
             name="budget"
-            rules="required"
+            rules="required|integer"
             class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
           />
           <div>
