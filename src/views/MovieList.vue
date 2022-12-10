@@ -41,7 +41,7 @@
                   <img
                     :src="link + movie.thumbnail"
                     alt="Fiction Product"
-                    class="object-cover rounded-tl-md rounded-tr-md"
+                    class="object-cover object-center w-[440px] h-[380px] rounded-md"
                   />
                   <div class="my-2">
                     <h3 class="text-xl text-white">
