@@ -78,34 +78,38 @@
               </router-link>
             </div>
 
-            <div class="bg-[#11101A] rounded-lg col-start-1 m-6">
-              <div class="flex">
-                <div class="p-6 mb-3 flex items-center w-full">
-                  <img
-                    class="w-50 w-40 object-cover rounded-lg"
-                    src="/src/assets/ProfilePic.jpg"
-                  />
-                  <div class="mx-6">
-                    <q class="text-xl text-center font-semibold text-white"
-                      >You don't understand! I coulda had class. I coulda been a
-                      contender. I could've been somebody, ....
-                    </q>
+            <div class="col-start-1" v-for="quote in data.quotes" :key="quote">
+              <div class="bg-[#11101A] rounded-lg col-start-1 m-6">
+                <div class="flex">
+                  <div class="p-6 mb-3 flex items-center w-full">
+                    <img
+                      class="w-50 w-40 object-cover rounded-lg"
+                      :src="link + quote.thumbnail"
+                    />
+                    <div class="mx-6">
+                      <q class="text-xl text-center font-semibold text-white"
+                        >{{ quote.quote }}
+                      </q>
+                    </div>
+                  </div>
+                  <div class="p-6">
+                    <button
+                      class="py-2"
+                      @click="toggleCrudOperationView(quote.id)"
+                    >
+                      <IconThreedots />
+                    </button>
+                    <QuoteCrud v-if="crudPanel == quote.id" />
                   </div>
                 </div>
-                <div class="p-6">
-                  <button class="py-2" @click="toggleCrudOperationView">
-                    <IconThreedots />
-                  </button>
-                  <QuoteCrud v-if="crudPanel" />
+                <div
+                  class="flex text-xl py-6 mx-6 border-t border-[#EFEFEF] text-white"
+                >
+                  <p class="mx-2">10</p>
+                  <IconComment />
+                  <p class="mx-2">10</p>
+                  <IconHeart />
                 </div>
-              </div>
-              <div
-                class="flex text-xl py-6 mx-6 border-t border-[#EFEFEF] text-white"
-              >
-                <p class="mx-2">10</p>
-                <IconComment />
-                <p class="mx-2">10</p>
-                <IconHeart />
               </div>
             </div>
           </div>
@@ -135,16 +139,21 @@ import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const router = useRouter();
 
-const crudPanel = ref(false);
+const crudPanel = ref("");
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
 
 const data = reactive({
   movie: {},
   genres: {},
+  quotes: {},
 });
-function toggleCrudOperationView() {
-  crudPanel.value = !crudPanel.value;
+function toggleCrudOperationView(id) {
+  if (crudPanel.value == id) {
+    crudPanel.value = "";
+  } else {
+    crudPanel.value = id;
+  }
 }
 
 const deleteMovie = async () => {
@@ -161,9 +170,10 @@ onMounted(() => {
   axiosInstance
     .get(`/movie-description/${route.params.id}`)
     .then((response) => {
-      data.movie = response.data;
+      data.movie = response.data.movie;
       data.genres = JSON.parse(data.movie.genre);
-      console.log(data.movie.thumbnail);
+      data.quotes = response.data.quotes;
+      console.log(response);
     })
     .catch((err) => {
       console.log(err);

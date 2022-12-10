@@ -146,7 +146,6 @@ const data = reactive({
 const selectMovie = (e) => {
   chooseMovie.value = false;
   selectedMovie.value = e.target.name;
-  console.log(selectedMovie.value);
 };
 
 const onSubmit = async (values) => {
