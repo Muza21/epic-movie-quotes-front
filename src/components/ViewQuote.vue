@@ -14,19 +14,20 @@
           >
             <div class="flex items-center w-full justify-between px-10">
               <div class="flex py-4 rounded-lg">
-                <IconPencil class="mr-5" />
+                <div @click="routerToEdit" class="mr-5 p-1 cursor-pointer">
+                  <IconPencil />
+                </div>
                 <div class="border-r border-[#6C757D]"></div>
-                <IconTrash class="ml-5" />
+                <div @click="deleteQuote" class="p-1 ml-5 cursor-pointer">
+                  <IconTrash />
+                </div>
               </div>
               <div class="text-center text-3xl text-white mx-14 my-6">
                 View quote
               </div>
-              <!-- <router-link
-                :to="{ name: 'description' }"
-                class="p-2 cursor-pointer"
-              >
+              <div @click="routerGoBack" class="p-1 cursor-pointer">
                 <IconCross />
-              </router-link> -->
+              </div>
             </div>
             <div class="flex items-center mb-6 p-6 rounded-md">
               <img
@@ -40,16 +41,16 @@
             <div
               class="text-white border-2 border-[#6C757D] text-xl p-6 lg:text-2xl mb-4 mx-8"
             >
-              "Frankly, my dear, I don'tgive a damn."
+              {{ data.quote.quote }}
             </div>
             <div
               class="text-white border-2 border-[#6C757D] text-xl p-6 lg:text-2xl mb-4 mx-8"
             >
-              “ციტატა ქართულ ენაზე”
+              {{ data.quote.quote }}
             </div>
 
             <div class="text-white p-6 leading-loose">
-              <img src="/src/assets/postIMg.png" alt="post image" />
+              <img :src="link + data.quote.thumbnail" alt="post image" />
             </div>
 
             <div class="flex text-xl p-6 text-white">
@@ -104,9 +105,6 @@
         </div>
       </div>
     </div>
-    <v-modal :open="open" @close="open = false">
-      <router-view />
-    </v-modal>
   </div>
 </template>
 
@@ -115,7 +113,60 @@ import NavigationBar from "@/components/layouts/NavigationBar.vue";
 import SideBar from "@/components/layouts/SideBar.vue";
 import IconHeart from "@/components/icons/IconHeart.vue";
 import IconComment from "@/components/icons/IconComment.vue";
-// import IconCross from "@/components/icons/IconCross.vue";
+import IconCross from "@/components/icons/IconCross.vue";
 import IconTrash from "@/components/icons/IconTrash.vue";
 import IconPencil from "@/components/icons/IconPencil.vue";
+import axiosInstance from "@/config/axios/index.js";
+import { useRoute, useRouter } from "vue-router";
+import { onBeforeMount, reactive } from "vue";
+
+const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
+
+const router = useRouter();
+const route = useRoute();
+
+const data = reactive({
+  quote: {},
+  movie: {},
+});
+
+const routerToEdit = () => {
+  router.push({
+    name: "edit-quote",
+    params: { id: data.quote.movie_id, quoteId: data.quote.id },
+  });
+};
+
+const routerGoBack = () => {
+  router.push({
+    name: "movie-description",
+    params: { id: data.quote.movie_id },
+  });
+};
+
+const deleteQuote = async () => {
+  try {
+    const response = await axiosInstance.post(`/delete-quote/${data.quote.id}`);
+    router.push({
+      name: "movie-description",
+      params: { id: data.quote.movie_id },
+    });
+    console.log(response);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+onBeforeMount(() => {
+  axiosInstance
+    .get(`/load-quote/${route.params.quoteId}`)
+    .then((response) => {
+      data.quote = response.data.quote;
+      data.movie = response.data.movie;
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 </script>

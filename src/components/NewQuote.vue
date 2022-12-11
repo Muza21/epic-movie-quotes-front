@@ -4,6 +4,12 @@
       <div class="text-center text-3xl text-white mx-14 my-6">
         Write new quote
       </div>
+      <div
+        @click="routerGoBack"
+        class="p-1 cursor-pointer absolute top-0 right-0 mt-8 mr-8"
+      >
+        <IconCross />
+      </div>
     </template>
     <ValidationForm class="mt-8" @submit="onSubmit">
       <div class="mx-auto px-4">
@@ -127,6 +133,7 @@ import FormLayout from "@/components/layouts/FormLayout.vue";
 import IconPhoto from "@/components/icons/IconPhoto.vue";
 import IconCamera from "@/components/icons/IconCamera.vue";
 import IconDropdown from "@/components/icons/IconDropdown.vue";
+import IconCross from "@/components/icons/IconCross.vue";
 import { Form as ValidationForm, Field, ErrorMessage } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
 import { ref, reactive, onMounted } from "vue";
@@ -146,6 +153,12 @@ const data = reactive({
 const selectMovie = (e) => {
   chooseMovie.value = false;
   selectedMovie.value = e.target.name;
+};
+
+const routerGoBack = () => {
+  router.push({
+    name: "newsfeed",
+  });
 };
 
 const onSubmit = async (values) => {

@@ -248,7 +248,6 @@ const onSubmit = async (values) => {
     formData.append("movie_picture", values.movie_picture);
     formData.append("_method", "PATCH");
 
-    console.log(formData);
     const response = await axiosInstance.post(
       `/edit-movie/${route.params.id}`,
       formData,
