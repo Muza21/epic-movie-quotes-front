@@ -92,6 +92,19 @@
                       </q>
                     </div>
                   </div>
+                  <!-- <div class="p-6">
+                    <button
+                      class="py-2"
+                      @click="showQuoteCrud = crudPanel == quote.id"
+                    >
+                      <IconThreedots />
+                    </button>
+                    <QuoteCrud
+                      :myParam="quote.id"
+                      v-if="showQuoteCrud"
+                      @close="showQuoteCrud = false"
+                    />
+                  </div> -->
                   <div class="p-6">
                     <button
                       class="py-2"
@@ -99,7 +112,11 @@
                     >
                       <IconThreedots />
                     </button>
-                    <QuoteCrud v-if="crudPanel == quote.id" />
+                    <QuoteCrud
+                      :myParam="quote.id"
+                      v-if="crudPanel == quote.id"
+                      @close="crudPanel = false"
+                    />
                   </div>
                 </div>
                 <div

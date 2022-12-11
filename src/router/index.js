@@ -110,7 +110,7 @@ const router = createRouter({
           component: () => import("@/components/AddQuote.vue"),
         },
         {
-          path: "edit-quote",
+          path: "edit-quote/:quoteId",
           name: "edit-quote",
           component: () => import("@/components/EditQuote.vue"),
         },
@@ -122,7 +122,7 @@ const router = createRouter({
       ],
     },
     {
-      path: "/view-quote",
+      path: "/view-quote/:quoteId",
       name: "view-quote",
       component: () => import("@/components/ViewQuote.vue"),
     },
