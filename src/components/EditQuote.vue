@@ -7,13 +7,10 @@
           <p class="text-[#CED4DA] ml-2">Delete</p>
         </div>
         <div class="text-center text-3xl text-white mx-14 my-6">Edit quote</div>
-        <!-- <router-link
-          :to="{ name: 'movie-description', params: { id: data.movie.id } }"
-        > -->
+
         <div @click="routerGoBack" class="p-1 cursor-pointer">
           <IconCross />
         </div>
-        <!-- </router-link> -->
       </div>
     </template>
     <ValidationForm class="mt-8" @submit="onSubmit">
@@ -22,10 +19,12 @@
           <div class="flex items-center mb-6 rounded-md">
             <img
               class="rounded-full w-12 h-12 mr-2 mt-1"
-              src="/src/assets/ProfilePic.jpg"
+              :src="user?.thumbnail"
             />
             <div>
-              <h2 class="text-lg font-semibold text-white">Nino Tabagari</h2>
+              <h2 class="text-lg font-semibold text-white">
+                {{ user?.username }}
+              </h2>
             </div>
           </div>
         </div>
@@ -107,7 +106,7 @@ import IconTrash from "@/components/icons/IconTrash.vue";
 import { Form as ValidationForm, Field } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
 import { useRoute, useRouter } from "vue-router";
-import { onBeforeMount, reactive, ref } from "vue";
+import { onBeforeMount, onMounted, reactive, ref } from "vue";
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
 
@@ -115,6 +114,9 @@ const router = useRouter();
 const route = useRoute();
 
 const url = ref("");
+
+const currentUser = ref({});
+const user = ref({});
 
 const data = reactive({
   quote: {},
@@ -152,6 +154,7 @@ const onSubmit = async (values) => {
     formData.append("quote_ka", values.quote_ka);
     formData.append("quote_picture", values.quote_picture);
     formData.append("movie_title", data.movie.title);
+    formData.append("user_id", currentUser.value.id);
     formData.append("_method", "PATCH");
     console.log(formData);
     const response = await axiosInstance.post(
@@ -179,6 +182,19 @@ onBeforeMount(() => {
     .then((response) => {
       data.quote = response.data.quote;
       data.movie = response.data.movie;
+      user.value = response.data.user;
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+onMounted(() => {
+  axiosInstance
+    .get(`/user`)
+    .then((response) => {
+      currentUser.value = response.data.user;
       console.log(response);
     })
     .catch((err) => {

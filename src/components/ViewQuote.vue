@@ -32,10 +32,12 @@
             <div class="flex items-center mb-6 p-6 rounded-md">
               <img
                 class="rounded-full w-12 h-12 mr-2 mt-1"
-                src="/src/assets/ProfilePic.jpg"
+                :src="user?.thumbnail"
               />
               <div class="ml-4">
-                <h2 class="text-lg font-semibold text-white">Nino Tabagari</h2>
+                <h2 class="text-lg font-semibold text-white">
+                  {{ user?.username }}
+                </h2>
               </div>
             </div>
             <div
@@ -50,7 +52,7 @@
             </div>
 
             <div class="text-white p-6 leading-loose">
-              <img :src="link + data.quote.thumbnail" alt="post image" />
+              <img :src="link + data.quote?.thumbnail" alt="post image" />
             </div>
 
             <div class="flex text-xl p-6 text-white">
@@ -118,12 +120,14 @@ import IconTrash from "@/components/icons/IconTrash.vue";
 import IconPencil from "@/components/icons/IconPencil.vue";
 import axiosInstance from "@/config/axios/index.js";
 import { useRoute, useRouter } from "vue-router";
-import { onBeforeMount, reactive } from "vue";
+import { onBeforeMount, reactive, ref } from "vue";
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
 
 const router = useRouter();
 const route = useRoute();
+
+const user = ref({});
 
 const data = reactive({
   quote: {},
@@ -163,6 +167,7 @@ onBeforeMount(() => {
     .then((response) => {
       data.quote = response.data.quote;
       data.movie = response.data.movie;
+      user.value = response.data.user;
       console.log(response);
     })
     .catch((err) => {

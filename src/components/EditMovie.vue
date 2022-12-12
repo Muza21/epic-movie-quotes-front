@@ -9,10 +9,12 @@
           <div class="flex items-center mb-6 rounded-md">
             <img
               class="rounded-full w-12 h-12 mr-2 mt-1"
-              src="/src/assets/ProfilePic.jpg"
+              :src="user?.thumbnail"
             />
             <div>
-              <h2 class="text-lg font-semibold text-white">Nino Tabagari</h2>
+              <h2 class="text-lg font-semibold text-white">
+                {{ user?.username }}
+              </h2>
             </div>
           </div>
         </div>
@@ -214,6 +216,8 @@ const data = reactive({
   genres: {},
 });
 
+const user = ref({});
+
 const reactiveSelectedGenres = reactive({});
 
 const toggleGenres = () => {
@@ -279,8 +283,9 @@ onMounted(() => {
   axiosInstance
     .get(`/movie-description/${route.params.id}`)
     .then((response) => {
-      data.movie = response.data;
+      data.movie = response.data.movie;
       data.genres = JSON.parse(data.movie.genre);
+      user.value = response.data.user;
       reactiveSelectedGenres.values = data.genres;
     })
     .catch((err) => {

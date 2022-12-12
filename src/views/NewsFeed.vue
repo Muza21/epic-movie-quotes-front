@@ -40,11 +40,11 @@
               <div class="flex items-center mb-6 p-6 rounded-md">
                 <img
                   class="rounded-full w-12 h-12 mr-2 mt-1"
-                  src="/src/assets/ProfilePic.jpg"
+                  :src="quote.user.thumbnail"
                 />
                 <div class="ml-4">
                   <h2 class="text-lg font-semibold text-white">
-                    Nino Tabagari
+                    {{ quote.user.username }}
                   </h2>
                 </div>
               </div>
@@ -54,7 +54,7 @@
               </h1>
 
               <div class="text-white p-6 leading-loose">
-                <img :src="link + quote.thumbnail" alt="post image" />
+                <img :src="link + quote?.thumbnail" alt="post image" />
               </div>
 
               <div class="flex text-xl p-6 text-white">

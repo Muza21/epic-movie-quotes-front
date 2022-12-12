@@ -28,7 +28,7 @@
                 >
                   <div class="relative">
                     <div class="rounded-full overflow-hidden w-32 h-32">
-                      <img alt="..." src="/src/assets/ProfilePic.jpg" />
+                      <img alt="Profile Picture" :src="user?.thumbnail" />
                     </div>
                   </div>
                 </div>
@@ -106,4 +106,20 @@ import NavigationBar from "@/components/layouts/NavigationBar.vue";
 import SideBar from "@/components/layouts/SideBar.vue";
 import IconCross from "@/components/icons/IconCross.vue";
 import IconGreencheck from "@/components/icons/IconGreencheck.vue";
+import axiosInstance from "@/config/axios/index.js";
+import { onMounted, ref } from "vue";
+
+const user = ref({});
+
+onMounted(() => {
+  axiosInstance
+    .get(`/user`)
+    .then((response) => {
+      user.value = response.data.user;
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 </script>

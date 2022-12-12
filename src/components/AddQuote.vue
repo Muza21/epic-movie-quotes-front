@@ -11,10 +11,12 @@
           <div class="flex items-center mb-6 rounded-md">
             <img
               class="rounded-full w-12 h-12 mr-2 mt-1"
-              src="/src/assets/ProfilePic.jpg"
+              :src="user?.thumbnail"
             />
             <div>
-              <h2 class="text-lg font-semibold text-white">Nino Tabagari</h2>
+              <h2 class="text-lg font-semibold text-white">
+                {{ user?.username }}
+              </h2>
             </div>
           </div>
         </div>
@@ -119,6 +121,21 @@ import { Form as ValidationForm, Field, ErrorMessage } from "vee-validate";
 import { onMounted, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axiosInstance from "@/config/axios/index.js";
+import { onBeforeMount, ref } from "vue";
+
+const user = ref([]);
+
+onBeforeMount(() => {
+  axiosInstance
+    .get(`/user`)
+    .then((response) => {
+      user.value = response.data.user;
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
 
@@ -137,6 +154,7 @@ const onSubmit = async (values) => {
     formData.append("quote_ka", values.quote_ka);
     formData.append("quote_picture", values.quote_picture);
     formData.append("movie_title", data.movie.title);
+    formData.append("user_id", user.value.id);
     console.log(formData);
     const response = await axiosInstance.post(`/add-quote`, formData, {
       headers: {
@@ -157,7 +175,6 @@ onMounted(() => {
       data.movie = response.data.movie;
       data.genres = JSON.parse(data.movie.genre);
       console.log(response);
-      // console.log(data.movie);
     })
     .catch((err) => {
       console.log(err);

@@ -39,7 +39,7 @@
                   class="flex flex-col drop-shadow hover:drop-shadow-lg hover:opacity-70 rounded-md"
                 >
                   <img
-                    :src="link + movie.thumbnail"
+                    :src="link + movie?.thumbnail"
                     alt="Fiction Product"
                     class="object-cover object-center w-[440px] h-[380px] rounded-md"
                   />

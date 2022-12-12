@@ -17,10 +17,12 @@
           <div class="flex items-center mb-6 rounded-md">
             <img
               class="rounded-full w-12 h-12 mr-2 mt-1"
-              src="/src/assets/ProfilePic.jpg"
+              :src="user?.thumbnail"
             />
             <div>
-              <h2 class="text-lg font-semibold text-white">Nino Tabagari</h2>
+              <h2 class="text-lg font-semibold text-white">
+                {{ user?.username }}
+              </h2>
             </div>
           </div>
         </div>
@@ -150,6 +152,8 @@ const data = reactive({
   movies: {},
 });
 
+const user = ref({});
+
 const selectMovie = (e) => {
   chooseMovie.value = false;
   selectedMovie.value = e.target.name;
@@ -168,6 +172,7 @@ const onSubmit = async (values) => {
     formData.append("quote_ka", values.quote_ka);
     formData.append("quote_picture", values.quote_picture);
     formData.append("movie_title", selectedMovie.value);
+    formData.append("user_id", user.value.id);
     console.log(formData);
     const response = await axiosInstance.post(`/add-quote`, formData, {
       headers: {
@@ -186,6 +191,7 @@ onMounted(() => {
     .get(`/movielist`)
     .then((response) => {
       data.movies = response.data.movies;
+      user.value = response.data.user;
       console.log(response);
     })
     .catch((err) => {
