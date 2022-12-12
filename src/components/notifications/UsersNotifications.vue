@@ -44,7 +44,7 @@
               <div class="flex justify-between">
                 <h2 class="text-[#CED4DA] flex items-center">
                   <RedHeart class="w-5" />
-                  <p class="ml-3">Commented to your movie quotes</p>
+                  <p class="ml-3">Reacted to your quote</p>
                 </h2>
                 <p class="text-[#198754]">New</p>
               </div>

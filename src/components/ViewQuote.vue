@@ -62,42 +62,41 @@
               <IconHeart />
             </div>
 
-            <div class="text-white p-6 antialiased flex">
-              <img
-                class="rounded-full w-12 h-12 mr-2 mt-1"
-                src="/src/assets/ProfilePic.jpg"
-              />
-              <div>
-                <div class="px-4 pt-2 pb-2.5 ]">
-                  <div class="font-semibold text-white text-sm leading-relaxed">
-                    Nino Tabagari
-                  </div>
-                  <div
-                    class="text-normal leading-snug md:leading-normal pb-6 border-b-2 border-[#EFEFEF]"
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
+            <div v-for="comment in data.quote.comments" :key="comment">
+              <div class="text-white p-6 antialiased flex">
+                <img
+                  class="rounded-full w-12 h-12 mr-2 mt-1"
+                  :src="comment.user.thumbnail"
+                />
+                <div>
+                  <div class="px-4 pt-2 pb-2.5 ]">
+                    <div
+                      class="font-semibold text-white text-sm leading-relaxed"
+                    >
+                      {{ comment.user.username }}
+                    </div>
+                    <div
+                      class="text-normal leading-snug md:leading-normal pb-6 border-b-2 border-[#EFEFEF]"
+                    >
+                      {{ comment.body }}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
             <div class="text-white p-6 antialiased flex">
               <img
                 class="rounded-full w-12 h-12 mr-2 mt-1"
-                src="/src/assets/ProfilePic.jpg"
+                :src="currentUser.thumbnail"
               />
               <div class="w-full">
                 <div class="px-4 pt-2 pb-2.5">
                   <input
                     class="bg-[#24222F] rounded-md w-full p-4"
                     type="text"
+                    name="comment"
+                    v-model="writtenComment"
+                    @keyup.enter="postComment"
                     placeholder="Write a comment"
                   />
                 </div>
@@ -128,11 +127,49 @@ const router = useRouter();
 const route = useRoute();
 
 const user = ref({});
+const currentUser = ref({});
 
 const data = reactive({
   quote: {},
   movie: {},
 });
+
+const writtenComment = ref("");
+
+function postComment() {
+  axiosInstance
+    .post(`/comment/${data.quote.id}`, {
+      body: writtenComment.value,
+      user_id: currentUser.value.id,
+      quote_id: data.quote.id,
+    })
+    .then((response) => {
+      writtenComment.value = "";
+      data.quote.comments.push(response.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+// const onSubmit = async (values) => {
+// if (values.comment) {
+//   try {
+//     const response = await axiosInstance.post(
+//       `/comment/${commentQuoteId.value}`,
+//       {
+//         body: values.comment,
+//         user_id: user.value.id,
+//         quote_id: commentQuoteId.value,
+//       }
+//     );
+//     writtenComment.value = "";
+//     console.log(response);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+// };
 
 const routerToEdit = () => {
   router.push({
@@ -168,7 +205,8 @@ onBeforeMount(() => {
       data.quote = response.data.quote;
       data.movie = response.data.movie;
       user.value = response.data.user;
-      console.log(response);
+      currentUser.value = response.data.currentUser;
+      console.log(response.data);
     })
     .catch((err) => {
       console.log(err);

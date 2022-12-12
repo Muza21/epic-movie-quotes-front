@@ -170,11 +170,11 @@ const onSubmit = async (values) => {
 
 onMounted(() => {
   axiosInstance
-    .get(`/movie-description/${route.params.id}`)
+    .get(`/movie/${route.params.id}`)
     .then((response) => {
       data.movie = response.data.movie;
       data.genres = JSON.parse(data.movie.genre);
-      console.log(response);
+      console.log(response.data);
     })
     .catch((err) => {
       console.log(err);

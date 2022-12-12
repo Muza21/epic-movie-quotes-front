@@ -33,7 +33,7 @@
               </div>
             </ValidationForm>
           </div>
-          <div v-for="quote in quotes.values" :key="quote">
+          <div v-for="(quote, index) in quotes.values" :key="index">
             <article
               class="max-w-4xl my-10 rounded-xl md:w-[1000px] bg-[#11101A] mx-auto"
             >
@@ -64,49 +64,48 @@
                 <IconHeart />
               </div>
 
-              <div class="text-white p-6 antialiased flex">
-                <img
-                  class="rounded-full w-12 h-12 mr-2 mt-1"
-                  src="/src/assets/ProfilePic.jpg"
-                />
-                <div>
-                  <div class="px-4 pt-2 pb-2.5 ]">
-                    <div
-                      class="font-semibold text-white text-sm leading-relaxed"
-                    >
-                      Nino Tabagari
-                    </div>
-                    <div
-                      class="text-normal leading-snug md:leading-normal pb-6 border-b-2 border-[#EFEFEF]"
-                    >
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
+              <div v-for="comment in quote.comments" :key="comment">
+                <div class="text-white p-6 antialiased flex">
+                  <img
+                    class="rounded-full w-12 h-12 mr-2 mt-1"
+                    :src="comment.user.thumbnail"
+                  />
+                  <div>
+                    <div class="px-4 pt-2 pb-2.5 ]">
+                      <div
+                        class="font-semibold text-white text-sm leading-relaxed"
+                      >
+                        {{ comment.user.username }}
+                      </div>
+                      <div
+                        class="text-normal leading-snug md:leading-normal pb-6 border-b-2 border-[#EFEFEF]"
+                      >
+                        {{ comment.body }}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <div class="text-white p-6 antialiased flex">
-                <img
-                  class="rounded-full w-12 h-12 mr-2 mt-1"
-                  src="/src/assets/ProfilePic.jpg"
-                />
-                <div class="w-full">
-                  <div class="px-4 pt-2 pb-2.5">
-                    <input
-                      class="bg-[#24222F] rounded-md w-full p-4"
-                      type="text"
-                      placeholder="Write a comment"
-                    />
+              <ValidationForm @submit="onSubmit">
+                <div class="text-white p-6 antialiased flex">
+                  <img
+                    class="rounded-full w-12 h-12 mr-2 mt-1"
+                    :src="user?.thumbnail"
+                  />
+                  <div class="w-full">
+                    <div class="px-4 pt-2 pb-2.5">
+                      <Field
+                        class="bg-[#24222F] rounded-md w-full p-4"
+                        type="text"
+                        name="comment"
+                        v-model="quote.writtenComment"
+                        @keydown.enter="postComment(quote.id, index)"
+                        placeholder="Write a comment"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              </ValidationForm>
             </article>
           </div>
         </div>
@@ -127,11 +126,52 @@ import IconNewquote from "@/components/icons/IconNewquote.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
 import { Form as ValidationForm, Field } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
-import { reactive, onMounted } from "vue";
+import { reactive, onMounted, onBeforeMount, ref } from "vue";
 
 const quotes = reactive({});
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
+
+const user = ref({});
+const commentQuoteId = ref("");
+const quoteIndex = ref();
+
+function postComment(id, index) {
+  commentQuoteId.value = id;
+  quoteIndex.value = index;
+}
+
+const onSubmit = async (values) => {
+  if (values.comment) {
+    try {
+      const response = await axiosInstance.post(
+        `/comment/${commentQuoteId.value}`,
+        {
+          body: values.comment,
+          user_id: user.value.id,
+          quote_id: commentQuoteId.value,
+        }
+      );
+      quotes.values[quoteIndex.value].writtenComment = "";
+      quotes.values[quoteIndex.value].comments.push(response.data);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+};
+
+onBeforeMount(() => {
+  axiosInstance
+    .get(`/current-user`)
+    .then((response) => {
+      user.value = response.data.user;
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 onMounted(() => {
   axiosInstance
@@ -139,6 +179,7 @@ onMounted(() => {
     .then((response) => {
       quotes.values = response.data.quotes;
       console.log(response);
+      console.log(quotes.values);
     })
     .catch((err) => {
       console.log(err);

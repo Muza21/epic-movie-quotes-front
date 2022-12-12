@@ -28,7 +28,7 @@
             </button>
             <div
               v-if="view.languageView"
-              class="absolute w-36 h-[112px] rounded-lg bg-[#11101A] mt-2"
+              class="absolute z-50 w-36 h-[112px] rounded-lg bg-[#11101A] mt-2"
             >
               <div class="py-1 hover:bg-gray-800">
                 <a href="#" class="flex items-center p-3 rounded-md">
