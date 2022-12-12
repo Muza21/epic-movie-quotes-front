@@ -135,7 +135,7 @@ const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
 
 onMounted(() => {
   axiosInstance
-    .get(`/quotes`)
+    .get(`/quote`)
     .then((response) => {
       quotes.values = response.data.quotes;
       console.log(response);

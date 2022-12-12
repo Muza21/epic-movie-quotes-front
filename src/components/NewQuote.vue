@@ -174,7 +174,7 @@ const onSubmit = async (values) => {
     formData.append("movie_title", selectedMovie.value);
     formData.append("user_id", user.value.id);
     console.log(formData);
-    const response = await axiosInstance.post(`/add-quote`, formData, {
+    const response = await axiosInstance.post(`/quote`, formData, {
       headers: {
         "Content-Type": "multipart/form-data;",
       },

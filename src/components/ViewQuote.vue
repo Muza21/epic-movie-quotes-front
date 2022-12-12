@@ -150,7 +150,7 @@ const routerGoBack = () => {
 
 const deleteQuote = async () => {
   try {
-    const response = await axiosInstance.post(`/delete-quote/${data.quote.id}`);
+    const response = await axiosInstance.post(`/quote/${data.quote.id}`);
     router.push({
       name: "movie-description",
       params: { id: data.quote.movie_id },
@@ -163,7 +163,7 @@ const deleteQuote = async () => {
 
 onBeforeMount(() => {
   axiosInstance
-    .get(`/load-quote/${route.params.quoteId}`)
+    .get(`/quote/${route.params.quoteId}`)
     .then((response) => {
       data.quote = response.data.quote;
       data.movie = response.data.movie;

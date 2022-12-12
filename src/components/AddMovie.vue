@@ -244,7 +244,7 @@ const onSubmit = async (values) => {
     formData.append("movie_description_ka", values.movie_description_ka);
     formData.append("movie_picture", values.movie_picture);
 
-    const response = await axiosInstance.post(`/add-movie`, formData, {
+    const response = await axiosInstance.post(`/movie`, formData, {
       headers: {
         "Content-Type": "multipart/form-data;",
       },

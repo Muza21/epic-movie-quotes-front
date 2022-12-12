@@ -85,7 +85,7 @@ const data = reactive({
 
 onMounted(() => {
   axiosInstance
-    .get(`/movielist`)
+    .get(`/movie`)
     .then((response) => {
       console.log(response);
       data.movies = response.data.movies;

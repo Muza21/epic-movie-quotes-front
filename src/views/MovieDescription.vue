@@ -175,7 +175,7 @@ function toggleCrudOperationView(id) {
 
 const deleteMovie = async () => {
   try {
-    const response = await axiosInstance.post(`/delete-movie/${data.movie.id}`);
+    const response = await axiosInstance.post(`/movie/${data.movie.id}`);
     router.push({ name: "movielist" });
     console.log(response);
   } catch (err) {
@@ -185,7 +185,7 @@ const deleteMovie = async () => {
 
 onMounted(() => {
   axiosInstance
-    .get(`/movie-description/${route.params.id}`)
+    .get(`/movie/${route.params.id}`)
     .then((response) => {
       data.movie = response.data.movie;
       data.genres = JSON.parse(data.movie.genre);

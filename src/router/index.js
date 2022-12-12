@@ -139,7 +139,7 @@ router.beforeEach(async (to, from, next) => {
 
   if (authStore.authenticated === null) {
     try {
-      await axiosInstance.get(`/me`);
+      await axiosInstance.get(`/check-user`);
       authStore.authenticated = true;
     } catch (err) {
       authStore.authenticated = false;

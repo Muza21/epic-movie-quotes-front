@@ -136,7 +136,7 @@ const routerGoBack = () => {
 
 const deleteQuote = async () => {
   try {
-    const response = await axiosInstance.post(`/delete-quote/${data.quote.id}`);
+    const response = await axiosInstance.post(`/quote/${data.quote.id}`);
     router.push({
       name: "movie-description",
       params: { id: data.quote.movie_id },
@@ -158,7 +158,7 @@ const onSubmit = async (values) => {
     formData.append("_method", "PATCH");
     console.log(formData);
     const response = await axiosInstance.post(
-      `/edit-quote/${route.params.quoteId}`,
+      `/quote/${route.params.quoteId}`,
       formData,
       {
         headers: {
@@ -178,7 +178,7 @@ const onSubmit = async (values) => {
 
 onBeforeMount(() => {
   axiosInstance
-    .get(`/load-quote/${route.params.quoteId}`)
+    .get(`/quote/${route.params.quoteId}`)
     .then((response) => {
       data.quote = response.data.quote;
       data.movie = response.data.movie;
@@ -192,7 +192,7 @@ onBeforeMount(() => {
 
 onMounted(() => {
   axiosInstance
-    .get(`/user`)
+    .get(`/current-user`)
     .then((response) => {
       currentUser.value = response.data.user;
       console.log(response);
