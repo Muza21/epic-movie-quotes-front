@@ -58,29 +58,36 @@
               </div>
 
               <div class="flex text-xl p-6 text-white">
-                <p class="mx-2">3</p>
+                <p class="mx-2">{{ quote.comments.length }}</p>
                 <IconComment />
-                <p class="mx-2">10</p>
-                <IconHeart />
+                <p class="ml-6 mr-2">{{ quote.likes.length }}</p>
+                <div
+                  @click="likeQuote(quote.id, index)"
+                  class="p-1 cursor-pointer -mt-1"
+                >
+                  <IconHeart />
+                </div>
               </div>
 
-              <div v-for="comment in quote.comments" :key="comment">
-                <div class="text-white p-6 antialiased flex">
-                  <img
-                    class="rounded-full w-12 h-12 mr-2 mt-1"
-                    :src="comment.user.thumbnail"
-                  />
-                  <div>
-                    <div class="px-4 pt-2 pb-2.5 ]">
-                      <div
-                        class="font-semibold text-white text-sm leading-relaxed"
-                      >
-                        {{ comment.user.username }}
-                      </div>
-                      <div
-                        class="text-normal leading-snug md:leading-normal pb-6 border-b-2 border-[#EFEFEF]"
-                      >
-                        {{ comment.body }}
+              <div class="max-h-60 overflow-auto">
+                <div v-for="comment in quote.comments" :key="comment">
+                  <div class="text-white p-6 antialiased flex">
+                    <img
+                      class="rounded-full w-12 h-12 mr-2 mt-1"
+                      :src="comment.user.thumbnail"
+                    />
+                    <div>
+                      <div class="px-4 pt-2 pb-2.5 ]">
+                        <div
+                          class="font-semibold text-white text-sm leading-relaxed"
+                        >
+                          {{ comment.user.username }}
+                        </div>
+                        <div
+                          class="text-normal leading-snug md:leading-normal pb-6 border-b-2 border-[#EFEFEF]"
+                        >
+                          {{ comment.body }}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -141,6 +148,21 @@ function postComment(id, index) {
   quoteIndex.value = index;
 }
 
+function likeQuote(id, index) {
+  axiosInstance
+    .post(`/reaction/${id}`, {
+      user_id: user.value.id,
+      quote_id: id,
+    })
+    .then((response) => {
+      quotes.values[index].likes = response.data;
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 const onSubmit = async (values) => {
   if (values.comment) {
     try {
@@ -179,7 +201,6 @@ onMounted(() => {
     .then((response) => {
       quotes.values = response.data.quotes;
       console.log(response);
-      console.log(quotes.values);
     })
     .catch((err) => {
       console.log(err);

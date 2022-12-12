@@ -43,42 +43,48 @@
             <div
               class="text-white border-2 border-[#6C757D] text-xl p-6 lg:text-2xl mb-4 mx-8"
             >
-              {{ data.quote.quote }}
+              {{ quote?.quote }}
             </div>
             <div
               class="text-white border-2 border-[#6C757D] text-xl p-6 lg:text-2xl mb-4 mx-8"
             >
-              {{ data.quote.quote }}
+              {{ quote?.quote }}
             </div>
 
             <div class="text-white p-6 leading-loose">
-              <img :src="link + data.quote?.thumbnail" alt="post image" />
+              <img :src="link + quote?.thumbnail" alt="post image" />
             </div>
 
             <div class="flex text-xl p-6 text-white">
-              <p class="mx-2">3</p>
+              <p class="mx-2">{{ commentsCount }}</p>
               <IconComment />
-              <p class="mx-2">10</p>
-              <IconHeart />
+              <p class="mx-2">{{ likesCount }}</p>
+              <div
+                @click="likeQuote(quote.id)"
+                class="p-1 cursor-pointer -mt-1"
+              >
+                <IconHeart />
+              </div>
             </div>
-
-            <div v-for="comment in data.quote.comments" :key="comment">
-              <div class="text-white p-6 antialiased flex">
-                <img
-                  class="rounded-full w-12 h-12 mr-2 mt-1"
-                  :src="comment.user.thumbnail"
-                />
-                <div>
-                  <div class="px-4 pt-2 pb-2.5 ]">
-                    <div
-                      class="font-semibold text-white text-sm leading-relaxed"
-                    >
-                      {{ comment.user.username }}
-                    </div>
-                    <div
-                      class="text-normal leading-snug md:leading-normal pb-6 border-b-2 border-[#EFEFEF]"
-                    >
-                      {{ comment.body }}
+            <div class="max-h-60 overflow-auto">
+              <div v-for="comment in quote.comments" :key="comment">
+                <div class="text-white p-6 antialiased flex">
+                  <img
+                    class="rounded-full w-12 h-12 mr-2 mt-1"
+                    :src="comment.user.thumbnail"
+                  />
+                  <div>
+                    <div class="px-4 pt-2 pb-2.5 ]">
+                      <div
+                        class="font-semibold text-white text-sm leading-relaxed"
+                      >
+                        {{ comment.user.username }}
+                      </div>
+                      <div
+                        class="text-normal leading-snug md:leading-normal pb-6 border-b-2 border-[#EFEFEF]"
+                      >
+                        {{ comment.body }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -119,78 +125,74 @@ import IconTrash from "@/components/icons/IconTrash.vue";
 import IconPencil from "@/components/icons/IconPencil.vue";
 import axiosInstance from "@/config/axios/index.js";
 import { useRoute, useRouter } from "vue-router";
-import { onBeforeMount, reactive, ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
 
 const router = useRouter();
 const route = useRoute();
 
+const quote = ref({});
+const movie = ref({});
 const user = ref({});
 const currentUser = ref({});
-
-const data = reactive({
-  quote: {},
-  movie: {},
-});
+const commentsCount = ref();
+const likesCount = ref();
 
 const writtenComment = ref("");
 
-function postComment() {
+function likeQuote(id) {
   axiosInstance
-    .post(`/comment/${data.quote.id}`, {
-      body: writtenComment.value,
-      user_id: currentUser.value.id,
-      quote_id: data.quote.id,
+    .post(`/reaction/${id}`, {
+      user_id: user.value.id,
+      quote_id: id,
     })
     .then((response) => {
-      writtenComment.value = "";
-      data.quote.comments.push(response.data);
+      likesCount.value = response.data.length;
+      console.log(response);
     })
     .catch((err) => {
       console.log(err);
     });
 }
 
-// const onSubmit = async (values) => {
-// if (values.comment) {
-//   try {
-//     const response = await axiosInstance.post(
-//       `/comment/${commentQuoteId.value}`,
-//       {
-//         body: values.comment,
-//         user_id: user.value.id,
-//         quote_id: commentQuoteId.value,
-//       }
-//     );
-//     writtenComment.value = "";
-//     console.log(response);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-// };
+function postComment() {
+  axiosInstance
+    .post(`/comment/${quote.value.id}`, {
+      body: writtenComment.value,
+      user_id: currentUser.value.id,
+      quote_id: quote.value.id,
+    })
+    .then((response) => {
+      writtenComment.value = "";
+      quote.value.comments.push(response.data);
+      commentsCount.value = quote.value.comments.length;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 const routerToEdit = () => {
   router.push({
     name: "edit-quote",
-    params: { id: data.quote.movie_id, quoteId: data.quote.id },
+    params: { id: quote.value.movie_id, quoteId: quote.value.id },
   });
 };
 
 const routerGoBack = () => {
   router.push({
     name: "movie-description",
-    params: { id: data.quote.movie_id },
+    params: { id: quote.value.movie_id },
   });
 };
 
 const deleteQuote = async () => {
   try {
-    const response = await axiosInstance.post(`/quote/${data.quote.id}`);
+    const response = await axiosInstance.post(`/quote/${quote.value.id}`);
     router.push({
       name: "movie-description",
-      params: { id: data.quote.movie_id },
+      params: { id: quote.value.movie_id },
     });
     console.log(response);
   } catch (err) {
@@ -202,11 +204,13 @@ onBeforeMount(() => {
   axiosInstance
     .get(`/quote/${route.params.quoteId}`)
     .then((response) => {
-      data.quote = response.data.quote;
-      data.movie = response.data.movie;
+      quote.value = response.data.quote;
+      movie.value = response.data.movie;
       user.value = response.data.user;
       currentUser.value = response.data.currentUser;
-      console.log(response.data);
+      commentsCount.value = response.data.quote.comments.length;
+      likesCount.value = response.data.quote.likes.length;
+      console.log(response);
     })
     .catch((err) => {
       console.log(err);

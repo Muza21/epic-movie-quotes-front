@@ -6,7 +6,9 @@
         <SideBar />
         <div class="w-full">
           <div class="flex justify-between mx-20 mt-5">
-            <h2 class="text-white text-xl">My list of movies Total 25</h2>
+            <h2 class="text-white text-xl">
+              My list of movies &#40;Total {{ data.movies.length }}&#41;
+            </h2>
             <div class="flex items-center">
               <div class="relative mr-14">
                 <div

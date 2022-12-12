@@ -92,19 +92,6 @@
                       </q>
                     </div>
                   </div>
-                  <!-- <div class="p-6">
-                    <button
-                      class="py-2"
-                      @click="showQuoteCrud = crudPanel == quote.id"
-                    >
-                      <IconThreedots />
-                    </button>
-                    <QuoteCrud
-                      :myParam="quote.id"
-                      v-if="showQuoteCrud"
-                      @close="showQuoteCrud = false"
-                    />
-                  </div> -->
                   <div class="p-6">
                     <button
                       class="py-2"
@@ -122,9 +109,9 @@
                 <div
                   class="flex text-xl py-6 mx-6 border-t border-[#EFEFEF] text-white"
                 >
-                  <p class="mx-2">10</p>
+                  <p class="mx-2">{{ quote.comments.length }}</p>
                   <IconComment />
-                  <p class="mx-2">10</p>
+                  <p class="mx-2">{{ quote.likes.length }}</p>
                   <IconHeart />
                 </div>
               </div>
