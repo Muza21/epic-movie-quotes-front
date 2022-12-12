@@ -14,3 +14,10 @@ defineRule("confirmed", (value, [target], ctx) => {
 
   return "Passwords must match";
 });
+
+defineRule("georgian_text", (value) => {
+  if (!value.match(/^[\u10D0-\u10F0 ]+$/)) {
+    return false;
+  }
+  return true;
+});

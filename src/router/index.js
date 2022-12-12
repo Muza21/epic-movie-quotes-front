@@ -99,7 +99,7 @@ const router = createRouter({
       ],
     },
     {
-      path: "/movie-description",
+      path: "/movie-description/:id",
       name: "movie-description",
       component: () => import("@/views/MovieDescription.vue"),
       beforeEnter: isAuthenticated,
@@ -110,11 +110,21 @@ const router = createRouter({
           component: () => import("@/components/AddQuote.vue"),
         },
         {
-          path: "edit-quote",
+          path: "edit-quote/:quoteId",
           name: "edit-quote",
           component: () => import("@/components/EditQuote.vue"),
         },
+        {
+          path: "edit-movie",
+          name: "edit-movie",
+          component: () => import("@/components/EditMovie.vue"),
+        },
       ],
+    },
+    {
+      path: "/view-quote/:quoteId",
+      name: "view-quote",
+      component: () => import("@/components/ViewQuote.vue"),
     },
     {
       path: "/callback",
