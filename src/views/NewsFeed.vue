@@ -15,23 +15,31 @@
               <IconNewquote />
               <p class="text-white ml-2">Write new quote</p>
             </router-link>
-            <ValidationForm class="flex items-center">
+            <div class="flex items-center">
               <div class="relative">
                 <div
                   class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
                 >
                   <IconSearch />
                 </div>
-                <Field
+                <input
                   type="text"
                   id="search"
                   name="search"
+                  v-model="searchValue"
+                  @keyup.enter="searchByMovieOrQuote"
                   class="bg-[#24222F] w-[688px] py-4 pr-4 pl-12 border-b border-[#EFEFEF] text-white text-sm rounded-lg placeholder-[#CED4DA]"
                   placeholder="Enter @ to search movies, Enter # to search quotes "
                   required
                 />
               </div>
-            </ValidationForm>
+            </div>
+          </div>
+          <div
+            class="text-center text-white text-6xl mt-52 hidden"
+            v-if="searchValue && !quotes.values.length"
+          >
+            <p>No results found!</p>
           </div>
           <div v-for="(quote, index) in quotes.values" :key="index">
             <article
@@ -40,11 +48,11 @@
               <div class="flex items-center mb-6 p-6 rounded-md">
                 <img
                   class="rounded-full w-12 h-12 mr-2 mt-1"
-                  :src="quote.user.thumbnail"
+                  :src="quote.user?.thumbnail"
                 />
                 <div class="ml-4">
                   <h2 class="text-lg font-semibold text-white">
-                    {{ quote.user.username }}
+                    {{ quote.user?.username }}
                   </h2>
                 </div>
               </div>
@@ -58,9 +66,9 @@
               </div>
 
               <div class="flex text-xl p-6 text-white">
-                <p class="mx-2">{{ quote.comments.length }}</p>
+                <p class="mx-2">{{ quote.comments?.length }}</p>
                 <IconComment />
-                <p class="ml-6 mr-2">{{ quote.likes.length }}</p>
+                <p class="ml-6 mr-2">{{ quote.likes?.length }}</p>
                 <div
                   @click="likeQuote(quote.id, index)"
                   class="p-1 cursor-pointer -mt-1"
@@ -134,8 +142,11 @@ import IconSearch from "@/components/icons/IconSearch.vue";
 import { Form as ValidationForm, Field } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
 import { reactive, onMounted, onBeforeMount, ref } from "vue";
+import { useRoute } from "vue-router";
 
+const route = useRoute();
 const quotes = reactive({});
+const searchValue = ref("");
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
 
@@ -146,6 +157,22 @@ const quoteIndex = ref();
 function postComment(id, index) {
   commentQuoteId.value = id;
   quoteIndex.value = index;
+}
+
+function searchByMovieOrQuote() {
+  console.log(route.query);
+  console.log(searchValue.value);
+  axiosInstance
+    .post(`/search-newsfeed`, {
+      text: searchValue.value,
+    })
+    .then((response) => {
+      quotes.values = response.data;
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 function likeQuote(id, index) {
