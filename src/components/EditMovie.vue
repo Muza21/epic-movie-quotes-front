@@ -1,14 +1,14 @@
 <template>
   <form-layout>
     <template v-slot:header>
-      <div class="text-center text-3xl text-white mx-14 my-6">Edit movie</div>
+      <div class="mx-14 my-6 text-center text-3xl text-white">Edit movie</div>
     </template>
     <ValidationForm class="mt-8" @submit="onSubmit">
       <div class="mx-auto px-4">
         <div class="my-10 rounded-xl bg-[#11101A]">
-          <div class="flex items-center mb-6 rounded-md">
+          <div class="mb-6 flex items-center rounded-md">
             <img
-              class="rounded-full w-12 h-12 mr-2 mt-1"
+              class="mr-2 mt-1 h-12 w-12 rounded-full"
               :src="user?.thumbnail"
             />
             <div>
@@ -23,7 +23,7 @@
             v-model="data.movie.title"
             name="movie_name_en"
             rules="required|alpha"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full placeholder:text-white placeholder:text-lg bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md placeholder:text-lg placeholder:text-white"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="movie_name_en" />
@@ -34,7 +34,7 @@
             v-model="data.movie.title"
             name="movie_name_ka"
             rules="required"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="movie_name_ka" />
@@ -43,16 +43,16 @@
         <div class="py-1">
           <div
             @click="toggleGenres"
-            class="p-2 flex items-center w-full border-2 h-14 border-[#6C757D]"
+            class="flex h-14 w-full items-center border-2 border-[#6C757D] p-2"
           ></div>
-          <div class="mx-3 flex-1 absolute -mt-[51px]">
+          <div class="absolute mx-3 -mt-[51px] flex-1">
             <div class="flex items-center">
               <div v-for="genre in reactiveSelectedGenres.values" :key="genre">
-                <div class="p-2 ml-2 bg-[#6C757D] text-white flex items-center">
+                <div class="ml-2 flex items-center bg-[#6C757D] p-2 text-white">
                   {{ genre }}
 
-                  <div @click="deleteGenre(genre)" class="p-2 cursor-pointer">
-                    <IconCross class="w-3 h-3" />
+                  <div @click="deleteGenre(genre)" class="cursor-pointer p-2">
+                    <IconCross class="h-3 w-3" />
                   </div>
                 </div>
               </div>
@@ -61,13 +61,13 @@
           <div>
             <div
               v-if="chooseGenres"
-              class="absolute w-60 rounded-lg bg-[#11101A] mt-2 h-96 overflow-y-auto border-2 border-gray-500"
+              class="absolute mt-2 h-96 w-60 overflow-y-auto rounded-lg border-2 border-gray-500 bg-[#11101A]"
             >
               <div v-for="genre in genres.values" :key="genre">
                 <div class="py-1 hover:bg-gray-500">
                   <Field
                     @click="selectGenre"
-                    class="p-3 rounded-md w-60 text-white bg-[#11101A] cursor-pointer outline-none"
+                    class="w-60 cursor-pointer rounded-md bg-[#11101A] p-3 text-white outline-none"
                     type="text"
                     :name="genre.name"
                     :value="genre.name"
@@ -83,7 +83,7 @@
             v-model="data.movie.director"
             name="director_name_en"
             rules="required|alpha"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage
@@ -97,7 +97,7 @@
             v-model="data.movie.director"
             name="director_name_ka"
             rules="required"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage
@@ -111,7 +111,7 @@
             v-model="data.movie.year"
             name="year"
             rules="required|integer"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="year" />
@@ -122,7 +122,7 @@
             v-model="data.movie.budget"
             name="budget"
             rules="required|integer"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="budget" />
@@ -134,7 +134,7 @@
             v-model="data.movie.description"
             name="movie_description_en"
             rules="required"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage
@@ -149,7 +149,7 @@
             v-model="data.movie.description"
             name="movie_description_ka"
             rules="required"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage
@@ -159,7 +159,7 @@
           </div>
         </div>
         <div class="py-1">
-          <div class="p-2 flex items-center w-full border-2 border-[#6C757D]">
+          <div class="flex w-full items-center border-2 border-[#6C757D] p-2">
             <IconPhoto />
             <div class="mx-3 flex-1">
               <div class="flex items-center">
@@ -176,7 +176,7 @@
                 <label
                   for="movie_picture"
                   refs="movie_picture"
-                  class="p-2 ml-2 bg-[#9747FF] rounded-lg text-white cursor-pointer"
+                  class="ml-2 cursor-pointer rounded-lg bg-[#9747FF] p-2 text-white"
                   >Choose a file</label
                 >
               </div>
@@ -187,7 +187,7 @@
           <ErrorMessage class="ml-4 text-orange-600" name="movie_picture" />
         </div>
         <button
-          class="mt-3 text-lg font-semibold bg-[#E31221] w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
           Add movie
         </button>

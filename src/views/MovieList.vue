@@ -5,14 +5,14 @@
       <div class="flex">
         <SideBar />
         <div class="w-full">
-          <div class="flex justify-between mx-20 mt-5">
-            <h2 class="text-white text-xl">
+          <div class="mx-20 mt-5 flex justify-between">
+            <h2 class="text-xl text-white">
               My list of movies &#40;Total {{ data.movies.length }}&#41;
             </h2>
             <div class="flex items-center">
               <div class="relative mr-14">
                 <div
-                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                  class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
                 >
                   <IconSearch />
                 </div>
@@ -22,37 +22,37 @@
                   name="search"
                   v-model="searchValue"
                   @keydown.enter="searchMovie"
-                  class="bg-[#24222F] w-[150px] py-4 pr-4 pl-12 border-b border-[#EFEFEF] text-white text-sm rounded-lg placeholder-[#CED4DA]"
+                  class="w-[150px] rounded-lg border-b border-[#EFEFEF] bg-[#24222F] py-4 pr-4 pl-12 text-sm text-white placeholder-[#CED4DA]"
                   placeholder="Search"
                   required
                 />
               </div>
               <router-link
                 :to="{ name: 'add-movie' }"
-                class="bg-[#E31221] px-4 py-2 rounded-lg text-white"
+                class="rounded-lg bg-[#E31221] px-4 py-2 text-white"
               >
                 <IconAdd class="my-auto mr-3" />Add movie
               </router-link>
             </div>
           </div>
           <div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-10 m-20">
+            <div class="m-20 grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-3">
               <div v-for="movie in data.movies" :key="movie">
                 <router-link
                   :to="{ name: 'movie-description', params: { id: movie?.id } }"
-                  class="flex flex-col drop-shadow hover:drop-shadow-lg hover:opacity-70 rounded-md"
+                  class="flex flex-col rounded-md drop-shadow hover:opacity-70 hover:drop-shadow-lg"
                 >
                   <img
                     :src="link + movie?.thumbnail"
                     alt="Fiction Product"
-                    class="object-cover object-center w-[440px] h-[380px] rounded-md"
+                    class="h-[380px] w-[440px] rounded-md object-cover object-center"
                   />
                   <div class="my-2">
                     <h3 class="text-xl text-white">
                       {{ movie.title }}
                     </h3>
                   </div>
-                  <div class="flex my-2 text-xl text-white">
+                  <div class="my-2 flex text-xl text-white">
                     <p class="mr-2">{{ movie.quotes_number }}</p>
                     <IconChat />
                   </div>

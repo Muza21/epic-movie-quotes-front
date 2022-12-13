@@ -4,7 +4,7 @@
       <IconSent class="mx-auto" />
     </div>
     <div class="text-center text-3xl text-white">Thank you&#33;</div>
-    <div class="text-center font-base text-white">
+    <div class="font-base text-center text-white">
       Please check your email and follow the instructions to activate your
       account.
     </div>
@@ -13,7 +13,7 @@
         <a
           href="https://gmail.com"
           target="_blank"
-          class="mt-3 text-lg font-semibold bg-[#E31221] w-full text-center text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-center text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
           Go to my email
         </a>

@@ -1,7 +1,7 @@
 <template>
-  <header class="py-4 px-16 bg-[#222030]">
+  <header class="bg-[#222030] py-4 px-16">
     <div class="wrapper">
-      <nav class="flex justify-between items-center">
+      <nav class="flex items-center justify-between">
         <RouterLink to="/" class="text-[#DDCCAA]">MOVIE QUOTES</RouterLink>
         <div class="flex items-center">
           <div v-if="authStore.authenticated" class="mx-4">
@@ -9,7 +9,7 @@
               <div class="relative">
                 <IconNotification />
                 <div
-                  class="w-[25px] h-[25px] absolute -top-[5px] -right-[10px] flex items-center justify-center rounded-full bg-[#E33812] text-white font-semibold"
+                  class="absolute -top-[5px] -right-[10px] flex h-[25px] w-[25px] items-center justify-center rounded-full bg-[#E33812] font-semibold text-white"
                 >
                   3
                 </div>
@@ -17,26 +17,26 @@
             </button>
             <UsersNotifications
               v-if="view.notificationView"
-              class="absolute -translate-x-[515px] -translate-y-[20px] z-50"
+              class="absolute z-50 -translate-x-[515px] -translate-y-[20px]"
             />
           </div>
           <div>
             <button @click="toggleLanguage">
-              <span class="flex items-center mx-4 text-white"
+              <span class="mx-4 flex items-center text-white"
                 >Eng <IconDropdown class="ml-2" />
               </span>
             </button>
             <div
               v-if="view.languageView"
-              class="absolute z-50 w-36 h-[112px] rounded-lg bg-[#11101A] mt-2"
+              class="absolute z-50 mt-2 h-[112px] w-36 rounded-lg bg-[#11101A]"
             >
               <div class="py-1 hover:bg-gray-800">
-                <a href="#" class="flex items-center p-3 rounded-md">
+                <a href="#" class="flex items-center rounded-md p-3">
                   <span class="ml-4 text-white">English</span>
                 </a>
               </div>
               <div class="py-1 hover:bg-gray-800">
-                <a href="#" class="flex items-center p-3 rounded-md">
+                <a href="#" class="flex items-center rounded-md p-3">
                   <span class="ml-4 text-white">ქართული</span>
                 </a>
               </div>
@@ -45,20 +45,20 @@
           <router-link
             v-if="!authStore.authenticated"
             :to="{ name: 'signup' }"
-            class="mx-4 bg-[#E31221] px-4 py-2 rounded-lg text-white"
+            class="mx-4 rounded-lg bg-[#E31221] px-4 py-2 text-white"
           >
             Sign Up
           </router-link>
           <router-link
             v-if="!authStore.authenticated"
             :to="{ name: 'login' }"
-            class="mx-4 px-4 py-2 rounded-lg text-white border border-white"
+            class="mx-4 rounded-lg border border-white px-4 py-2 text-white"
           >
             Log In
           </router-link>
           <ValidationForm v-if="authStore.authenticated" @submit="onSubmit">
             <button
-              class="mx-4 px-4 py-2 rounded-lg text-white border border-white"
+              class="mx-4 rounded-lg border border-white px-4 py-2 text-white"
             >
               Log Out
             </button>

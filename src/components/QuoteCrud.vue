@@ -1,10 +1,10 @@
 <template>
-  <div class="absolute w-60 h-[168px] bg-[#24222F] mt-2">
+  <div class="absolute mt-2 h-[168px] w-60 bg-[#24222F]">
     <div @click="handleClose" class="py-1 hover:bg-gray-800">
       <router-link
         :to="{ name: 'view-quote', params: { quoteId: props.myParam } }"
       >
-        <div class="flex items-center p-3 rounded-md">
+        <div class="flex items-center rounded-md p-3">
           <IconEyes class="ml-6" />
           <span class="ml-6 text-white">View quote</span>
         </div>
@@ -15,7 +15,7 @@
         :to="{ name: 'edit-quote', params: { quoteId: props.myParam } }"
         class="py-1 hover:bg-gray-800"
       >
-        <div class="flex items-center p-3 rounded-md">
+        <div class="flex items-center rounded-md p-3">
           <IconPencil class="ml-6" />
           <span class="ml-6 text-white">Edit</span>
         </div>
@@ -26,9 +26,9 @@
         deleteQuote();
         handleClose();
       "
-      class="py-1 hover:bg-gray-800 cursor-pointer"
+      class="cursor-pointer py-1 hover:bg-gray-800"
     >
-      <div class="flex items-center p-3 rounded-md">
+      <div class="flex items-center rounded-md p-3">
         <IconTrash class="ml-6" />
         <span class="ml-6 text-white">Delete</span>
       </div>

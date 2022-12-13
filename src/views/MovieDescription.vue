@@ -5,15 +5,15 @@
       <div class="flex">
         <SideBar />
         <div class="w-full">
-          <h1 class="text-white text-2xl p-6 mx-20">Movie description</h1>
+          <h1 class="mx-20 p-6 text-2xl text-white">Movie description</h1>
 
-          <div class="grid grid-cols-2 my-10 rounded-xl md:w-full px-20">
-            <div class="text-white p-6 leading-loose">
+          <div class="my-10 grid grid-cols-2 rounded-xl px-20 md:w-full">
+            <div class="p-6 leading-loose text-white">
               <img :src="link + data.movie.thumbnail" alt="post image" />
             </div>
             <div>
               <div
-                class="flex items-center justify-between mb-6 px-6 pt-6 rounded-md"
+                class="mb-6 flex items-center justify-between rounded-md px-6 pt-6"
               >
                 <h2 class="text-4xl text-[#DDCCAA]">
                   {{ data.movie.title }} &#40;{{ data.movie.year }}&#41;
@@ -21,73 +21,73 @@
                 <div class="ml-4 flex rounded-lg bg-[#24222F]">
                   <router-link
                     :to="{ name: 'edit-movie' }"
-                    class="hover:bg-slate-800 rounded-md py-4 px-5"
+                    class="rounded-md py-4 px-5 hover:bg-slate-800"
                   >
                     <IconPencil />
                   </router-link>
                   <div
-                    class="border-2 border-r h-6 mt-[14px] border-[#6C757D]"
+                    class="mt-[14px] h-6 border-2 border-r border-[#6C757D]"
                   ></div>
                   <div
                     @click="deleteMovie"
-                    class="hover:bg-slate-800 rounded-md py-4 px-5 cursor-pointer"
+                    class="cursor-pointer rounded-md py-4 px-5 hover:bg-slate-800"
                   >
                     <IconTrash />
                   </div>
                 </div>
               </div>
 
-              <div class="my-3 px-6 flex">
+              <div class="my-3 flex px-6">
                 <div v-for="genre in data.genres" :key="genre">
                   <div
-                    class="px-2 py-1 text-white bg-[#6C757D] text-center rounded-md mr-2"
+                    class="mr-2 rounded-md bg-[#6C757D] px-2 py-1 text-center text-white"
                   >
                     {{ genre }}
                   </div>
                 </div>
               </div>
 
-              <div class="my-3 px-6 flex">
+              <div class="my-3 flex px-6">
                 <h2 class="text-xl text-white">Director&#58;</h2>
                 <h2 class="ml-2 text-xl text-white">
                   {{ data.movie.director }}
                 </h2>
               </div>
 
-              <div class="my-3 px-6 flex">
+              <div class="my-3 flex px-6">
                 <h2 class="text-xl text-white">Budget&#58;</h2>
                 <h2 class="ml-2 text-xl text-white">
                   {{ data.movie.budget }}
                 </h2>
               </div>
-              <p class="my-3 px-6 text-white text-lg">
+              <p class="my-3 px-6 text-lg text-white">
                 {{ data.movie.description }}
               </p>
             </div>
 
-            <div class="flex items-center m-6">
-              <h3 class="text-white text-lg pr-4 border-r border-[#6C757D]">
+            <div class="m-6 flex items-center">
+              <h3 class="border-r border-[#6C757D] pr-4 text-lg text-white">
                 quotes &#40;total {{ data.movie.quotes_number }}&#41;
               </h3>
 
               <router-link
                 :to="{ name: 'add-quote' }"
-                class="mx-4 bg-[#E31221] px-4 py-2 rounded-lg text-white"
+                class="mx-4 rounded-lg bg-[#E31221] px-4 py-2 text-white"
               >
                 Add quote
               </router-link>
             </div>
 
             <div class="col-start-1" v-for="quote in data.quotes" :key="quote">
-              <div class="bg-[#11101A] rounded-lg col-start-1 m-6">
+              <div class="col-start-1 m-6 rounded-lg bg-[#11101A]">
                 <div class="flex">
-                  <div class="p-6 mb-3 flex items-center w-full">
+                  <div class="mb-3 flex w-full items-center p-6">
                     <img
-                      class="w-50 w-40 object-cover rounded-lg"
+                      class="w-50 w-40 rounded-lg object-cover"
                       :src="link + quote.thumbnail"
                     />
                     <div class="mx-6">
-                      <q class="text-xl text-center font-semibold text-white"
+                      <q class="text-center text-xl font-semibold text-white"
                         >{{ quote.quote }}
                       </q>
                     </div>
@@ -107,7 +107,7 @@
                   </div>
                 </div>
                 <div
-                  class="flex text-xl py-6 mx-6 border-t border-[#EFEFEF] text-white"
+                  class="mx-6 flex border-t border-[#EFEFEF] py-6 text-xl text-white"
                 >
                   <p class="mx-2">{{ quote.comments.length }}</p>
                   <IconComment />

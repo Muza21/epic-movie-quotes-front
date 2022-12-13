@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-col h-screen overflow-hidden">
+  <div class="flex h-screen flex-col overflow-hidden">
     <div class="flex flex-col justify-between">
-      <div class="h-full p-3 pl-16 space-y-2 w-96">
+      <div class="h-full w-96 space-y-2 p-3 pl-16">
         <div class="divide-y divide-gray-700">
-          <ul class="pt-2 pb-4 space-y-1 text-sm">
+          <ul class="space-y-1 pt-2 pb-4 text-sm">
             <li class="flex dark:bg-gray-800 dark:text-gray-50">
-              <div class="rounded-full overflow-hidden bg-red-400 w-12 h-12">
+              <div class="h-12 w-12 overflow-hidden rounded-full bg-red-400">
                 <img alt="..." :src="user?.thumbnail" />
               </div>
               <div class="ml-4">
@@ -15,7 +15,7 @@
                 <span class="flex items-center space-x-1">
                   <router-link
                     :to="{ name: 'profile' }"
-                    class="text-xs hover:underline text-[#CED4DA] dark:text-gray-400"
+                    class="text-xs text-[#CED4DA] hover:underline dark:text-gray-400"
                     >Edit your profile</router-link
                   >
                 </span>
@@ -24,7 +24,7 @@
             <li class="dark:bg-gray-800 dark:text-gray-50">
               <router-link
                 :to="{ name: 'newsfeed' }"
-                class="flex items-center p-2 rounded-md"
+                class="flex items-center rounded-md p-2"
               >
                 <IconHouseVue />
                 <span class="ml-6 text-white">News feed</span>
@@ -33,7 +33,7 @@
             <li>
               <router-link
                 :to="{ name: 'movielist' }"
-                class="flex items-center p-2 rounded-md"
+                class="flex items-center rounded-md p-2"
               >
                 <IconCameraVue />
 

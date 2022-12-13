@@ -6,19 +6,19 @@
         <SideBar />
         <div class="w-full">
           <div
-            class="flex justify-between max-w-4xl rounded-xl md:w-[1000px] mx-auto"
+            class="mx-auto flex max-w-4xl justify-between rounded-xl md:w-[1000px]"
           >
             <router-link
               :to="{ name: 'new-quote' }"
-              class="flex p-4 bg-[#24222F] rounded-lg w-52"
+              class="flex w-52 rounded-lg bg-[#24222F] p-4"
             >
               <IconNewquote />
-              <p class="text-white ml-2">Write new quote</p>
+              <p class="ml-2 text-white">Write new quote</p>
             </router-link>
             <div class="flex items-center">
               <div class="relative">
                 <div
-                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                  class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
                 >
                   <IconSearch />
                 </div>
@@ -28,7 +28,7 @@
                   name="search"
                   v-model="searchValue"
                   @keyup.enter="searchByMovieOrQuote"
-                  class="bg-[#24222F] w-[688px] py-4 pr-4 pl-12 border-b border-[#EFEFEF] text-white text-sm rounded-lg placeholder-[#CED4DA]"
+                  class="w-[688px] rounded-lg border-b border-[#EFEFEF] bg-[#24222F] py-4 pr-4 pl-12 text-sm text-white placeholder-[#CED4DA]"
                   placeholder="Enter @ to search movies, Enter # to search quotes "
                   required
                 />
@@ -36,18 +36,18 @@
             </div>
           </div>
           <div
-            class="text-center text-white text-6xl mt-52 hidden"
+            class="mt-52 hidden text-center text-6xl text-white"
             v-if="searchValue && !quotes.values.length"
           >
             <p>No results found!</p>
           </div>
           <div v-for="(quote, index) in quotes.values" :key="index">
             <article
-              class="max-w-4xl my-10 rounded-xl md:w-[1000px] bg-[#11101A] mx-auto"
+              class="my-10 mx-auto max-w-4xl rounded-xl bg-[#11101A] md:w-[1000px]"
             >
-              <div class="flex items-center mb-6 p-6 rounded-md">
+              <div class="mb-6 flex items-center rounded-md p-6">
                 <img
-                  class="rounded-full w-12 h-12 mr-2 mt-1"
+                  class="mr-2 mt-1 h-12 w-12 rounded-full"
                   :src="quote.user?.thumbnail"
                 />
                 <div class="ml-4">
@@ -57,21 +57,21 @@
                 </div>
               </div>
 
-              <h1 class="text-white text-xl p-6 lg:text-4xl mb-10">
+              <h1 class="mb-10 p-6 text-xl text-white lg:text-4xl">
                 {{ quote.quote }}
               </h1>
 
-              <div class="text-white p-6 leading-loose">
+              <div class="p-6 leading-loose text-white">
                 <img :src="link + quote?.thumbnail" alt="post image" />
               </div>
 
-              <div class="flex text-xl p-6 text-white">
+              <div class="flex p-6 text-xl text-white">
                 <p class="mx-2">{{ quote.comments?.length }}</p>
                 <IconComment />
                 <p class="ml-6 mr-2">{{ quote.likes?.length }}</p>
                 <div
                   @click="likeQuote(quote.id, index)"
-                  class="p-1 cursor-pointer -mt-1"
+                  class="-mt-1 cursor-pointer p-1"
                 >
                   <IconHeart />
                 </div>
@@ -79,20 +79,20 @@
 
               <div class="max-h-60 overflow-auto">
                 <div v-for="comment in quote.comments" :key="comment">
-                  <div class="text-white p-6 antialiased flex">
+                  <div class="flex p-6 text-white antialiased">
                     <img
-                      class="rounded-full w-12 h-12 mr-2 mt-1"
+                      class="mr-2 mt-1 h-12 w-12 rounded-full"
                       :src="comment.user.thumbnail"
                     />
                     <div>
-                      <div class="px-4 pt-2 pb-2.5 ]">
+                      <div class="] px-4 pt-2 pb-2.5">
                         <div
-                          class="font-semibold text-white text-sm leading-relaxed"
+                          class="text-sm font-semibold leading-relaxed text-white"
                         >
                           {{ comment.user.username }}
                         </div>
                         <div
-                          class="text-normal leading-snug md:leading-normal pb-6 border-b-2 border-[#EFEFEF]"
+                          class="text-normal border-b-2 border-[#EFEFEF] pb-6 leading-snug md:leading-normal"
                         >
                           {{ comment.body }}
                         </div>
@@ -102,15 +102,15 @@
                 </div>
               </div>
               <ValidationForm @submit="onSubmit">
-                <div class="text-white p-6 antialiased flex">
+                <div class="flex p-6 text-white antialiased">
                   <img
-                    class="rounded-full w-12 h-12 mr-2 mt-1"
+                    class="mr-2 mt-1 h-12 w-12 rounded-full"
                     :src="user?.thumbnail"
                   />
                   <div class="w-full">
                     <div class="px-4 pt-2 pb-2.5">
                       <Field
-                        class="bg-[#24222F] rounded-md w-full p-4"
+                        class="w-full rounded-md bg-[#24222F] p-4"
                         type="text"
                         name="comment"
                         v-model="quote.writtenComment"

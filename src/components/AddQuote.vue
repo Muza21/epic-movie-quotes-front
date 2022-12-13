@@ -2,15 +2,15 @@
   <form-layout>
     <template v-slot:header>
       <div class="w-full px-10">
-        <div class="text-center text-3xl text-white mx-14 my-6">Add quote</div>
+        <div class="mx-14 my-6 text-center text-3xl text-white">Add quote</div>
       </div>
     </template>
     <ValidationForm class="mt-8" @submit="onSubmit">
       <div class="mx-auto px-4">
         <div class="my-10 rounded-xl bg-[#11101A]">
-          <div class="flex items-center mb-6 rounded-md">
+          <div class="mb-6 flex items-center rounded-md">
             <img
-              class="rounded-full w-12 h-12 mr-2 mt-1"
+              class="mr-2 mt-1 h-12 w-12 rounded-full"
               :src="user?.thumbnail"
             />
             <div>
@@ -21,9 +21,9 @@
           </div>
         </div>
 
-        <div class="mb-3 flex items-center w-full">
+        <div class="mb-3 flex w-full items-center">
           <img
-            class="w-72 h-40 object-cover rounded-xl"
+            class="h-40 w-72 rounded-xl object-cover"
             :src="link + data.movie.thumbnail"
           />
           <div class="mx-3 flex-1">
@@ -35,7 +35,7 @@
             <div class="my-3 flex">
               <div v-for="genre in data.genres" :key="genre">
                 <div
-                  class="px-2 py-1 text-white bg-[#6C757D] text-center rounded-md mr-2"
+                  class="mr-2 rounded-md bg-[#6C757D] px-2 py-1 text-center text-white"
                 >
                   {{ genre }}
                 </div>
@@ -54,7 +54,7 @@
             placeholder="Quote in English"
             name="quote_en"
             rules="required"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] focus:outline-none"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white focus:outline-none"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="quote_en" />
@@ -66,7 +66,7 @@
             placeholder="ციტატა ქართულ ენაზე"
             name="quote_ka"
             rules="required|georgian_text"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] focus:outline-none"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white focus:outline-none"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="quote_ka" />
@@ -74,7 +74,7 @@
         </div>
 
         <div class="py-1">
-          <div class="p-2 flex items-center w-full border-2 border-[#6C757D]">
+          <div class="flex w-full items-center border-2 border-[#6C757D] p-2">
             <IconPhoto />
             <div class="mx-3 flex-1">
               <div class="flex items-center">
@@ -93,7 +93,7 @@
                 <label
                   for="quote_picture"
                   refs="quote_picture"
-                  class="p-2 ml-2 bg-[#9747FF] rounded-lg text-white cursor-pointer"
+                  class="ml-2 cursor-pointer rounded-lg bg-[#9747FF] p-2 text-white"
                   >Choose a file</label
                 >
               </div>
@@ -105,7 +105,7 @@
         </div>
 
         <button
-          class="mt-3 text-lg font-semibold bg-[#E31221] w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
           Add Quote
         </button>

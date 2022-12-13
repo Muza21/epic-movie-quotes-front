@@ -8,13 +8,13 @@
             placeholder="Enter new email"
             type="email"
             name="email"
-            class="text-md block p-3 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] p-3 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
           />
         </div>
 
-        <div class="pt-4 flex justify-end">
-          <button class="mx-4 px-4 py-2 rounded-lg text-white">Cancel</button>
-          <button class="ml-4 bg-[#E31221] px-4 py-2 rounded-lg text-white">
+        <div class="flex justify-end pt-4">
+          <button class="mx-4 rounded-lg px-4 py-2 text-white">Cancel</button>
+          <button class="ml-4 rounded-lg bg-[#E31221] px-4 py-2 text-white">
             Save changes
           </button>
         </div>

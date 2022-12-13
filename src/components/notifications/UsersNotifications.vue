@@ -1,18 +1,18 @@
 <template>
-  <div class="w-full max-w-lg px-10 py-8 mx-auto">
-    <div class="w-[750px] mx-auto space-y-6">
+  <div class="mx-auto w-full max-w-lg px-10 py-8">
+    <div class="mx-auto w-[750px] space-y-6">
       <div class="dropdown-menu">
-        <div class="bg-black rounded-lg shadow-xl px-4 relative mt-8">
+        <div class="relative mt-8 rounded-lg bg-black px-4 shadow-xl">
           <IconTriangle class="absolute bottom-full right-60" />
-          <div class="flex justify-between text-white pt-8 pb-6">
+          <div class="flex justify-between pt-8 pb-6 text-white">
             <h2 class="text-xl">Notifications</h2>
             <p class="border-b-2 border-white">mark as all read</p>
           </div>
           <div
-            class="p-3 mb-3 flex items-center w-full hover:bg-gray-800 border-2 border-[#6C757D]"
+            class="mb-3 flex w-full items-center border-2 border-[#6C757D] p-3 hover:bg-gray-800"
           >
             <img
-              class="w-20 h-20 object-cover rounded-full"
+              class="h-20 w-20 rounded-full object-cover"
               src="/src/assets/ProfilePic.jpg"
             />
             <div class="mx-3 flex-1">
@@ -21,7 +21,7 @@
                 <p class="text-[#D9D9D9]">5 min ago</p>
               </div>
               <div class="flex justify-between">
-                <h2 class="text-[#CED4DA] flex items-center">
+                <h2 class="flex items-center text-[#CED4DA]">
                   <IconChat class="w-5" />
                   <p class="ml-3">Commented to your movie quotes</p>
                 </h2>
@@ -30,10 +30,10 @@
             </div>
           </div>
           <div
-            class="p-3 mb-3 flex items-center w-full hover:bg-gray-800 border-2 border-[#6C757D]"
+            class="mb-3 flex w-full items-center border-2 border-[#6C757D] p-3 hover:bg-gray-800"
           >
             <img
-              class="w-20 h-20 object-cover rounded-full"
+              class="h-20 w-20 rounded-full object-cover"
               src="/src/assets/ProfilePic.jpg"
             />
             <div class="mx-3 flex-1">
@@ -42,7 +42,7 @@
                 <p class="text-[#D9D9D9]">5 min ago</p>
               </div>
               <div class="flex justify-between">
-                <h2 class="text-[#CED4DA] flex items-center">
+                <h2 class="flex items-center text-[#CED4DA]">
                   <RedHeart class="w-5" />
                   <p class="ml-3">Reacted to your quote</p>
                 </h2>

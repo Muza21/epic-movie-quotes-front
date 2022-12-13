@@ -1,7 +1,7 @@
 <template>
   <popup-layout>
     <div class="text-center text-3xl text-white">Create new password</div>
-    <div class="text-center font-base text-[#6C757D]">
+    <div class="font-base text-center text-[#6C757D]">
       Your new password must be different from previous used passwords&#33;
     </div>
     <ValidationForm class="mt-8" @submit="onSubmit">
@@ -14,7 +14,7 @@
             type="password"
             name="password"
             rules="required"
-            class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="password" />
@@ -28,7 +28,7 @@
             type="password"
             name="password_confirmation"
             rules="required|confirmed:password"
-            class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
           />
           <div>
             <ErrorMessage
@@ -39,17 +39,17 @@
         </div>
 
         <button
-          class="mt-3 text-lg font-semibold bg-[#E31221] w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
           Reset password
         </button>
       </div>
     </ValidationForm>
 
-    <div class="text-sm font-semibold py-6 flex justify-center">
+    <div class="flex justify-center py-6 text-sm font-semibold">
       <router-link
         :to="{ name: 'login' }"
-        class="font-normal flex justify-center"
+        class="flex justify-center font-normal"
         ><IconReturn class="my-auto mr-3" />
         <router-link :to="{ name: 'login' }" class="text-[#6C757D]">
           Back to log in

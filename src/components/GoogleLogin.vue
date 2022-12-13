@@ -1,7 +1,7 @@
 <template>
   <form :action="link">
     <button
-      class="mt-3 text-lg font-semibold w-full text-white rounded-lg border border-white px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+      class="mt-3 block w-full rounded-lg border border-white px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
     >
       <div class="flex justify-center">
         <IconGoogle class="my-auto mr-3" />

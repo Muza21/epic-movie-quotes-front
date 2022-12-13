@@ -5,12 +5,12 @@
       <div class="flex">
         <SideBar />
         <div
-          class="w-[400px] h-[130px] bg-[#BADBCC] rounded-lg absolute right-11 top-8 hidden"
+          class="absolute right-11 top-8 hidden h-[130px] w-[400px] rounded-lg bg-[#BADBCC]"
         >
-          <div class="flex justify-between items-center p-4">
-            <IconGreencheck class="w-6 h-6" />
-            <p class="text-[#0F5132] font-sans">A simple alert—check it out!</p>
-            <IconCross :svgColor="black" class="w-4 h-4" />
+          <div class="flex items-center justify-between p-4">
+            <IconGreencheck class="h-6 w-6" />
+            <p class="font-sans text-[#0F5132]">A simple alert—check it out!</p>
+            <IconCross :svgColor="black" class="h-4 w-4" />
           </div>
           <p class="p-4 text-center">
             Please check email to verify new address
@@ -18,16 +18,16 @@
         </div>
 
         <div
-          class="w-full h-full md:w-[1000px] mx-auto bg-[#11101A] rounded-lg m-24 overflow-y-auto"
+          class="m-24 mx-auto h-full w-full overflow-y-auto rounded-lg bg-[#11101A] md:w-[1000px]"
         >
           <div class="flex items-center justify-center py-16 px-52">
-            <div class="px-6 w-full">
+            <div class="w-full px-6">
               <div class="flex flex-wrap justify-center">
                 <div
-                  class="w-full px-4 lg:w-3/12 lg:order-2 flex justify-center"
+                  class="flex w-full justify-center px-4 lg:order-2 lg:w-3/12"
                 >
                   <div class="relative">
-                    <div class="rounded-full overflow-hidden w-32 h-32">
+                    <div class="h-32 w-32 overflow-hidden rounded-full">
                       <img alt="Profile Picture" :src="user?.thumbnail" />
                     </div>
                   </div>
@@ -35,18 +35,18 @@
               </div>
               <div>
                 <div
-                  class="text-center text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
+                  class="mt-0 mb-2 text-center text-sm font-bold uppercase leading-normal text-gray-500"
                 >
                   Upload new photo
                 </div>
-                <div class="mb-2 text-gray-700 mt-10">
+                <div class="mb-2 mt-10 text-gray-700">
                   <div class="py-1">
                     <span class="px-1 text-sm text-white">Username</span>
-                    <div class="flex justify-between items-center">
+                    <div class="flex items-center justify-between">
                       <input
                         placeholder=""
                         type="text"
-                        class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                        class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
                       />
                       <div class="ml-4 text-[#CED4DA]">Edit</div>
                     </div>
@@ -54,17 +54,17 @@
                   <div class="my-10 border-t border-[#CED4DA]"></div>
                   <div class="py-1">
                     <span class="px-1 text-sm text-white">Email</span>
-                    <div class="flex justify-between items-center">
+                    <div class="flex items-center justify-between">
                       <input
                         placeholder=""
                         type="email"
-                        class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                        class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
                       />
                       <div class="ml-4 text-[#CED4DA]">Edit</div>
                     </div>
                   </div>
                   <button
-                    class="mt-10 px-4 py-2 rounded-lg text-white border border-white"
+                    class="mt-10 rounded-lg border border-white px-4 py-2 text-white"
                   >
                     Add new email
                   </button>
@@ -72,12 +72,12 @@
 
                   <div class="py-1">
                     <span class="px-1 text-sm text-white">Password</span>
-                    <div class="flex justify-between items-center">
+                    <div class="flex items-center justify-between">
                       <input
                         placeholder=""
                         type="password"
                         x-model="password"
-                        class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                        class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
                       />
                       <div class="ml-4 text-[#CED4DA]">Edit</div>
                     </div>
@@ -86,9 +86,9 @@
               </div>
             </div>
           </div>
-          <div class="pt-4 bg-[#222030] flex justify-end">
-            <button class="mx-4 px-4 py-2 rounded-lg text-white">Cancel</button>
-            <button class="mx-4 bg-[#E31221] px-4 py-2 rounded-lg text-white">
+          <div class="flex justify-end bg-[#222030] pt-4">
+            <button class="mx-4 rounded-lg px-4 py-2 text-white">Cancel</button>
+            <button class="mx-4 rounded-lg bg-[#E31221] px-4 py-2 text-white">
               Save changes
             </button>
           </div>

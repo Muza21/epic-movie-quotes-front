@@ -1,12 +1,12 @@
 <template>
   <form-layout>
     <template v-slot:header>
-      <div class="text-center text-3xl text-white mx-14 my-6">
+      <div class="mx-14 my-6 text-center text-3xl text-white">
         Write new quote
       </div>
       <div
         @click="routerGoBack"
-        class="p-1 cursor-pointer absolute top-0 right-0 mt-8 mr-8"
+        class="absolute top-0 right-0 mt-8 mr-8 cursor-pointer p-1"
       >
         <IconCross />
       </div>
@@ -14,9 +14,9 @@
     <ValidationForm class="mt-8" @submit="onSubmit">
       <div class="mx-auto px-4">
         <div class="my-10 rounded-xl bg-[#11101A]">
-          <div class="flex items-center mb-6 rounded-md">
+          <div class="mb-6 flex items-center rounded-md">
             <img
-              class="rounded-full w-12 h-12 mr-2 mt-1"
+              class="mr-2 mt-1 h-12 w-12 rounded-full"
               :src="user?.thumbnail"
             />
             <div>
@@ -32,7 +32,7 @@
             placeholder="Start create new quote"
             name="quote_en"
             rules="required"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] focus:outline-none"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white focus:outline-none"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="quote_en" />
@@ -44,14 +44,14 @@
             placeholder="ახალი ციტატა"
             name="quote_ka"
             rules="required|georgian_text"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] focus:outline-none"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white focus:outline-none"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="quote_ka" />
           </div>
         </div>
         <div class="py-1">
-          <div class="p-2 flex items-center w-full border-2 border-[#6C757D]">
+          <div class="flex w-full items-center border-2 border-[#6C757D] p-2">
             <IconPhoto />
             <div class="mx-3 flex-1">
               <div class="flex items-center">
@@ -69,7 +69,7 @@
                 <label
                   for="quote_picture"
                   refs="quote_picture"
-                  class="p-2 ml-2 bg-[#9747FF] rounded-lg text-white cursor-pointer"
+                  class="ml-2 cursor-pointer rounded-lg bg-[#9747FF] p-2 text-white"
                 >
                   Choose a file
                 </label>
@@ -80,20 +80,20 @@
         <div>
           <ErrorMessage class="ml-4 text-orange-600" name="quote_picture" />
         </div>
-        <div class="py-1 cursor-pointer" @click="toggleChooseMovie">
-          <div class="p-2 flex items-center w-full border-2 border-[#6C757D]">
+        <div class="cursor-pointer py-1" @click="toggleChooseMovie">
+          <div class="flex w-full items-center border-2 border-[#6C757D] p-2">
             <IconCamera />
             <div class="mx-3 flex-1">
               <div class="flex items-center justify-between">
                 <h2
                   v-if="!selectedMovie"
-                  class="text-white text-xl font-semibold"
+                  class="text-xl font-semibold text-white"
                 >
                   Choose a movie
                 </h2>
                 <h2
                   v-if="selectedMovie"
-                  class="text-white text-xl font-semibold"
+                  class="text-xl font-semibold text-white"
                 >
                   {{ selectedMovie }}
                 </h2>
@@ -105,13 +105,13 @@
         </div>
         <div
           v-if="chooseMovie"
-          class="absolute w-96 h-[112px] rounded-lg bg-[#11101A] mt-2"
+          class="absolute mt-2 h-[112px] w-96 rounded-lg bg-[#11101A]"
         >
           <div v-for="movie in data.movies" :key="movie">
             <div class="py-1 hover:bg-gray-500">
               <Field
                 @click="selectMovie"
-                class="p-3 rounded-md w-96 text-white bg-[#11101A] cursor-pointer outline-none"
+                class="w-96 cursor-pointer rounded-md bg-[#11101A] p-3 text-white outline-none"
                 type="text"
                 :name="movie.title"
                 :value="movie.title"
@@ -121,7 +121,7 @@
           </div>
         </div>
         <button
-          class="mt-3 text-lg font-semibold bg-[#E31221] w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
           Post
         </button>

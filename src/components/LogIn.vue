@@ -1,7 +1,7 @@
 <template>
   <popup-layout>
     <div class="text-center text-3xl text-white">Log in to your account</div>
-    <div class="text-center font-base text-[#6C757D]">
+    <div class="font-base text-center text-[#6C757D]">
       Welcome back&#33; Please eneter your details&#33;
     </div>
     <ValidationForm @submit="onSubmit" class="mt-8">
@@ -14,7 +14,7 @@
             name="username"
             rules="required|min:3"
             @focus="clearError"
-            class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
           />
           <div v-if="errorData.authError">
             <div class="ml-4 text-orange-600">
@@ -33,35 +33,35 @@
             name="password"
             rules="required"
             @focus="clearError"
-            class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="password" />
           </div>
         </div>
 
-        <div class="flex justify-between my-4">
-          <label class="text-gray-500 font-bold flex items-center">
+        <div class="my-4 flex justify-between">
+          <label class="flex items-center font-bold text-gray-500">
             <Field
               name="remember"
-              class="leading-loose text-pink-600 top-0"
+              class="top-0 leading-loose text-pink-600"
               type="checkbox"
               @click="toggleRemember"
               :value="rememberMe"
             />
-            <span class="ml-2 text-sm py-2 text-white text-left">
+            <span class="ml-2 py-2 text-left text-sm text-white">
               Remember me
             </span>
           </label>
           <router-link
             :to="{ name: 'forgot-password' }"
-            class="flex items-center underline text-[#0D6EFD]"
+            class="flex items-center text-[#0D6EFD] underline"
           >
             Forgot password
           </router-link>
         </div>
         <button
-          class="mt-3 text-lg font-semibold bg-[#E31221] w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
           Sign in
         </button>
@@ -70,12 +70,12 @@
 
     <GoogleLogin>Sign in with Google</GoogleLogin>
 
-    <div class="text-sm font-semibold py-6 flex justify-center">
-      <div class="text-[#6C757D] font-normal hover:border-teal-500">
+    <div class="flex justify-center py-6 text-sm font-semibold">
+      <div class="font-normal text-[#6C757D] hover:border-teal-500">
         Do not have an account?
         <router-link
           :to="{ name: 'signup' }"
-          class="font-semibold underline text-[#0D6EFD]"
+          class="font-semibold text-[#0D6EFD] underline"
         >
           SignUp
         </router-link>
