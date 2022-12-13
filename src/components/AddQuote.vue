@@ -127,7 +127,7 @@ const user = ref([]);
 
 onBeforeMount(() => {
   axiosInstance
-    .get(`/user`)
+    .get(`/current-user`)
     .then((response) => {
       user.value = response.data.user;
       console.log(response);
@@ -156,7 +156,7 @@ const onSubmit = async (values) => {
     formData.append("movie_title", data.movie.title);
     formData.append("user_id", user.value.id);
     console.log(formData);
-    const response = await axiosInstance.post(`/add-quote`, formData, {
+    const response = await axiosInstance.post(`/quote`, formData, {
       headers: {
         "Content-Type": "multipart/form-data;",
       },
@@ -170,11 +170,11 @@ const onSubmit = async (values) => {
 
 onMounted(() => {
   axiosInstance
-    .get(`/movie-description/${route.params.id}`)
+    .get(`/movie/${route.params.id}`)
     .then((response) => {
       data.movie = response.data.movie;
       data.genres = JSON.parse(data.movie.genre);
-      console.log(response);
+      console.log(response.data);
     })
     .catch((err) => {
       console.log(err);

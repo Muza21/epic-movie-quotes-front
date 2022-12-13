@@ -113,7 +113,7 @@ const user = ref({});
 
 onMounted(() => {
   axiosInstance
-    .get(`/user`)
+    .get(`/current-user`)
     .then((response) => {
       user.value = response.data.user;
       console.log(response);

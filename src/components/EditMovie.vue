@@ -253,7 +253,7 @@ const onSubmit = async (values) => {
     formData.append("_method", "PATCH");
 
     const response = await axiosInstance.post(
-      `/edit-movie/${route.params.id}`,
+      `/movie/${route.params.id}`,
       formData,
       {
         headers: {

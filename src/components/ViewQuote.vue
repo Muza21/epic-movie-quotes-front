@@ -43,61 +43,66 @@
             <div
               class="text-white border-2 border-[#6C757D] text-xl p-6 lg:text-2xl mb-4 mx-8"
             >
-              {{ data.quote.quote }}
+              {{ quote?.quote }}
             </div>
             <div
               class="text-white border-2 border-[#6C757D] text-xl p-6 lg:text-2xl mb-4 mx-8"
             >
-              {{ data.quote.quote }}
+              {{ quote?.quote }}
             </div>
 
             <div class="text-white p-6 leading-loose">
-              <img :src="link + data.quote?.thumbnail" alt="post image" />
+              <img :src="link + quote?.thumbnail" alt="post image" />
             </div>
 
             <div class="flex text-xl p-6 text-white">
-              <p class="mx-2">3</p>
+              <p class="mx-2">{{ commentsCount }}</p>
               <IconComment />
-              <p class="mx-2">10</p>
-              <IconHeart />
+              <p class="mx-2">{{ likesCount }}</p>
+              <div
+                @click="likeQuote(quote.id)"
+                class="p-1 cursor-pointer -mt-1"
+              >
+                <IconHeart />
+              </div>
             </div>
-
-            <div class="text-white p-6 antialiased flex">
-              <img
-                class="rounded-full w-12 h-12 mr-2 mt-1"
-                src="/src/assets/ProfilePic.jpg"
-              />
-              <div>
-                <div class="px-4 pt-2 pb-2.5 ]">
-                  <div class="font-semibold text-white text-sm leading-relaxed">
-                    Nino Tabagari
-                  </div>
-                  <div
-                    class="text-normal leading-snug md:leading-normal pb-6 border-b-2 border-[#EFEFEF]"
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
+            <div class="max-h-60 overflow-auto">
+              <div v-for="comment in quote.comments" :key="comment">
+                <div class="text-white p-6 antialiased flex">
+                  <img
+                    class="rounded-full w-12 h-12 mr-2 mt-1"
+                    :src="comment.user.thumbnail"
+                  />
+                  <div>
+                    <div class="px-4 pt-2 pb-2.5 ]">
+                      <div
+                        class="font-semibold text-white text-sm leading-relaxed"
+                      >
+                        {{ comment.user.username }}
+                      </div>
+                      <div
+                        class="text-normal leading-snug md:leading-normal pb-6 border-b-2 border-[#EFEFEF]"
+                      >
+                        {{ comment.body }}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
             <div class="text-white p-6 antialiased flex">
               <img
                 class="rounded-full w-12 h-12 mr-2 mt-1"
-                src="/src/assets/ProfilePic.jpg"
+                :src="currentUser.thumbnail"
               />
               <div class="w-full">
                 <div class="px-4 pt-2 pb-2.5">
                   <input
                     class="bg-[#24222F] rounded-md w-full p-4"
                     type="text"
+                    name="comment"
+                    v-model="writtenComment"
+                    @keyup.enter="postComment"
                     placeholder="Write a comment"
                   />
                 </div>
@@ -120,40 +125,74 @@ import IconTrash from "@/components/icons/IconTrash.vue";
 import IconPencil from "@/components/icons/IconPencil.vue";
 import axiosInstance from "@/config/axios/index.js";
 import { useRoute, useRouter } from "vue-router";
-import { onBeforeMount, reactive, ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
 
 const router = useRouter();
 const route = useRoute();
 
+const quote = ref({});
+const movie = ref({});
 const user = ref({});
+const currentUser = ref({});
+const commentsCount = ref();
+const likesCount = ref();
 
-const data = reactive({
-  quote: {},
-  movie: {},
-});
+const writtenComment = ref("");
+
+function likeQuote(id) {
+  axiosInstance
+    .post(`/reaction/${id}`, {
+      user_id: user.value.id,
+      quote_id: id,
+    })
+    .then((response) => {
+      likesCount.value = response.data.length;
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function postComment() {
+  axiosInstance
+    .post(`/comment/${quote.value.id}`, {
+      body: writtenComment.value,
+      user_id: currentUser.value.id,
+      quote_id: quote.value.id,
+    })
+    .then((response) => {
+      writtenComment.value = "";
+      quote.value.comments.push(response.data);
+      commentsCount.value = quote.value.comments.length;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 const routerToEdit = () => {
   router.push({
     name: "edit-quote",
-    params: { id: data.quote.movie_id, quoteId: data.quote.id },
+    params: { id: quote.value.movie_id, quoteId: quote.value.id },
   });
 };
 
 const routerGoBack = () => {
   router.push({
     name: "movie-description",
-    params: { id: data.quote.movie_id },
+    params: { id: quote.value.movie_id },
   });
 };
 
 const deleteQuote = async () => {
   try {
-    const response = await axiosInstance.post(`/delete-quote/${data.quote.id}`);
+    const response = await axiosInstance.post(`/quote/${quote.value.id}`);
     router.push({
       name: "movie-description",
-      params: { id: data.quote.movie_id },
+      params: { id: quote.value.movie_id },
     });
     console.log(response);
   } catch (err) {
@@ -163,11 +202,14 @@ const deleteQuote = async () => {
 
 onBeforeMount(() => {
   axiosInstance
-    .get(`/load-quote/${route.params.quoteId}`)
+    .get(`/quote/${route.params.quoteId}`)
     .then((response) => {
-      data.quote = response.data.quote;
-      data.movie = response.data.movie;
+      quote.value = response.data.quote;
+      movie.value = response.data.movie;
       user.value = response.data.user;
+      currentUser.value = response.data.currentUser;
+      commentsCount.value = response.data.quote.comments.length;
+      likesCount.value = response.data.quote.likes.length;
       console.log(response);
     })
     .catch((err) => {

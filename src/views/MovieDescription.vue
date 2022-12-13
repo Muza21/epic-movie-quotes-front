@@ -92,19 +92,6 @@
                       </q>
                     </div>
                   </div>
-                  <!-- <div class="p-6">
-                    <button
-                      class="py-2"
-                      @click="showQuoteCrud = crudPanel == quote.id"
-                    >
-                      <IconThreedots />
-                    </button>
-                    <QuoteCrud
-                      :myParam="quote.id"
-                      v-if="showQuoteCrud"
-                      @close="showQuoteCrud = false"
-                    />
-                  </div> -->
                   <div class="p-6">
                     <button
                       class="py-2"
@@ -122,9 +109,9 @@
                 <div
                   class="flex text-xl py-6 mx-6 border-t border-[#EFEFEF] text-white"
                 >
-                  <p class="mx-2">10</p>
+                  <p class="mx-2">{{ quote.comments.length }}</p>
                   <IconComment />
-                  <p class="mx-2">10</p>
+                  <p class="mx-2">{{ quote.likes.length }}</p>
                   <IconHeart />
                 </div>
               </div>
@@ -175,7 +162,7 @@ function toggleCrudOperationView(id) {
 
 const deleteMovie = async () => {
   try {
-    const response = await axiosInstance.post(`/delete-movie/${data.movie.id}`);
+    const response = await axiosInstance.post(`/movie/${data.movie.id}`);
     router.push({ name: "movielist" });
     console.log(response);
   } catch (err) {
@@ -185,7 +172,7 @@ const deleteMovie = async () => {
 
 onMounted(() => {
   axiosInstance
-    .get(`/movie-description/${route.params.id}`)
+    .get(`/movie/${route.params.id}`)
     .then((response) => {
       data.movie = response.data.movie;
       data.genres = JSON.parse(data.movie.genre);

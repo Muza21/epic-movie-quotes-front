@@ -131,6 +131,10 @@ const router = createRouter({
       name: "callback",
       component: () => import("@/components/CallbackGoogle.vue"),
     },
+    {
+      path: "/:pathMatch(.*)*",
+      component: () => import("@/components/NotFound.vue"),
+    },
   ],
 });
 
@@ -139,7 +143,7 @@ router.beforeEach(async (to, from, next) => {
 
   if (authStore.authenticated === null) {
     try {
-      await axiosInstance.get(`/me`);
+      await axiosInstance.get(`/check-user`);
       authStore.authenticated = true;
     } catch (err) {
       authStore.authenticated = false;

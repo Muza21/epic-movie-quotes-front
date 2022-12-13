@@ -52,7 +52,7 @@ const handleClose = () => {
 
 const deleteQuote = async () => {
   try {
-    const response = await axiosInstance.post(`/delete-quote/${props.myParam}`);
+    const response = await axiosInstance.post(`/quote/${props.myParam}`);
     console.log(response);
   } catch (err) {
     console.log(err);
