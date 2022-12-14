@@ -9,7 +9,7 @@
             <h2 class="text-xl text-white">
               {{ $t("movielist.my_list_of_movies") }} &#40;{{
                 $t("movielist.total")
-              }}{{ data.movies.length }}&#41;
+              }}{{ data?.movies?.length }}&#41;
             </h2>
             <div class="flex items-center">
               <div class="relative mr-14">
@@ -56,7 +56,7 @@
                     </h3>
                   </div>
                   <div class="my-2 flex text-xl text-white">
-                    <p class="mr-2">{{ movie.quotes_number }}</p>
+                    <p class="mr-2">{{ movie?.quotes_number }}</p>
                     <IconChat />
                   </div>
                 </router-link>

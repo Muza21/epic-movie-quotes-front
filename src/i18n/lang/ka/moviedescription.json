@@ -1,14 +1,14 @@
 {
-  "movie_description": "Movie description",
-  "quotes": "Quotes",
-  "search": "Search",
-  "add_quote": "Add quote",
+  "movie_description": "ფილმის აღწერა",
+  "quotes": "ციტატები",
+  "search": "ძებნა",
+  "add_quote": "ციტატის დამატება",
 
-  "edit_movie": "Edit movie",
+  "edit_movie": "ფილმის შეცვლა",
 
-  "change_photo": "change photo",
-  "save_changes": "Save changes",
-  "view_quote": "View quote",
-  "delete": "Delete",
-  "edit": "Edit"
+  "change_photo": "სურათის შეცვლა",
+  "save_changes": "ცვლილებების შენახვა",
+  "view_quote": "ციტატის ნახვა",
+  "delete": "წაშლა",
+  "edit": "შეცვლა"
 }

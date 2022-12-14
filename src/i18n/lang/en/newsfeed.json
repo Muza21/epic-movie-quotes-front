@@ -4,7 +4,9 @@
   "edit_your_profile": "Edit your profile",
 
   "write_new_quote": "Write new quote",
-  "enter_to_search_movies": "Enter @ to search movies, Enter # to search quotes",
+  "enter": "Enter",
+  "to_search_movies": "to search movies",
+  "to_search_quotes": "to search quotes",
   "write_a_comment": "Write a comment",
   "no_results_found": "No results found!",
 

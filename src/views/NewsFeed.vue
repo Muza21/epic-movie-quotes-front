@@ -31,7 +31,15 @@
                   v-model="searchValue"
                   @keyup.enter="searchByMovieOrQuote"
                   class="w-[688px] rounded-lg border-b border-[#EFEFEF] bg-[#24222F] py-4 pr-4 pl-12 text-sm text-white placeholder-[#CED4DA]"
-                  :placeholder="$t('newsfeed.enter_to_search_movies')"
+                  :placeholder="
+                    $t('newsfeed.enter') +
+                    ' @ ' +
+                    $t('newsfeed.to_search_movies') +
+                    ' ' +
+                    $t('newsfeed.enter') +
+                    ' # ' +
+                    $t('newsfeed.to_search_quotes')
+                  "
                   required
                 />
               </div>

@@ -1,12 +1,12 @@
 {
-  "my_list_of_movies": "My list of movies",
-  "total": "Total",
-  "edit_your_profile": "Edit your profile",
-  "search": "Search",
-  "add_movie": "Add movie",
+  "my_list_of_movies": "დამატებული ფილმები",
+  "total": "ჯამში",
+  "edit_your_profile": "შეცვალე შენი მონაცემები",
+  "search": "ძებნა",
+  "add_movie": "ფილმის დამატება",
 
-  "genre": "Genre",
-  "year": "Year",
-  "budget": "Budget",
-  "director": "Director"
+  "genre": "ჟანრი",
+  "year": "წელი",
+  "budget": "ბიუჯეტი",
+  "director": "დირექტორი"
 }
