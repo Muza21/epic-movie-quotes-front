@@ -34,7 +34,7 @@
             as="textarea"
             placeholder="Quote on English"
             name="quote_en"
-            v-model="data.quote.quote"
+            v-model="quoteEn"
             rules="required"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
@@ -44,7 +44,7 @@
             as="textarea"
             placeholder="ციტატა ქართულ ენაზე"
             name="quote_ka"
-            v-model="data.quote.quote"
+            v-model="quoteKa"
             rules="required"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
@@ -113,6 +113,9 @@ const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
 const router = useRouter();
 const route = useRoute();
 
+const quoteEn = ref("");
+const quoteKa = ref("");
+
 const url = ref("");
 
 const currentUser = ref({});
@@ -150,10 +153,10 @@ const deleteQuote = async () => {
 const onSubmit = async (values) => {
   try {
     const formData = new FormData();
-    formData.append("quote_en", values.quote_en);
-    formData.append("quote_ka", values.quote_ka);
+    formData.append("quote_en", quoteEn.value);
+    formData.append("quote_ka", quoteKa.value);
     formData.append("quote_picture", values.quote_picture);
-    formData.append("movie_title", data.movie.title);
+    formData.append("movie_id", data.movie.id);
     formData.append("user_id", currentUser.value.id);
     formData.append("_method", "PATCH");
     console.log(formData);
@@ -183,6 +186,8 @@ onBeforeMount(() => {
       data.quote = response.data.quote;
       data.movie = response.data.movie;
       user.value = response.data.user;
+      quoteEn.value = data.quote.quote.en;
+      quoteKa.value = data.quote.quote.ka;
       console.log(response);
     })
     .catch((err) => {

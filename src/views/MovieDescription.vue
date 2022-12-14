@@ -7,7 +7,6 @@
         <div class="w-full">
           <h1 class="mx-20 p-6 text-2xl text-white">
             {{ $t("moviedescription.movie_description") }}
-            Movie description
           </h1>
 
           <div class="my-10 grid grid-cols-2 rounded-xl px-20 md:w-full">
@@ -19,7 +18,9 @@
                 class="mb-6 flex items-center justify-between rounded-md px-6 pt-6"
               >
                 <h2 class="text-4xl text-[#DDCCAA]">
-                  {{ data.movie.title }} &#40;{{ data.movie.year }}&#41;
+                  {{ data?.movie?.title?.[$i18n.locale] }} &#40;{{
+                    data?.movie?.year
+                  }}&#41;
                 </h2>
                 <div class="ml-4 flex rounded-lg bg-[#24222F]">
                   <router-link
@@ -41,11 +42,11 @@
               </div>
 
               <div class="my-3 flex px-6">
-                <div v-for="genre in data.genres" :key="genre">
+                <div v-for="genre in data?.genres" :key="genre">
                   <div
                     class="mr-2 rounded-md bg-[#6C757D] px-2 py-1 text-center text-white"
                   >
-                    {{ genre }}
+                    {{ genre?.[$i18n.locale] }}
                   </div>
                 </div>
               </div>
@@ -56,7 +57,7 @@
                   &#58;
                 </h2>
                 <h2 class="ml-2 text-xl text-white">
-                  {{ data.movie.director }}
+                  {{ data?.movie?.director?.[$i18n.locale] }}
                 </h2>
               </div>
 
@@ -70,7 +71,7 @@
                 </h2>
               </div>
               <p class="my-3 px-6 text-lg text-white">
-                {{ data.movie.description }}
+                {{ data?.movie?.description?.[$i18n.locale] }}
               </p>
             </div>
 
@@ -95,24 +96,24 @@
                   <div class="mb-3 flex w-full items-center p-6">
                     <img
                       class="w-50 w-40 rounded-lg object-cover"
-                      :src="link + quote.thumbnail"
+                      :src="link + quote?.thumbnail"
                     />
                     <div class="mx-6">
                       <q class="text-center text-xl font-semibold text-white"
-                        >{{ quote.quote }}
+                        >{{ quote?.quote?.[$i18n.locale] }}
                       </q>
                     </div>
                   </div>
                   <div class="p-6">
                     <button
                       class="py-2"
-                      @click="toggleCrudOperationView(quote.id)"
+                      @click="toggleCrudOperationView(quote?.id)"
                     >
                       <IconThreedots />
                     </button>
                     <QuoteCrud
-                      :myParam="quote.id"
-                      v-if="crudPanel == quote.id"
+                      :myParam="quote?.id"
+                      v-if="crudPanel == quote?.id"
                       @close="crudPanel = false"
                     />
                   </div>
@@ -120,9 +121,9 @@
                 <div
                   class="mx-6 flex border-t border-[#EFEFEF] py-6 text-xl text-white"
                 >
-                  <p class="mx-2">{{ quote.comments.length }}</p>
+                  <p class="mx-2">{{ quote?.comments?.length }}</p>
                   <IconComment />
-                  <p class="mx-2">{{ quote.likes.length }}</p>
+                  <p class="mx-2">{{ quote?.likes?.length }}</p>
                   <IconHeart />
                 </div>
               </div>

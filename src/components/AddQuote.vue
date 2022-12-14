@@ -2,7 +2,9 @@
   <form-layout>
     <template v-slot:header>
       <div class="w-full px-10">
-        <div class="mx-14 my-6 text-center text-3xl text-white">Add quote</div>
+        <div class="mx-14 my-6 text-center text-3xl text-white">
+          {{ $t("moviedescription.add_quote") }}
+        </div>
       </div>
     </template>
     <ValidationForm class="mt-8" @submit="onSubmit">
@@ -24,12 +26,12 @@
         <div class="mb-3 flex w-full items-center">
           <img
             class="h-40 w-72 rounded-xl object-cover"
-            :src="link + data.movie.thumbnail"
+            :src="link + data?.movie?.thumbnail"
           />
           <div class="mx-3 flex-1">
             <div class="my-3">
               <h2 class="text-xl font-semibold text-[#DDCCAA]">
-                {{ data.movie.title }}
+                {{ data.movie.title?.[$i18n.locale] }}
               </h2>
             </div>
             <div class="my-3 flex">
@@ -37,13 +39,15 @@
                 <div
                   class="mr-2 rounded-md bg-[#6C757D] px-2 py-1 text-center text-white"
                 >
-                  {{ genre }}
+                  {{ genre?.[$i18n.locale] }}
                 </div>
               </div>
             </div>
             <div class="my-3 flex">
               <h2 class="text-xl text-white">Director:</h2>
-              <h2 class="ml-2 text-xl text-white">{{ data.movie.director }}</h2>
+              <h2 class="ml-2 text-xl text-white">
+                {{ data?.movie?.director?.[$i18n.locale] }}
+              </h2>
             </div>
           </div>
         </div>
@@ -79,7 +83,7 @@
             <div class="mx-3 flex-1">
               <div class="flex items-center">
                 <h2 class="text-xl font-semibold text-white">
-                  Drag and drop your image here or
+                  {{ $t("newsfeed.drag_or_drop_your_image_here_or") }}
                 </h2>
                 <Field
                   type="file"
@@ -94,8 +98,9 @@
                   for="quote_picture"
                   refs="quote_picture"
                   class="ml-2 cursor-pointer rounded-lg bg-[#9747FF] p-2 text-white"
-                  >Choose a file</label
                 >
+                  {{ $t("newsfeed.choose_file") }}
+                </label>
               </div>
             </div>
           </div>
@@ -107,7 +112,7 @@
         <button
           class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
-          Add Quote
+          {{ $t("moviedescription.add_quote") }}
         </button>
       </div>
     </ValidationForm>

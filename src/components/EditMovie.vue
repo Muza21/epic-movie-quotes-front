@@ -59,7 +59,7 @@
               </div>
               <div v-for="genre in reactiveSelectedGenres.values" :key="genre">
                 <div class="ml-2 flex items-center bg-[#6C757D] p-2 text-white">
-                  {{ genre }}
+                  {{ genre?.[$i18n.locale] }}
 
                   <div @click="deleteGenre(genre)" class="cursor-pointer p-2">
                     <IconCross class="h-3 w-3" />
@@ -76,11 +76,11 @@
               <div v-for="genre in genres.values" :key="genre">
                 <div class="py-1 hover:bg-gray-500">
                   <Field
-                    @click="selectGenre"
+                    @click="selectGenre(genre?.name)"
                     class="w-60 cursor-pointer rounded-md bg-[#11101A] p-3 text-white outline-none"
                     type="text"
-                    :name="genre.name.en"
-                    :value="genre.name.en"
+                    :name="genre?.name?.[$i18n.locale]"
+                    :value="genre?.name?.[$i18n.locale]"
                     readonly
                   />
                 </div>
@@ -206,7 +206,7 @@
         <button
           class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
-          {{ $t("movielist.add_movie") }}
+          {{ $t("moviedescription.edit_movie") }}
         </button>
       </div>
     </ValidationForm>
@@ -248,9 +248,9 @@ const toggleGenres = () => {
   chooseGenres.value = !chooseGenres.value;
 };
 
-const selectGenre = (e) => {
-  if (selectedGenres.value.indexOf(e.target.name) === -1) {
-    selectedGenres.value.push(e.target.name);
+const selectGenre = (genre) => {
+  if (selectedGenres.value.indexOf(genre) === -1) {
+    selectedGenres.value.push(genre);
   }
   chooseGenres.value = false;
   reactiveSelectedGenres.values = selectedGenres.value;

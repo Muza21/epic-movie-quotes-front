@@ -24,7 +24,7 @@
           <Field
             placeholder="Movie name"
             name="movie_name_en"
-            rules="required|alpha"
+            rules="required"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
@@ -56,9 +56,9 @@
                 {{ $t("movielist.genre") }}
               </div>
 
-              <div v-for="genre in reactiveSelectedGenres.values" :key="genre">
+              <div v-for="genre in reactiveSelectedGenres?.values" :key="genre">
                 <div class="ml-2 flex items-center bg-[#6C757D] p-2 text-white">
-                  {{ genre }}
+                  {{ genre?.[$i18n.locale] }}
 
                   <div @click="deleteGenre(genre)" class="cursor-pointer p-2">
                     <IconCross class="h-3 w-3" />
@@ -73,17 +73,14 @@
               v-if="chooseGenres"
               class="absolute mt-2 h-96 w-60 overflow-y-auto rounded-lg border-2 border-gray-500 bg-[#11101A]"
             >
-              <div v-for="genre in genres.values" :key="genre">
+              <div v-for="genre in genres?.values" :key="genre">
                 <div class="py-1 hover:bg-gray-500">
                   <Field
-                    @click="
-                      selectGenre();
-                      genreID(genre.id);
-                    "
+                    @click="selectGenre(genre?.name)"
                     class="w-60 cursor-pointer rounded-md bg-[#11101A] p-3 text-white outline-none"
                     type="text"
-                    :name="genre.name.en"
-                    :value="genre.name.en"
+                    :name="genre?.name?.[$i18n.locale]"
+                    :value="genre?.name?.[$i18n.locale]"
                     readonly
                   />
                 </div>
@@ -95,7 +92,7 @@
           <Field
             placeholder="Director"
             name="director_name_en"
-            rules="required|alpha"
+            rules="required"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
@@ -233,9 +230,9 @@ const toggleGenres = () => {
   chooseGenres.value = !chooseGenres.value;
 };
 
-const selectGenre = (e) => {
-  if (selectedGenres.value.indexOf(e.target.name) === -1) {
-    selectedGenres.value.push(e.target.name);
+const selectGenre = (genre) => {
+  if (selectedGenres.value.indexOf(genre) === -1) {
+    selectedGenres.value.push(genre);
   }
   chooseGenres.value = false;
   reactiveSelectedGenres.values = selectedGenres.value;

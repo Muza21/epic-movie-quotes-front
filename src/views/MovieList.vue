@@ -52,7 +52,7 @@
                   />
                   <div class="my-2">
                     <h3 class="text-xl text-white">
-                      {{ movie.title }}
+                      {{ movie?.title?.[$i18n.locale] }}
                     </h3>
                   </div>
                   <div class="my-2 flex text-xl text-white">

@@ -3,14 +3,13 @@ import { createPinia } from "pinia";
 
 import App from "@/App.vue";
 import router from "@/router";
-import i18n from "@/i18n/index";
+import i18n from "@/i18n/index.js";
 
 import "@/config/vee-validate/rules.js";
 
 import "@/style.css";
 
 const app = createApp(App);
-
 app.use(createPinia());
 app.use(router);
 app.use(i18n);

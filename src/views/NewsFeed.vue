@@ -60,17 +60,17 @@
               <div class="mb-6 flex items-center rounded-md p-6">
                 <img
                   class="mr-2 mt-1 h-12 w-12 rounded-full"
-                  :src="quote.user?.thumbnail"
+                  :src="quote?.user?.thumbnail"
                 />
                 <div class="ml-4">
                   <h2 class="text-lg font-semibold text-white">
-                    {{ quote.user?.username }}
+                    {{ quote?.user?.username }}
                   </h2>
                 </div>
               </div>
 
               <h1 class="mb-10 p-6 text-xl text-white lg:text-4xl">
-                {{ quote.quote }}
+                {{ quote?.quote?.[$i18n.locale] }}
               </h1>
 
               <div class="p-6 leading-loose text-white">
@@ -78,11 +78,11 @@
               </div>
 
               <div class="flex p-6 text-xl text-white">
-                <p class="mx-2">{{ quote.comments?.length }}</p>
+                <p class="mx-2">{{ quote?.comments?.length }}</p>
                 <IconComment />
-                <p class="ml-6 mr-2">{{ quote.likes?.length }}</p>
+                <p class="ml-6 mr-2">{{ quote?.likes?.length }}</p>
                 <div
-                  @click="likeQuote(quote.id, index)"
+                  @click="likeQuote(quote?.id, index)"
                   class="-mt-1 cursor-pointer p-1"
                 >
                   <IconHeart />
@@ -90,23 +90,23 @@
               </div>
 
               <div class="max-h-60 overflow-auto">
-                <div v-for="comment in quote.comments" :key="comment">
+                <div v-for="comment in quote?.comments" :key="comment">
                   <div class="flex p-6 text-white antialiased">
                     <img
                       class="mr-2 mt-1 h-12 w-12 rounded-full"
-                      :src="comment.user.thumbnail"
+                      :src="comment?.user?.thumbnail"
                     />
                     <div>
                       <div class="] px-4 pt-2 pb-2.5">
                         <div
                           class="text-sm font-semibold leading-relaxed text-white"
                         >
-                          {{ comment.user.username }}
+                          {{ comment?.user?.username }}
                         </div>
                         <div
                           class="text-normal border-b-2 border-[#EFEFEF] pb-6 leading-snug md:leading-normal"
                         >
-                          {{ comment.body }}
+                          {{ comment?.body }}
                         </div>
                       </div>
                     </div>
@@ -126,7 +126,7 @@
                         type="text"
                         name="comment"
                         v-model="quote.writtenComment"
-                        @keydown.enter="postComment(quote.id, index)"
+                        @keydown.enter="postComment(quote?.id, index)"
                         :placeholder="$t('newsfeed.write_a_comment')"
                       />
                     </div>

@@ -95,7 +95,7 @@
                   v-if="selectedMovie"
                   class="text-xl font-semibold text-white"
                 >
-                  {{ selectedMovie }}
+                  {{ selectedMovie?.[$i18n.locale] }}
                 </h2>
 
                 <IconDropdown />
@@ -110,11 +110,11 @@
           <div v-for="movie in data.movies" :key="movie">
             <div class="py-1 hover:bg-gray-500">
               <Field
-                @click="selectMovie"
+                @click="selectMovie(movie?.title, movie?.id)"
                 class="w-96 cursor-pointer rounded-md bg-[#11101A] p-3 text-white outline-none"
                 type="text"
-                :name="movie.title"
-                :value="movie.title"
+                :name="movie?.title?.[$i18n.locale]"
+                :value="movie?.title?.[$i18n.locale]"
                 readonly
               />
             </div>
@@ -144,7 +144,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const chooseMovie = ref(false);
 const selectedMovie = ref("");
-
+const movieId = ref();
 const toggleChooseMovie = () => {
   chooseMovie.value = !chooseMovie.value;
 };
@@ -154,9 +154,10 @@ const data = reactive({
 
 const user = ref({});
 
-const selectMovie = (e) => {
+const selectMovie = (movie, id) => {
   chooseMovie.value = false;
-  selectedMovie.value = e.target.name;
+  selectedMovie.value = movie;
+  movieId.value = id;
 };
 
 const routerGoBack = () => {
@@ -171,7 +172,7 @@ const onSubmit = async (values) => {
     formData.append("quote_en", values.quote_en);
     formData.append("quote_ka", values.quote_ka);
     formData.append("quote_picture", values.quote_picture);
-    formData.append("movie_title", selectedMovie.value);
+    formData.append("movie_id", movieId.value);
     formData.append("user_id", user.value.id);
     console.log(formData);
     const response = await axiosInstance.post(`/quote`, formData, {
@@ -188,7 +189,7 @@ const onSubmit = async (values) => {
 
 onMounted(() => {
   axiosInstance
-    .get(`/movielist`)
+    .get(`/movie`)
     .then((response) => {
       data.movies = response.data.movies;
       user.value = response.data.user;

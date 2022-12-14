@@ -24,8 +24,15 @@
           </div>
           <div>
             <button @click="toggleLanguage">
-              <span class="mx-4 flex items-center text-white"
+              <span
+                v-if="$root.$i18n.locale == 'en'"
+                class="mx-4 flex items-center text-white"
                 >Eng <IconDropdown class="ml-2" />
+              </span>
+              <span
+                v-if="$root.$i18n.locale == 'ka'"
+                class="mx-4 flex items-center text-white"
+                >ქარ <IconDropdown class="ml-2" />
               </span>
             </button>
             <div
@@ -33,14 +40,28 @@
               class="absolute z-50 mt-2 h-[112px] w-36 rounded-lg bg-[#11101A]"
             >
               <div class="py-1 hover:bg-gray-800">
-                <a href="#" class="flex items-center rounded-md p-3">
+                <div
+                  @click="
+                    $root.$i18n.locale = 'en';
+                    view.languageView = false;
+                    setLocale('en');
+                  "
+                  class="flex cursor-pointer items-center rounded-md p-3"
+                >
                   <span class="ml-4 text-white">English</span>
-                </a>
+                </div>
               </div>
               <div class="py-1 hover:bg-gray-800">
-                <a href="#" class="flex items-center rounded-md p-3">
+                <div
+                  @click="
+                    $root.$i18n.locale = 'ka';
+                    view.languageView = false;
+                    setLocale('ka');
+                  "
+                  class="flex cursor-pointer items-center rounded-md p-3"
+                >
                   <span class="ml-4 text-white">ქართული</span>
-                </a>
+                </div>
               </div>
             </div>
           </div>
@@ -79,19 +100,21 @@ import { Form as ValidationForm } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
-
 import { reactive } from "vue";
 
 const view = reactive({
   notificationView: false,
   languageView: false,
 });
-
 const router = useRouter();
 const authStore = useAuthStore();
 
 function toggleNotification() {
   view.notificationView = !view.notificationView;
+}
+
+function setLocale(locale) {
+  window.localStorage.setItem("selectedLocale", locale);
 }
 
 const toggleLanguage = () => {
