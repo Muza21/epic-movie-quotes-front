@@ -13,7 +13,9 @@
               class="flex w-52 rounded-lg bg-[#24222F] p-4"
             >
               <IconNewquote />
-              <p class="ml-2 text-white">Write new quote</p>
+              <p class="ml-2 text-white">
+                {{ $t("newsfeed.write_new_quote") }}
+              </p>
             </router-link>
             <div class="flex items-center">
               <div class="relative">
@@ -29,7 +31,7 @@
                   v-model="searchValue"
                   @keyup.enter="searchByMovieOrQuote"
                   class="w-[688px] rounded-lg border-b border-[#EFEFEF] bg-[#24222F] py-4 pr-4 pl-12 text-sm text-white placeholder-[#CED4DA]"
-                  placeholder="Enter @ to search movies, Enter # to search quotes "
+                  :placeholder="$t('newsfeed.enter_to_search_movies')"
                   required
                 />
               </div>
@@ -39,7 +41,9 @@
             class="mt-52 hidden text-center text-6xl text-white"
             v-if="searchValue && !quotes.values.length"
           >
-            <p>No results found!</p>
+            <p>
+              {{ $t("newsfeed.no_results_found") }}
+            </p>
           </div>
           <div v-for="(quote, index) in quotes.values" :key="index">
             <article
@@ -115,7 +119,7 @@
                         name="comment"
                         v-model="quote.writtenComment"
                         @keydown.enter="postComment(quote.id, index)"
-                        placeholder="Write a comment"
+                        :placeholder="$t('newsfeed.write_a_comment')"
                       />
                     </div>
                   </div>

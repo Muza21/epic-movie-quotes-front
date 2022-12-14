@@ -7,7 +7,9 @@
         <div class="w-full">
           <div class="mx-20 mt-5 flex justify-between">
             <h2 class="text-xl text-white">
-              My list of movies &#40;Total {{ data.movies.length }}&#41;
+              {{ $t("movielist.my_list_of_movies") }} &#40;{{
+                $t("movielist.total")
+              }}{{ data.movies.length }}&#41;
             </h2>
             <div class="flex items-center">
               <div class="relative mr-14">
@@ -23,7 +25,7 @@
                   v-model="searchValue"
                   @keydown.enter="searchMovie"
                   class="w-[150px] rounded-lg border-b border-[#EFEFEF] bg-[#24222F] py-4 pr-4 pl-12 text-sm text-white placeholder-[#CED4DA]"
-                  placeholder="Search"
+                  :placeholder="$t('movielist.search')"
                   required
                 />
               </div>
@@ -31,7 +33,8 @@
                 :to="{ name: 'add-movie' }"
                 class="rounded-lg bg-[#E31221] px-4 py-2 text-white"
               >
-                <IconAdd class="my-auto mr-3" />Add movie
+                <IconAdd class="my-auto mr-3" />
+                {{ $t("movielist.add_movie") }}
               </router-link>
             </div>
           </div>

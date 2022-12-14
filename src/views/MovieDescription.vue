@@ -5,7 +5,10 @@
       <div class="flex">
         <SideBar />
         <div class="w-full">
-          <h1 class="mx-20 p-6 text-2xl text-white">Movie description</h1>
+          <h1 class="mx-20 p-6 text-2xl text-white">
+            {{ $t("moviedescription.movie_description") }}
+            Movie description
+          </h1>
 
           <div class="my-10 grid grid-cols-2 rounded-xl px-20 md:w-full">
             <div class="p-6 leading-loose text-white">
@@ -48,14 +51,20 @@
               </div>
 
               <div class="my-3 flex px-6">
-                <h2 class="text-xl text-white">Director&#58;</h2>
+                <h2 class="text-xl text-white">
+                  {{ $t("movielist.director") }}
+                  &#58;
+                </h2>
                 <h2 class="ml-2 text-xl text-white">
                   {{ data.movie.director }}
                 </h2>
               </div>
 
               <div class="my-3 flex px-6">
-                <h2 class="text-xl text-white">Budget&#58;</h2>
+                <h2 class="text-xl text-white">
+                  {{ $t("movielist.budget") }}
+                  &#58;
+                </h2>
                 <h2 class="ml-2 text-xl text-white">
                   {{ data.movie.budget }}
                 </h2>
@@ -67,14 +76,16 @@
 
             <div class="m-6 flex items-center">
               <h3 class="border-r border-[#6C757D] pr-4 text-lg text-white">
-                quotes &#40;total {{ data.movie.quotes_number }}&#41;
+                {{ $t("moviedescription.quotes") }} &#40;{{
+                  $t("movielist.total")
+                }}{{ data?.movies?.length }}&#41;
               </h3>
 
               <router-link
                 :to="{ name: 'add-quote' }"
                 class="mx-4 rounded-lg bg-[#E31221] px-4 py-2 text-white"
               >
-                Add quote
+                {{ $t("moviedescription.add_quote") }}
               </router-link>
             </div>
 

@@ -1,13 +1,17 @@
 <template>
   <popup-layout>
-    <div class="text-center text-3xl text-white">Create an account</div>
+    <div class="text-center text-3xl text-white">
+      {{ $t("landing.create_an_account") }}
+    </div>
     <div class="font-base text-center text-[#6C757D]">
-      Start Your journey&#33;
+      {{ $t("landing.start_your_journey") }}&#33;
     </div>
     <ValidationForm @submit="onSubmit" class="mt-8">
       <div class="mx-auto max-w-lg">
         <div class="py-1">
-          <span class="px-1 text-sm text-white">Username</span>
+          <span class="px-1 text-sm text-white">
+            {{ $t("landing.username") }}
+          </span>
           <span class="text-[#DC3545]">&#42;</span>
           <Field
             placeholder=""
@@ -27,7 +31,9 @@
           </div>
         </div>
         <div class="py-1">
-          <span class="px-1 text-sm text-white">Email</span>
+          <span class="px-1 text-sm text-white">
+            {{ $t("landing.email") }}
+          </span>
           <span class="text-[#DC3545]">&#42;</span>
           <Field
             placeholder=""
@@ -45,7 +51,9 @@
           </div>
         </div>
         <div class="py-1">
-          <span class="px-1 text-sm text-white">Password</span>
+          <span class="px-1 text-sm text-white">
+            {{ $t("landing.password") }}
+          </span>
           <span class="text-[#DC3545]">&#42;</span>
           <Field
             placeholder=""
@@ -59,7 +67,9 @@
           </div>
         </div>
         <div class="py-1">
-          <span class="px-1 text-sm text-white">Password Confirm</span>
+          <span class="px-1 text-sm text-white">
+            {{ $t("landing.password_confirm") }}
+          </span>
           <span class="text-[#DC3545]">&#42;</span>
           <Field
             placeholder=""
@@ -79,21 +89,23 @@
         <button
           class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
-          Get started
+          {{ $t("landing.get_started") }}
         </button>
       </div>
     </ValidationForm>
 
-    <GoogleLogin>Sign up with Google</GoogleLogin>
+    <GoogleLogin>
+      {{ $t("landing.sign_up_with_google") }}
+    </GoogleLogin>
 
     <div class="flex justify-center py-6 text-sm font-semibold">
       <div class="font-normal text-[#6C757D] hover:border-teal-500">
-        Already have an account?
+        {{ $t("landing.already_have_an_account") }}&#63;
         <router-link
           :to="{ name: 'login' }"
           class="font-semibold text-[#0D6EFD]"
         >
-          Login
+          {{ $t("landing.login") }}
         </router-link>
       </div>
     </div>

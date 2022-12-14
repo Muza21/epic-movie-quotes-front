@@ -2,7 +2,7 @@
   <form-layout>
     <template v-slot:header>
       <div class="mx-14 my-6 text-center text-3xl text-white">
-        Write new quote
+        {{ $t("newsfeed.write_new_quote") }}
       </div>
       <div
         @click="routerGoBack"
@@ -56,7 +56,7 @@
             <div class="mx-3 flex-1">
               <div class="flex items-center">
                 <h2 class="text-xl font-semibold text-white">
-                  Drag and drop your image here or
+                  {{ $t("newsfeed.drag_or_drop_your_image_here_or") }}
                 </h2>
                 <Field
                   type="file"
@@ -71,7 +71,7 @@
                   refs="quote_picture"
                   class="ml-2 cursor-pointer rounded-lg bg-[#9747FF] p-2 text-white"
                 >
-                  Choose a file
+                  {{ $t("newsfeed.choose_file") }}
                 </label>
               </div>
             </div>
@@ -89,7 +89,7 @@
                   v-if="!selectedMovie"
                   class="text-xl font-semibold text-white"
                 >
-                  Choose a movie
+                  {{ $t("newsfeed.choose_movie") }}
                 </h2>
                 <h2
                   v-if="selectedMovie"
@@ -123,7 +123,7 @@
         <button
           class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
-          Post
+          {{ $t("newsfeed.post") }}
         </button>
       </div>
     </ValidationForm>

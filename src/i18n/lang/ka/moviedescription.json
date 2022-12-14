@@ -1,0 +1,14 @@
+{
+  "movie_description": "Movie description",
+  "quotes": "Quotes",
+  "search": "Search",
+  "add_quote": "Add quote",
+
+  "edit_movie": "Edit movie",
+
+  "change_photo": "change photo",
+  "save_changes": "Save changes",
+  "view_quote": "View quote",
+  "delete": "Delete",
+  "edit": "Edit"
+}

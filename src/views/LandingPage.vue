@@ -3,14 +3,14 @@
     <NavigationBar />
     <div class="bg-[#11101A] py-36">
       <h1 class="text-center text-3xl text-[#DDCCAA]">
-        Find any quote in millions of movie lines
+        {{ $t("landing.find_any_quote_in_millions_of_movie_lines") }}
       </h1>
       <div class="flex items-center justify-center">
         <router-link
           :to="{ name: 'signup' }"
           class="mt-8 rounded-lg bg-[#E31221] px-4 py-2 text-white"
         >
-          <h1 id="begin">Get Started</h1>
+          <h1 id="begin">{{ $t("landing.get_started") }}</h1>
         </router-link>
       </div>
     </div>
@@ -33,11 +33,13 @@
           ></div>
           <div>
             <q class="text-xl text-white md:text-5xl">
-              You have to leave somethig behind to go forward
+              {{
+                $t("landing.you_have_to_leave_somethig_behind_to_go_forward")
+              }}
             </q>
 
             <p class="mt-2 text-lg text-[#D9D9D9] md:mt-6 md:text-3xl">
-              Interstellar, 2014
+              {{ $t("landing.interstellar") }}
             </p>
           </div>
         </div>
@@ -56,12 +58,15 @@
           ></div>
           <div>
             <q class="text-xl text-white md:text-5xl">
-              I think were just gonna have to be secretly in love with earch
-              other and leave it that
+              {{
+                $t(
+                  "landing.i_think_were_just_gonna_have_to_be_secretly_in_love"
+                )
+              }}
             </q>
 
             <p class="mt-2 text-lg text-[#D9D9D9] md:mt-6 md:text-3xl">
-              The Royal Tenenbaums,2001
+              {{ $t("landing.the_royal_tenenbaums") }},2001
             </p>
           </div>
         </div>
@@ -82,12 +87,11 @@
           ></div>
           <div>
             <q class="text-xl text-white md:text-5xl">
-              I think were just gonna have to be secretly in love with earch
-              other and leave it that
+              {{ $t("landing.i_see_in_your_eyes_the_same_fear") }}
             </q>
 
             <p class="m-2 text-lg text-[#D9D9D9] md:mt-6 md:text-3xl">
-              The Royal Tenenbaums,2001
+              {{ $t("landing.the_lord_of_the_rings") }},2003
             </p>
           </div>
         </div>
@@ -95,7 +99,7 @@
     </div>
     <footer class="bg-[#11101A] py-4 px-10">
       <div class="text-[#DDCCAA]">
-        &#169; MOVIE QUOTES. ALL RIGHTS RESERVED.
+        &#169; 2022 {{ $t("landing.movie_quotes_all_rights_reserved") }}
       </div>
     </footer>
   </div>

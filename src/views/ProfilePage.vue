@@ -37,41 +37,51 @@
                 <div
                   class="mt-0 mb-2 text-center text-sm font-bold uppercase leading-normal text-gray-500"
                 >
-                  Upload new photo
+                  {{ $t("profile.upload_new_photo") }}
                 </div>
                 <div class="mb-2 mt-10 text-gray-700">
                   <div class="py-1">
-                    <span class="px-1 text-sm text-white">Username</span>
+                    <span class="px-1 text-sm text-white">
+                      {{ $t("landing.username") }}
+                    </span>
                     <div class="flex items-center justify-between">
                       <input
                         placeholder=""
                         type="text"
                         class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
                       />
-                      <div class="ml-4 text-[#CED4DA]">Edit</div>
+                      <div class="ml-4 text-[#CED4DA]">
+                        {{ $t("moviedescription.edit") }}
+                      </div>
                     </div>
                   </div>
                   <div class="my-10 border-t border-[#CED4DA]"></div>
                   <div class="py-1">
-                    <span class="px-1 text-sm text-white">Email</span>
+                    <span class="px-1 text-sm text-white">
+                      {{ $t("landing.email") }}
+                    </span>
                     <div class="flex items-center justify-between">
                       <input
                         placeholder=""
                         type="email"
                         class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
                       />
-                      <div class="ml-4 text-[#CED4DA]">Edit</div>
+                      <div class="ml-4 text-[#CED4DA]">
+                        {{ $t("moviedescription.edit") }}
+                      </div>
                     </div>
                   </div>
                   <button
                     class="mt-10 rounded-lg border border-white px-4 py-2 text-white"
                   >
-                    Add new email
+                    {{ $t("profile.add_new_email") }}
                   </button>
                   <div class="my-10 border-t border-[#CED4DA]"></div>
 
                   <div class="py-1">
-                    <span class="px-1 text-sm text-white">Password</span>
+                    <span class="px-1 text-sm text-white">
+                      {{ $t("landing.password") }}
+                    </span>
                     <div class="flex items-center justify-between">
                       <input
                         placeholder=""
@@ -79,7 +89,9 @@
                         x-model="password"
                         class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
                       />
-                      <div class="ml-4 text-[#CED4DA]">Edit</div>
+                      <div class="ml-4 text-[#CED4DA]">
+                        {{ $t("moviedescription.edit") }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -87,9 +99,11 @@
             </div>
           </div>
           <div class="flex justify-end bg-[#222030] pt-4">
-            <button class="mx-4 rounded-lg px-4 py-2 text-white">Cancel</button>
+            <button class="mx-4 rounded-lg px-4 py-2 text-white">
+              {{ $t("profile.cancel") }}
+            </button>
             <button class="mx-4 rounded-lg bg-[#E31221] px-4 py-2 text-white">
-              Save changes
+              {{ $t("moviedescription.save_changes") }}
             </button>
           </div>
         </div>

@@ -1,7 +1,9 @@
 <template>
   <form-layout>
     <template v-slot:header>
-      <div class="mx-14 my-6 text-center text-3xl text-white">Add movie</div>
+      <div class="mx-14 my-6 text-center text-3xl text-white">
+        {{ $t("movielist.add_movie") }}
+      </div>
     </template>
     <ValidationForm class="mt-8" @submit="onSubmit">
       <div class="mx-auto px-4">
@@ -9,10 +11,12 @@
           <div class="mb-6 flex items-center rounded-md">
             <img
               class="mr-2 mt-1 h-12 w-12 rounded-full"
-              src="/src/assets/ProfilePic.jpg"
+              :src="user?.thumbnail"
             />
             <div>
-              <h2 class="text-lg font-semibold text-white">Nino Tabagari</h2>
+              <h2 class="text-lg font-semibold text-white">
+                {{ user?.username }}
+              </h2>
             </div>
           </div>
         </div>
@@ -45,6 +49,13 @@
           ></div>
           <div class="absolute mx-3 -mt-[51px] flex-1">
             <div class="flex items-center">
+              <div
+                v-if="!reactiveSelectedGenres?.values?.length"
+                class="py-2 text-lg text-white"
+              >
+                {{ $t("movielist.genre") }}
+              </div>
+
               <div v-for="genre in reactiveSelectedGenres.values" :key="genre">
                 <div class="ml-2 flex items-center bg-[#6C757D] p-2 text-white">
                   {{ genre }}
@@ -65,11 +76,14 @@
               <div v-for="genre in genres.values" :key="genre">
                 <div class="py-1 hover:bg-gray-500">
                   <Field
-                    @click="selectGenre"
+                    @click="
+                      selectGenre();
+                      genreID(genre.id);
+                    "
                     class="w-60 cursor-pointer rounded-md bg-[#11101A] p-3 text-white outline-none"
                     type="text"
-                    :name="genre.name"
-                    :value="genre.name"
+                    :name="genre.name.en"
+                    :value="genre.name.en"
                     readonly
                   />
                 </div>
@@ -107,7 +121,7 @@
         </div>
         <div class="py-1">
           <Field
-            placeholder="Year"
+            :placeholder="$t('movielist.year')"
             name="year"
             rules="required|integer"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
@@ -118,7 +132,7 @@
         </div>
         <div class="py-1">
           <Field
-            placeholder="Budget"
+            :placeholder="$t('movielist.budget')"
             name="budget"
             rules="required|integer"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
@@ -163,7 +177,7 @@
             <div class="mx-3 flex-1">
               <div class="flex items-center">
                 <h2 class="text-xl font-semibold text-white">
-                  Drag and drop your image here or
+                  {{ $t("newsfeed.drag_or_drop_your_image_here_or") }}
                 </h2>
                 <Field
                   type="file"
@@ -177,8 +191,9 @@
                   for="movie_picture"
                   refs="movie_picture"
                   class="ml-2 cursor-pointer rounded-lg bg-[#9747FF] p-2 text-white"
-                  >Choose a file</label
                 >
+                  {{ $t("newsfeed.choose_file") }}
+                </label>
               </div>
             </div>
           </div>
@@ -189,7 +204,7 @@
         <button
           class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
-          Add movie
+          {{ $t("movielist.add_movie") }}
         </button>
       </div>
     </ValidationForm>
@@ -210,6 +225,7 @@ const router = useRouter();
 const genres = reactive({});
 const chooseGenres = ref(false);
 const selectedGenres = ref([]);
+const user = ref({});
 
 const reactiveSelectedGenres = reactive({});
 
@@ -261,6 +277,7 @@ onMounted(() => {
     .get(`/genres`)
     .then((response) => {
       genres.values = response.data.genres;
+      user.value = response.data.user;
       console.log(response);
     })
     .catch((err) => {

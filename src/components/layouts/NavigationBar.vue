@@ -2,7 +2,9 @@
   <header class="bg-[#222030] py-4 px-16">
     <div class="wrapper">
       <nav class="flex items-center justify-between">
-        <RouterLink to="/" class="text-[#DDCCAA]">MOVIE QUOTES</RouterLink>
+        <RouterLink to="/" class="text-[#DDCCAA]">
+          {{ $t("landing.movie_quotes") }}
+        </RouterLink>
         <div class="flex items-center">
           <div v-if="authStore.authenticated" class="mx-4">
             <button @click="toggleNotification">
@@ -47,20 +49,20 @@
             :to="{ name: 'signup' }"
             class="mx-4 rounded-lg bg-[#E31221] px-4 py-2 text-white"
           >
-            Sign Up
+            {{ $t("landing.sign_up") }}
           </router-link>
           <router-link
             v-if="!authStore.authenticated"
             :to="{ name: 'login' }"
             class="mx-4 rounded-lg border border-white px-4 py-2 text-white"
           >
-            Log In
+            {{ $t("landing.log_in") }}
           </router-link>
           <ValidationForm v-if="authStore.authenticated" @submit="onSubmit">
             <button
               class="mx-4 rounded-lg border border-white px-4 py-2 text-white"
             >
-              Log Out
+              {{ $t("landing.logout") }}
             </button>
           </ValidationForm>
         </div>

@@ -16,8 +16,9 @@
                   <router-link
                     :to="{ name: 'profile' }"
                     class="text-xs text-[#CED4DA] hover:underline dark:text-gray-400"
-                    >Edit your profile</router-link
                   >
+                    {{ $t("newsfeed.edit_your_profile") }}
+                  </router-link>
                 </span>
               </div>
             </li>
@@ -27,7 +28,9 @@
                 class="flex items-center rounded-md p-2"
               >
                 <IconHouseVue />
-                <span class="ml-6 text-white">News feed</span>
+                <span class="ml-6 text-white">
+                  {{ $t("newsfeed.news_feed") }}
+                </span>
               </router-link>
             </li>
             <li>
@@ -37,7 +40,9 @@
               >
                 <IconCameraVue />
 
-                <span class="ml-6 text-white">List of movies</span>
+                <span class="ml-6 text-white">
+                  {{ $t("newsfeed.list_of_movies") }}
+                </span>
               </router-link>
             </li>
           </ul>

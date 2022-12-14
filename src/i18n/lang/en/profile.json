@@ -1,0 +1,21 @@
+{
+  "upload_new_photo": "Upload new photo",
+  "add_new_email": "Add new email",
+  "cancel": "Cancel",
+
+  "write_new_quote": "Write new quote",
+  "enter_to_search_movies": "Enter @ to search movies, Enter # to search quotes",
+  "write_a_comment": "Write a comment",
+  "no_results_found": "No results found!",
+
+  "commented_to_your_movie_quote": "Commented to your movie quote",
+  "reacted_to_your_quote": "Reacted to your quote",
+
+  "day_ago": "day ago",
+  "min_ago": "min ago",
+
+  "choose_file": "Choose file",
+  "drag_or_drop_your_image_here_or": "Drag & drop your image here or",
+  "post": "Post",
+  "choose_movie": "Choose movie"
+}

@@ -6,7 +6,9 @@
       >
         <div class="flex items-center rounded-md p-3">
           <IconEyes class="ml-6" />
-          <span class="ml-6 text-white">View quote</span>
+          <span class="ml-6 text-white">
+            {{ $t("moviedescription.view_quote") }}
+          </span>
         </div>
       </router-link>
     </div>
@@ -17,7 +19,9 @@
       >
         <div class="flex items-center rounded-md p-3">
           <IconPencil class="ml-6" />
-          <span class="ml-6 text-white">Edit</span>
+          <span class="ml-6 text-white">
+            {{ $t("moviedescription.edit") }}
+          </span>
         </div>
       </router-link>
     </div>
@@ -30,7 +34,9 @@
     >
       <div class="flex items-center rounded-md p-3">
         <IconTrash class="ml-6" />
-        <span class="ml-6 text-white">Delete</span>
+        <span class="ml-6 text-white">
+          {{ $t("moviedescription.delete") }}
+        </span>
       </div>
     </div>
   </div>

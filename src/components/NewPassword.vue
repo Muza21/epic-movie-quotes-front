@@ -1,13 +1,17 @@
 <template>
   <popup-layout>
-    <div class="text-center text-3xl text-white">Create new password</div>
+    <div class="text-center text-3xl text-white">
+      {{ $t("landing.create_new_password") }}
+    </div>
     <div class="font-base text-center text-[#6C757D]">
-      Your new password must be different from previous used passwords&#33;
+      {{ $t("landing.your_new_password_must_be_different") }}
     </div>
     <ValidationForm class="mt-8" @submit="onSubmit">
       <div class="mx-auto max-w-lg">
         <div class="py-1">
-          <span class="px-1 text-sm text-white">Password</span>
+          <span class="px-1 text-sm text-white">
+            {{ $t("landing.password") }}
+          </span>
           <span class="text-[#DC3545]">&#42;</span>
           <Field
             placeholder=""
@@ -21,7 +25,9 @@
           </div>
         </div>
         <div class="py-1">
-          <span class="px-1 text-sm text-white">Password Confirm</span>
+          <span class="px-1 text-sm text-white">
+            {{ $t("landing.password_confirm") }}
+          </span>
           <span class="text-[#DC3545]">&#42;</span>
           <Field
             placeholder=""
@@ -41,7 +47,7 @@
         <button
           class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
-          Reset password
+          {{ $t("landing.reset_password") }}
         </button>
       </div>
     </ValidationForm>
@@ -52,7 +58,7 @@
         class="flex justify-center font-normal"
         ><IconReturn class="my-auto mr-3" />
         <router-link :to="{ name: 'login' }" class="text-[#6C757D]">
-          Back to log in
+          {{ $t("landing.back_to_log_in") }}
         </router-link>
       </router-link>
     </div>

@@ -1,7 +1,9 @@
 <template>
   <form-layout>
     <template v-slot:header>
-      <div class="mx-14 my-6 text-center text-3xl text-white">Edit movie</div>
+      <div class="mx-14 my-6 text-center text-3xl text-white">
+        {{ $t("moviedescription.edit_movie") }}
+      </div>
     </template>
     <ValidationForm class="mt-8" @submit="onSubmit">
       <div class="mx-auto px-4">
@@ -20,7 +22,8 @@
         </div>
         <div class="py-1">
           <Field
-            v-model="data.movie.title"
+            v-model="movieNameEn"
+            placeholder="Movie name"
             name="movie_name_en"
             rules="required|alpha"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md placeholder:text-lg placeholder:text-white"
@@ -31,7 +34,8 @@
         </div>
         <div class="py-1">
           <Field
-            v-model="data.movie.title"
+            v-model="movieNameKa"
+            placeholder="ფილმის სახელი"
             name="movie_name_ka"
             rules="required"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
@@ -47,6 +51,12 @@
           ></div>
           <div class="absolute mx-3 -mt-[51px] flex-1">
             <div class="flex items-center">
+              <div
+                v-if="!reactiveSelectedGenres?.values?.length"
+                class="py-2 text-lg text-white"
+              >
+                {{ $t("movielist.genre") }}
+              </div>
               <div v-for="genre in reactiveSelectedGenres.values" :key="genre">
                 <div class="ml-2 flex items-center bg-[#6C757D] p-2 text-white">
                   {{ genre }}
@@ -69,8 +79,8 @@
                     @click="selectGenre"
                     class="w-60 cursor-pointer rounded-md bg-[#11101A] p-3 text-white outline-none"
                     type="text"
-                    :name="genre.name"
-                    :value="genre.name"
+                    :name="genre.name.en"
+                    :value="genre.name.en"
                     readonly
                   />
                 </div>
@@ -80,8 +90,9 @@
         </div>
         <div class="py-1">
           <Field
-            v-model="data.movie.director"
+            v-model="directorEn"
             name="director_name_en"
+            placeholder="Director"
             rules="required|alpha"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
@@ -94,8 +105,9 @@
         </div>
         <div class="py-1">
           <Field
-            v-model="data.movie.director"
+            v-model="directorKa"
             name="director_name_ka"
+            placeholder="რეჟისორი"
             rules="required"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
@@ -108,8 +120,9 @@
         </div>
         <div class="py-1">
           <Field
-            v-model="data.movie.year"
+            v-model="movie.year"
             name="year"
+            :placeholder="$t('movielist.year')"
             rules="required|integer"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
@@ -119,8 +132,9 @@
         </div>
         <div class="py-1">
           <Field
-            v-model="data.movie.budget"
+            v-model="movie.budget"
             name="budget"
+            :placeholder="$t('movielist.budget')"
             rules="required|integer"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
@@ -131,7 +145,8 @@
         <div class="py-1">
           <Field
             as="textarea"
-            v-model="data.movie.description"
+            v-model="descriptionEn"
+            placeholder="Movie description"
             name="movie_description_en"
             rules="required"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
@@ -146,7 +161,8 @@
         <div class="py-1">
           <Field
             as="textarea"
-            v-model="data.movie.description"
+            v-model="descriptionKa"
+            placeholder="ფილმის აღწერა"
             name="movie_description_ka"
             rules="required"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
@@ -164,7 +180,7 @@
             <div class="mx-3 flex-1">
               <div class="flex items-center">
                 <h2 class="text-xl font-semibold text-white">
-                  Drag and drop your image here or
+                  {{ $t("newsfeed.drag_or_drop_your_image_here_or") }}
                 </h2>
                 <Field
                   type="file"
@@ -177,8 +193,9 @@
                   for="movie_picture"
                   refs="movie_picture"
                   class="ml-2 cursor-pointer rounded-lg bg-[#9747FF] p-2 text-white"
-                  >Choose a file</label
                 >
+                  {{ $t("newsfeed.choose_file") }}
+                </label>
               </div>
             </div>
           </div>
@@ -189,7 +206,7 @@
         <button
           class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
-          Add movie
+          {{ $t("movielist.add_movie") }}
         </button>
       </div>
     </ValidationForm>
@@ -205,6 +222,13 @@ import axiosInstance from "@/config/axios/index.js";
 import { useRouter, useRoute } from "vue-router";
 import { onMounted, onBeforeMount, ref, reactive } from "vue";
 
+const movieNameEn = ref("");
+const movieNameKa = ref("");
+const directorEn = ref("");
+const directorKa = ref("");
+const descriptionEn = ref("");
+const descriptionKa = ref("");
+
 const router = useRouter();
 const route = useRoute();
 
@@ -212,9 +236,9 @@ const genres = reactive({});
 const chooseGenres = ref(false);
 const selectedGenres = ref([]);
 const data = reactive({
-  movie: {},
   genres: {},
 });
+const movie = ref({});
 
 const user = ref({});
 
@@ -240,15 +264,15 @@ const deleteGenre = (genre) => {
 const onSubmit = async (values) => {
   try {
     const formData = new FormData();
-    formData.append("movie_name_en", values.movie_name_en);
-    formData.append("movie_name_ka", values.movie_name_ka);
-    formData.append("director_name_en", values.director_name_en);
-    formData.append("director_name_ka", values.director_name_ka);
+    formData.append("movie_name_en", movieNameEn.value);
+    formData.append("movie_name_ka", movieNameKa.value);
+    formData.append("director_name_en", directorEn.value);
+    formData.append("director_name_ka", directorKa.value);
     formData.append("genre", JSON.stringify(reactiveSelectedGenres.values));
     formData.append("year", values.year);
     formData.append("budget", values.budget);
-    formData.append("movie_description_en", values.movie_description_en);
-    formData.append("movie_description_ka", values.movie_description_ka);
+    formData.append("movie_description_en", descriptionEn.value);
+    formData.append("movie_description_ka", descriptionKa.value);
     formData.append("movie_picture", values.movie_picture);
     formData.append("_method", "PATCH");
 
@@ -267,7 +291,8 @@ const onSubmit = async (values) => {
     console.log(err);
   }
 };
-onBeforeMount(() => {
+
+onMounted(() => {
   axiosInstance
     .get(`/genres`)
     .then((response) => {
@@ -279,14 +304,21 @@ onBeforeMount(() => {
     });
 });
 
-onMounted(() => {
+onBeforeMount(() => {
   axiosInstance
-    .get(`/movie-description/${route.params.id}`)
+    .get(`/movie/${route.params.id}`)
     .then((response) => {
-      data.movie = response.data.movie;
-      data.genres = JSON.parse(data.movie.genre);
+      movie.value = response.data.movie;
+      data.genres = JSON.parse(response.data.movie.genre);
       user.value = response.data.user;
       reactiveSelectedGenres.values = data.genres;
+      movieNameEn.value = movie.value.title.en;
+      movieNameKa.value = movie.value.title.ka;
+      directorEn.value = movie.value.director.en;
+      directorKa.value = movie.value.director.ka;
+      descriptionEn.value = movie.value.description.en;
+      descriptionKa.value = movie.value.description.ka;
+      console.log(response);
     })
     .catch((err) => {
       console.log(err);

@@ -1,14 +1,17 @@
 <template>
   <popup-layout>
-    <div class="text-center text-3xl text-white">Forgot password&#63;</div>
+    <div class="text-center text-3xl text-white">
+      {{ $t("landing.forgot_password") }}&#63;
+    </div>
     <div class="font-base text-center text-[#6C757D]">
-      Enter the email and we&#39;ll send an email with instructions to reset
-      your password
+      {{ $t("landing.Enter_the_email_and_we") }}
     </div>
     <ValidationForm class="mt-8" @submit="onSubmit">
       <div class="mx-auto max-w-lg">
         <div class="py-1">
-          <span class="px-1 text-sm text-white">Email</span>
+          <span class="px-1 text-sm text-white">
+            {{ $t("landing.email") }}
+          </span>
           <Field
             placeholder=""
             type="email"
@@ -29,7 +32,7 @@
         <button
           class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
-          Send instructions
+          {{ $t("landing.send_instructions") }}
         </button>
       </div>
     </ValidationForm>
@@ -38,7 +41,7 @@
       <a href="#" class="flex justify-center font-normal"
         ><IconReturn class="my-auto mr-3" />
         <router-link :to="{ name: 'login' }" class="text-[#6C757D]">
-          Back to log in
+          {{ $t("landing.back_to_log_in") }}
         </router-link>
       </a>
     </div>

@@ -153,7 +153,7 @@ const onSubmit = async (values) => {
     formData.append("quote_en", values.quote_en);
     formData.append("quote_ka", values.quote_ka);
     formData.append("quote_picture", values.quote_picture);
-    formData.append("movie_title", data.movie.title);
+    formData.append("movie_id", data.movie.id);
     formData.append("user_id", user.value.id);
     console.log(formData);
     const response = await axiosInstance.post(`/quote`, formData, {

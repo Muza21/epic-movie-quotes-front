@@ -1,13 +1,17 @@
 <template>
   <popup-layout>
-    <div class="text-center text-3xl text-white">Log in to your account</div>
+    <div class="text-center text-3xl text-white">
+      {{ $t("landing.log_in_to_your_account") }}
+    </div>
     <div class="font-base text-center text-[#6C757D]">
-      Welcome back&#33; Please eneter your details&#33;
+      {{ $t("landing.welcome_back_please_eneter_your_details") }}
     </div>
     <ValidationForm @submit="onSubmit" class="mt-8">
       <div class="mx-auto max-w-lg">
         <div class="py-1">
-          <span class="px-1 text-sm text-white">Username&#47;Email</span>
+          <span class="px-1 text-sm text-white">
+            {{ $t("landing.username") }}&#47;{{ $t("landing.email") }}
+          </span>
           <Field
             placeholder=""
             type="username"
@@ -26,7 +30,9 @@
           </div>
         </div>
         <div class="py-1">
-          <span class="px-1 text-sm text-white">Password</span>
+          <span class="px-1 text-sm text-white">
+            {{ $t("landing.password") }}
+          </span>
           <Field
             placeholder=""
             type="password"
@@ -50,34 +56,36 @@
               :value="rememberMe"
             />
             <span class="ml-2 py-2 text-left text-sm text-white">
-              Remember me
+              {{ $t("landing.remember_me") }}
             </span>
           </label>
           <router-link
             :to="{ name: 'forgot-password' }"
             class="flex items-center text-[#0D6EFD] underline"
           >
-            Forgot password
+            {{ $t("landing.forgot_password") }}
           </router-link>
         </div>
         <button
           class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
-          Sign in
+          {{ $t("landing.sign_in") }}
         </button>
       </div>
     </ValidationForm>
 
-    <GoogleLogin>Sign in with Google</GoogleLogin>
+    <GoogleLogin>
+      {{ $t("landing.sign_in_with_google") }}
+    </GoogleLogin>
 
     <div class="flex justify-center py-6 text-sm font-semibold">
       <div class="font-normal text-[#6C757D] hover:border-teal-500">
-        Do not have an account?
+        {{ $t("landing.do_not_have_an_account") }}
         <router-link
           :to="{ name: 'signup' }"
           class="font-semibold text-[#0D6EFD] underline"
         >
-          SignUp
+          {{ $t("landing.signup") }}
         </router-link>
       </div>
     </div>

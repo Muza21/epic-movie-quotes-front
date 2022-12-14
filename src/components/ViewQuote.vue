@@ -23,7 +23,7 @@
                 </div>
               </div>
               <div class="mx-14 my-6 text-center text-3xl text-white">
-                View quote
+                {{ $t("moviedescription.view_quote") }}
               </div>
               <div @click="routerGoBack" class="cursor-pointer p-1">
                 <IconCross />
@@ -43,12 +43,12 @@
             <div
               class="mx-8 mb-4 border-2 border-[#6C757D] p-6 text-xl text-white lg:text-2xl"
             >
-              {{ quote?.quote }}
+              {{ quote?.quote?.en }}
             </div>
             <div
               class="mx-8 mb-4 border-2 border-[#6C757D] p-6 text-xl text-white lg:text-2xl"
             >
-              {{ quote?.quote }}
+              {{ quote?.quote?.ka }}
             </div>
 
             <div class="p-6 leading-loose text-white">
@@ -60,30 +60,30 @@
               <IconComment />
               <p class="mx-2">{{ likesCount }}</p>
               <div
-                @click="likeQuote(quote.id)"
+                @click="likeQuote(quote?.id)"
                 class="-mt-1 cursor-pointer p-1"
               >
                 <IconHeart />
               </div>
             </div>
             <div class="max-h-60 overflow-auto">
-              <div v-for="comment in quote.comments" :key="comment">
+              <div v-for="comment in quote?.comments" :key="comment">
                 <div class="flex p-6 text-white antialiased">
                   <img
                     class="mr-2 mt-1 h-12 w-12 rounded-full"
-                    :src="comment.user.thumbnail"
+                    :src="comment?.user?.thumbnail"
                   />
                   <div>
                     <div class="] px-4 pt-2 pb-2.5">
                       <div
                         class="text-sm font-semibold leading-relaxed text-white"
                       >
-                        {{ comment.user.username }}
+                        {{ comment?.user?.username }}
                       </div>
                       <div
                         class="text-normal border-b-2 border-[#EFEFEF] pb-6 leading-snug md:leading-normal"
                       >
-                        {{ comment.body }}
+                        {{ comment?.body }}
                       </div>
                     </div>
                   </div>
@@ -93,7 +93,7 @@
             <div class="flex p-6 text-white antialiased">
               <img
                 class="mr-2 mt-1 h-12 w-12 rounded-full"
-                :src="currentUser.thumbnail"
+                :src="currentUser?.thumbnail"
               />
               <div class="w-full">
                 <div class="px-4 pt-2 pb-2.5">
@@ -103,7 +103,7 @@
                     name="comment"
                     v-model="writtenComment"
                     @keyup.enter="postComment"
-                    placeholder="Write a comment"
+                    :placeholder="$t('newsfeed.write_a_comment')"
                   />
                 </div>
               </div>
