@@ -79,7 +79,8 @@
               <h3 class="border-r border-[#6C757D] pr-4 text-lg text-white">
                 {{ $t("moviedescription.quotes") }} &#40;{{
                   $t("movielist.total")
-                }}{{ data?.movies?.length }}&#41;
+                }}
+                {{ data?.quotes?.length }}&#41;
               </h3>
 
               <router-link
@@ -149,15 +150,39 @@ import IconThreedots from "@/components/icons/IconThreedots.vue";
 import QuoteCrud from "@/components/QuoteCrud.vue";
 import axiosInstance from "@/config/axios/index.js";
 
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { useMovieStore } from "@/stores/movie";
+import { useQuoteStore } from "@/stores/quote";
+import { useUpdateQuoteStore } from "@/stores/quote";
+import { useDeleteQuoteStore } from "@/stores/quote";
 
 const route = useRoute();
 const router = useRouter();
-
+const movieData = useMovieStore();
+const quoteData = useQuoteStore();
+const quoteUpdateData = useUpdateQuoteStore();
+const quoteDeleteData = useDeleteQuoteStore();
 const crudPanel = ref("");
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
+
+watch(() => {
+  if (movieData.movie) {
+    return (data.movie = movieData.movie);
+  }
+  if (quoteData.quote) {
+    return data.quotes.push(quoteData.quote);
+  }
+  if (quoteUpdateData.quote) {
+    let res = data.quotes.find((x) => x.id == quoteUpdateData.quote.id);
+    let index = data.quotes.indexOf(res);
+    return (data.quotes[index] = quoteUpdateData.quote);
+  }
+  if (quoteDeleteData.quote) {
+    return data.quotes.splice(data.quotes.indexOf(quoteDeleteData.quote), 1);
+  }
+});
 
 const data = reactive({
   movie: {},

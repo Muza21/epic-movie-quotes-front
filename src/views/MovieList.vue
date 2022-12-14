@@ -9,7 +9,8 @@
             <h2 class="text-xl text-white">
               {{ $t("movielist.my_list_of_movies") }} &#40;{{
                 $t("movielist.total")
-              }}{{ data?.movies?.length }}&#41;
+              }}
+              {{ data?.movies?.length }}&#41;
             </h2>
             <div class="flex items-center">
               <div class="relative mr-14">
@@ -66,7 +67,7 @@
         </div>
       </div>
     </div>
-    <v-modal :open="open" @close="open = false">
+    <v-modal>
       <router-view />
     </v-modal>
   </div>
@@ -78,13 +79,21 @@ import SideBar from "@/components/layouts/SideBar.vue";
 import IconChat from "@/components/icons/IconChat.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
 
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import axiosInstance from "@/config/axios/index.js";
 
 import { reactive } from "vue";
 
-const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
+import { useMovieStore } from "@/stores/movie";
 
+const movieData = useMovieStore();
+
+const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
+watch(() => {
+  if (movieData.movie) {
+    return data.movies.push(movieData.movie);
+  }
+});
 const searchValue = ref("");
 const data = reactive({
   movies: {},
@@ -108,9 +117,9 @@ onMounted(() => {
   axiosInstance
     .get(`/movie`)
     .then((response) => {
-      console.log(response);
       data.movies = response.data.movies;
-      console.log(data.movies);
+      console.log(response);
+      console.log(movieData.movie);
     })
     .catch((err) => {
       console.log(err);

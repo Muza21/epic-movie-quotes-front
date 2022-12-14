@@ -5,7 +5,7 @@
         <div class="divide-y divide-gray-700">
           <ul class="space-y-1 pt-2 pb-4 text-sm">
             <li class="flex dark:bg-gray-800 dark:text-gray-50">
-              <div class="h-12 w-12 overflow-hidden rounded-full bg-red-400">
+              <div class="h-12 w-12 overflow-hidden rounded-full bg-gray-400">
                 <img alt="..." :src="user?.thumbnail" />
               </div>
               <div class="ml-4">

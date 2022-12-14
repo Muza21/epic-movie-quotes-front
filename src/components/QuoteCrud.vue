@@ -47,6 +47,10 @@ import IconEyes from "@/components/icons/IconEyes.vue";
 import IconPencil from "@/components/icons/IconPencil.vue";
 import IconTrash from "@/components/icons/IconTrash.vue";
 import axiosInstance from "@/config/axios/index.js";
+import { useDeleteQuoteStore } from "@/stores/quote";
+
+const quoteDeleteData = useDeleteQuoteStore();
+
 const props = defineProps({
   myParam: {},
 });
@@ -59,6 +63,7 @@ const handleClose = () => {
 const deleteQuote = async () => {
   try {
     const response = await axiosInstance.post(`/quote/${props.myParam}`);
+    quoteDeleteData.quote = response.data;
     console.log(response);
   } catch (err) {
     console.log(err);

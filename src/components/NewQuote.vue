@@ -140,8 +140,10 @@ import { Form as ValidationForm, Field, ErrorMessage } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { useQuoteStore } from "@/stores/quote";
 
 const router = useRouter();
+const quoteData = useQuoteStore();
 const chooseMovie = ref(false);
 const selectedMovie = ref("");
 const movieId = ref();
@@ -180,6 +182,7 @@ const onSubmit = async (values) => {
         "Content-Type": "multipart/form-data;",
       },
     });
+    quoteData.quote = response.data;
     router.push({ name: "newsfeed" });
     console.log(response);
   } catch (err) {

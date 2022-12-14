@@ -113,11 +113,13 @@ import { Form as ValidationForm, Field } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
 import { useRoute, useRouter } from "vue-router";
 import { onBeforeMount, onMounted, reactive, ref } from "vue";
+import { useUpdateQuoteStore } from "@/stores/quote";
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
 
 const router = useRouter();
 const route = useRoute();
+const quoteUpdateData = useUpdateQuoteStore();
 
 const quoteEn = ref("");
 const quoteKa = ref("");
@@ -175,6 +177,7 @@ const onSubmit = async (values) => {
         },
       }
     );
+    quoteUpdateData.quote = response.data;
     router.push({
       name: "movie-description",
       params: { id: data.quote.movie_id },

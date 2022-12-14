@@ -153,18 +153,26 @@ import IconNewquote from "@/components/icons/IconNewquote.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
 import { Form as ValidationForm, Field } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
-import { reactive, onMounted, onBeforeMount, ref } from "vue";
+import { reactive, onMounted, onBeforeMount, ref, watch } from "vue";
 import { useRoute } from "vue-router";
+import { useQuoteStore } from "@/stores/quote";
 
 const route = useRoute();
 const quotes = reactive({});
 const searchValue = ref("");
+const quoteData = useQuoteStore();
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
 
 const user = ref({});
 const commentQuoteId = ref("");
 const quoteIndex = ref();
+
+watch(() => {
+  if (quoteData.quote) {
+    return quotes.values.push(quoteData.quote);
+  }
+});
 
 function postComment(id, index) {
   commentQuoteId.value = id;

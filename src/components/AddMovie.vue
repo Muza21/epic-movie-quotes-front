@@ -216,8 +216,11 @@ import { Form as ValidationForm, Field, ErrorMessage } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
 import { useRouter } from "vue-router";
 import { onMounted, ref, reactive } from "vue";
+import { useMovieStore } from "@/stores/movie";
 
 const router = useRouter();
+
+const movieData = useMovieStore();
 
 const genres = reactive({});
 const chooseGenres = ref(false);
@@ -264,6 +267,8 @@ const onSubmit = async (values) => {
     });
     router.push({ name: "movielist" });
     console.log(response);
+    movieData.movie = response.data;
+    console.log(useMovieStore);
   } catch (err) {
     console.log(err);
   }

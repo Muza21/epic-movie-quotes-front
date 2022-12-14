@@ -221,6 +221,7 @@ import { Form as ValidationForm, Field, ErrorMessage } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
 import { useRouter, useRoute } from "vue-router";
 import { onMounted, onBeforeMount, ref, reactive } from "vue";
+import { useMovieStore } from "@/stores/movie";
 
 const movieNameEn = ref("");
 const movieNameKa = ref("");
@@ -228,6 +229,8 @@ const directorEn = ref("");
 const directorKa = ref("");
 const descriptionEn = ref("");
 const descriptionKa = ref("");
+
+const movieData = useMovieStore();
 
 const router = useRouter();
 const route = useRoute();
@@ -286,6 +289,7 @@ const onSubmit = async (values) => {
       }
     );
     router.push({ name: "movie-description", params: { id: route.params.id } });
+    movieData.movie = response.data;
     console.log(response);
   } catch (err) {
     console.log(err);

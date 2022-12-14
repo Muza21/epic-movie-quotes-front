@@ -127,7 +127,9 @@ import { onMounted, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axiosInstance from "@/config/axios/index.js";
 import { onBeforeMount, ref } from "vue";
+import { useQuoteStore } from "@/stores/quote";
 
+const quoteData = useQuoteStore();
 const user = ref([]);
 
 onBeforeMount(() => {
@@ -166,6 +168,7 @@ const onSubmit = async (values) => {
         "Content-Type": "multipart/form-data;",
       },
     });
+    quoteData.quote = response.data;
     router.push({ name: "movie-description", params: { id: data.movie.id } });
     console.log(response);
   } catch (err) {
