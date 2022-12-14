@@ -4,9 +4,13 @@
       <div class="flex w-full items-center justify-between px-10">
         <div @click="deleteQuote()" class="item-center flex cursor-pointer">
           <IconTrash />
-          <p class="ml-2 text-[#CED4DA]">Delete</p>
+          <p class="ml-2 text-[#CED4DA]">
+            {{ $t("moviedescription.delete") }}
+          </p>
         </div>
-        <div class="mx-14 my-6 text-center text-3xl text-white">Edit quote</div>
+        <div class="mx-14 my-6 text-center text-3xl text-white">
+          {{ $t("moviedescription.edit_quote") }}
+        </div>
 
         <div @click="routerGoBack" class="cursor-pointer p-1">
           <IconCross />
@@ -74,7 +78,7 @@
           <label
             for="quote_picture"
             refs="quote_picture"
-            class="absolute top-1/2 left-1/2 h-28 w-32 -translate-x-1/2 -translate-y-1/2"
+            class="absolute top-1/2 left-1/2 h-28 w-32 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
           >
             <div
               class="block h-28 w-32 rounded-xl bg-black opacity-70 shadow-xl"
@@ -83,7 +87,9 @@
               class="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center"
             >
               <IconPhoto />
-              <p class="w-32 text-center text-white">Change photo</p>
+              <p class="w-32 text-center text-white">
+                {{ $t("moviedescription.change_photo") }}
+              </p>
             </div>
           </label>
         </div>
@@ -91,7 +97,7 @@
         <button
           class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
         >
-          Save Changes
+          {{ $t("moviedescription.save_changes") }}
         </button>
       </div>
     </ValidationForm>

@@ -39,7 +39,7 @@
             </q>
 
             <p class="mt-2 text-lg text-[#D9D9D9] md:mt-6 md:text-3xl">
-              {{ $t("landing.interstellar") }}
+              {{ $t("landing.interstellar") }}, 2014
             </p>
           </div>
         </div>
@@ -66,7 +66,7 @@
             </q>
 
             <p class="mt-2 text-lg text-[#D9D9D9] md:mt-6 md:text-3xl">
-              {{ $t("landing.the_royal_tenenbaums") }},2001
+              {{ $t("landing.the_royal_tenenbaums") }}, 2001
             </p>
           </div>
         </div>
@@ -91,7 +91,7 @@
             </q>
 
             <p class="m-2 text-lg text-[#D9D9D9] md:mt-6 md:text-3xl">
-              {{ $t("landing.the_lord_of_the_rings") }},2003
+              {{ $t("landing.the_lord_of_the_rings") }}, 2003
             </p>
           </div>
         </div>

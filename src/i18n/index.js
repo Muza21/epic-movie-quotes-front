@@ -8,8 +8,9 @@ const messages = {
 };
 
 const i18n = createI18n({
+  // locale: "ka",
   locale: window.localStorage.getItem("selectedLocale") || "en",
-  fallbackLocale: window.localStorage.getItem("selectedLocale") || "en",
+  fallbackLocale: "ka",
   messages,
 });
 
