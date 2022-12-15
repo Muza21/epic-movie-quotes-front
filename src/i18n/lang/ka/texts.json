@@ -1,0 +1,13 @@
+{
+  "the_selected_username_is_invalid": "მონაცემები შეყვანილია არასწორად",
+  "the_provided_email_is_invalid": "შეყვანილი ელ-ფოსტით ანგარიში ვერ მოიძებნა",
+  "enter_your_email": "შეიყვანეთ თქვენი ელ-ფოსტა",
+  "enter_new_email": "შეიყვანეთ ახალი ელ-ფოსტა",
+  "password": "პაროლი",
+  "confirm_password": "პაროლის დადასტურება",
+  "notifications": "შეტყობინებები",
+  "mark_as_all_read": "მონიშნე ყველა წაკითხულად",
+  "commented_to_your_movie_quotes": "დააკომენტარა თქვენი ფილმის ციტატებზე",
+  "reacted_to_your_quote": "გამოხატა რეაქცია თქვენს ციტატებზე",
+  "new": "ახალი"
+}

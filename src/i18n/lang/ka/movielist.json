@@ -1,0 +1,13 @@
+{
+  "my_list_of_movies": "დამატებული ფილმები",
+  "total": "ჯამში",
+  "edit_your_profile": "შეცვალე შენი მონაცემები",
+  "search": "ძებნა",
+  "add_movie": "ფილმის დამატება",
+
+  "genre": "ჟანრი",
+  "genre_field_is_required": "ჟანრის არჩევა აუცილებელია",
+  "year": "წელი",
+  "budget": "ბიუჯეტი",
+  "director": "დირექტორი"
+}

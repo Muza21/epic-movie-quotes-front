@@ -1,18 +1,22 @@
 <template>
   <form-layout>
     <template v-slot:header>
-      <div class="text-center text-3xl text-white mx-14 my-6">Add movie</div>
+      <div class="mx-14 my-6 text-center text-3xl text-white">
+        {{ $t("movielist.add_movie") }}
+      </div>
     </template>
     <ValidationForm class="mt-8" @submit="onSubmit">
       <div class="mx-auto px-4">
         <div class="my-10 rounded-xl bg-[#11101A]">
-          <div class="flex items-center mb-6 rounded-md">
+          <div class="mb-6 flex items-center rounded-md">
             <img
-              class="rounded-full w-12 h-12 mr-2 mt-1"
-              src="/src/assets/ProfilePic.jpg"
+              class="mr-2 mt-1 h-12 w-12 rounded-full"
+              :src="user?.thumbnail"
             />
             <div>
-              <h2 class="text-lg font-semibold text-white">Nino Tabagari</h2>
+              <h2 class="text-lg font-semibold text-white">
+                {{ user?.username }}
+              </h2>
             </div>
           </div>
         </div>
@@ -20,8 +24,8 @@
           <Field
             placeholder="Movie name"
             name="movie_name_en"
-            rules="required|alpha"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            rules="required|english_text"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="movie_name_en" />
@@ -31,8 +35,8 @@
           <Field
             placeholder="ფილმის სახელი"
             name="movie_name_ka"
-            rules="required"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            rules="required|georgian_text"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="movie_name_ka" />
@@ -41,35 +45,44 @@
         <div class="py-1">
           <div
             @click="toggleGenres"
-            class="p-2 flex items-center w-full border-2 h-14 border-[#6C757D]"
+            class="flex h-14 w-full items-center border-2 border-[#6C757D] p-2"
           ></div>
-          <div class="mx-3 flex-1 absolute -mt-[51px]">
+          <div class="absolute mx-3 -mt-[51px] flex-1">
             <div class="flex items-center">
-              <div v-for="genre in reactiveSelectedGenres.values" :key="genre">
-                <div class="p-2 ml-2 bg-[#6C757D] text-white flex items-center">
-                  {{ genre }}
+              <div
+                v-if="!reactiveSelectedGenres?.values?.length"
+                class="py-2 text-lg text-white"
+              >
+                {{ $t("movielist.genre") }}
+              </div>
 
-                  <div @click="deleteGenre(genre)" class="p-2 cursor-pointer">
-                    <IconCross class="w-3 h-3" />
+              <div v-for="genre in reactiveSelectedGenres?.values" :key="genre">
+                <div class="ml-2 flex items-center bg-[#6C757D] p-2 text-white">
+                  {{ genre?.[$i18n.locale] }}
+
+                  <div @click="deleteGenre(genre)" class="cursor-pointer p-2">
+                    <IconCross class="h-3 w-3" />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
+          <div v-if="genreNotSelected" class="ml-4 text-orange-600">
+            {{ $t("movielist.genre_field_is_required") }}
+          </div>
           <div>
             <div
               v-if="chooseGenres"
-              class="absolute w-60 rounded-lg bg-[#11101A] mt-2 h-96 overflow-y-auto border-2 border-gray-500"
+              class="absolute mt-2 h-96 w-60 overflow-y-auto rounded-lg border-2 border-gray-500 bg-[#11101A]"
             >
-              <div v-for="genre in genres.values" :key="genre">
+              <div v-for="genre in genres?.values" :key="genre">
                 <div class="py-1 hover:bg-gray-500">
                   <Field
-                    @click="selectGenre"
-                    class="p-3 rounded-md w-60 text-white bg-[#11101A] cursor-pointer outline-none"
+                    @click="selectGenre(genre?.name)"
+                    class="w-60 cursor-pointer rounded-md bg-[#11101A] p-3 text-white outline-none"
                     type="text"
-                    :name="genre.name"
-                    :value="genre.name"
+                    :name="genre?.name?.[$i18n.locale]"
+                    :value="genre?.name?.[$i18n.locale]"
                     readonly
                   />
                 </div>
@@ -81,8 +94,8 @@
           <Field
             placeholder="Director"
             name="director_name_en"
-            rules="required|alpha"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            rules="required|english_text"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage
@@ -95,8 +108,8 @@
           <Field
             placeholder="რეჟისორი"
             name="director_name_ka"
-            rules="required"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            rules="required|georgian_text"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage
@@ -107,10 +120,10 @@
         </div>
         <div class="py-1">
           <Field
-            placeholder="Year"
+            :placeholder="$t('movielist.year')"
             name="year"
             rules="required|integer"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="year" />
@@ -118,10 +131,10 @@
         </div>
         <div class="py-1">
           <Field
-            placeholder="Budget"
+            :placeholder="$t('movielist.budget')"
             name="budget"
             rules="required|integer"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="budget" />
@@ -132,8 +145,8 @@
             as="textarea"
             placeholder="Movie description"
             name="movie_description_en"
-            rules="required"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            rules="required|english_text"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage
@@ -147,8 +160,8 @@
             as="textarea"
             placeholder="ფილმის აღწერა"
             name="movie_description_ka"
-            rules="required"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            rules="required|georgian_text"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
             <ErrorMessage
@@ -157,29 +170,38 @@
             />
           </div>
         </div>
-        <div class="py-1">
-          <div class="p-2 flex items-center w-full border-2 border-[#6C757D]">
+        <div class="py-1" @dragover.prevent @drop.prevent>
+          <div
+            @drop="drag"
+            class="flex w-full items-center border-2 border-[#6C757D] p-2"
+          >
             <IconPhoto />
             <div class="mx-3 flex-1">
               <div class="flex items-center">
                 <h2 class="text-xl font-semibold text-white">
-                  Drag and drop your image here or
+                  {{ $t("newsfeed.drag_or_drop_your_image_here_or") }}
                 </h2>
                 <Field
                   type="file"
                   id="movie_picture"
                   name="movie_picture"
+                  v-model="imageFile"
                   class="hidden"
                   accept="image/jpeg, image/png"
                   rules="required"
+                  @change="onImageChange"
                 />
                 <label
                   for="movie_picture"
                   refs="movie_picture"
-                  class="p-2 ml-2 bg-[#9747FF] rounded-lg text-white cursor-pointer"
-                  >Choose a file</label
+                  class="ml-2 cursor-pointer rounded-lg bg-[#9747FF] p-2 text-white"
                 >
+                  {{ $t("newsfeed.choose_file") }}
+                </label>
               </div>
+            </div>
+            <div v-if="url" class="float-right">
+              <img :src="url" class="h-24 w-24" alt="photo uploaded" />
             </div>
           </div>
         </div>
@@ -187,9 +209,9 @@
           <ErrorMessage class="ml-4 text-orange-600" name="movie_picture" />
         </div>
         <button
-          class="mt-3 text-lg font-semibold bg-[#E31221] w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-[#CC0E10] hover:text-white"
         >
-          Add movie
+          {{ $t("movielist.add_movie") }}
         </button>
       </div>
     </ValidationForm>
@@ -204,22 +226,39 @@ import { Form as ValidationForm, Field, ErrorMessage } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
 import { useRouter } from "vue-router";
 import { onMounted, ref, reactive } from "vue";
+import { useMovieStore } from "@/stores/movie";
+
+const url = ref("");
+const imageFile = ref();
+const onImageChange = (e) => {
+  url.value = URL.createObjectURL(e.target.files[0]);
+  console.log(url.value);
+};
+
+function drag(file) {
+  url.value = URL.createObjectURL(file.dataTransfer.files[0]);
+  imageFile.value = file.dataTransfer.files[0];
+  console.log(file.dataTransfer.files[0]);
+}
 
 const router = useRouter();
+
+const movieData = useMovieStore();
 
 const genres = reactive({});
 const chooseGenres = ref(false);
 const selectedGenres = ref([]);
-
+const user = ref({});
+const genreNotSelected = ref(false);
 const reactiveSelectedGenres = reactive({});
 
 const toggleGenres = () => {
   chooseGenres.value = !chooseGenres.value;
 };
 
-const selectGenre = (e) => {
-  if (selectedGenres.value.indexOf(e.target.name) === -1) {
-    selectedGenres.value.push(e.target.name);
+const selectGenre = (genre) => {
+  if (selectedGenres.value.indexOf(genre) === -1) {
+    selectedGenres.value.push(genre);
   }
   chooseGenres.value = false;
   reactiveSelectedGenres.values = selectedGenres.value;
@@ -232,6 +271,9 @@ const deleteGenre = (genre) => {
 
 const onSubmit = async (values) => {
   try {
+    if (!selectedGenres.value.length) {
+      throw true;
+    }
     const formData = new FormData();
     formData.append("movie_name_en", values.movie_name_en);
     formData.append("movie_name_ka", values.movie_name_ka);
@@ -242,7 +284,7 @@ const onSubmit = async (values) => {
     formData.append("budget", values.budget);
     formData.append("movie_description_en", values.movie_description_en);
     formData.append("movie_description_ka", values.movie_description_ka);
-    formData.append("movie_picture", values.movie_picture);
+    formData.append("movie_picture", imageFile.value);
 
     const response = await axiosInstance.post(`/movie`, formData, {
       headers: {
@@ -251,7 +293,10 @@ const onSubmit = async (values) => {
     });
     router.push({ name: "movielist" });
     console.log(response);
+    movieData.movie = response.data;
+    console.log(useMovieStore);
   } catch (err) {
+    genreNotSelected.value = true;
     console.log(err);
   }
 };
@@ -261,6 +306,7 @@ onMounted(() => {
     .get(`/genres`)
     .then((response) => {
       genres.values = response.data.genres;
+      user.value = response.data.user;
       console.log(response);
     })
     .catch((err) => {

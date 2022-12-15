@@ -3,35 +3,35 @@
     <NavigationBar />
     <div class="flex flex-col justify-between">
       <div class="flex">
-        <div class="flex flex-col h-screen overflow-y-auto">
+        <div class="flex h-screen flex-col overflow-y-auto">
           <div class="flex flex-col justify-between">
             <SideBar />
           </div>
         </div>
         <div class="w-full">
           <article
-            class="max-w-4xl my-10 rounded-xl md:w-[1000px] bg-[#11101A] mx-auto"
+            class="my-10 mx-auto max-w-4xl rounded-xl bg-[#11101A] md:w-[1000px]"
           >
-            <div class="flex items-center w-full justify-between px-10">
-              <div class="flex py-4 rounded-lg">
-                <div @click="routerToEdit" class="mr-5 p-1 cursor-pointer">
+            <div class="flex w-full items-center justify-between px-10">
+              <div class="flex rounded-lg py-4">
+                <div @click="routerToEdit" class="mr-5 cursor-pointer p-1">
                   <IconPencil />
                 </div>
                 <div class="border-r border-[#6C757D]"></div>
-                <div @click="deleteQuote" class="p-1 ml-5 cursor-pointer">
+                <div @click="deleteQuote" class="ml-5 cursor-pointer p-1">
                   <IconTrash />
                 </div>
               </div>
-              <div class="text-center text-3xl text-white mx-14 my-6">
-                View quote
+              <div class="mx-14 my-6 text-center text-3xl text-white">
+                {{ $t("moviedescription.view_quote") }}
               </div>
-              <div @click="routerGoBack" class="p-1 cursor-pointer">
+              <div @click="routerGoBack" class="cursor-pointer p-1">
                 <IconCross />
               </div>
             </div>
-            <div class="flex items-center mb-6 p-6 rounded-md">
+            <div class="mb-6 flex items-center rounded-md p-6">
               <img
-                class="rounded-full w-12 h-12 mr-2 mt-1"
+                class="mr-2 mt-1 h-12 w-12 rounded-full"
                 :src="user?.thumbnail"
               />
               <div class="ml-4">
@@ -41,69 +41,69 @@
               </div>
             </div>
             <div
-              class="text-white border-2 border-[#6C757D] text-xl p-6 lg:text-2xl mb-4 mx-8"
+              class="mx-8 mb-4 border-2 border-[#6C757D] p-6 text-xl text-white lg:text-2xl"
             >
-              {{ quote?.quote }}
+              {{ quote?.quote?.en }}
             </div>
             <div
-              class="text-white border-2 border-[#6C757D] text-xl p-6 lg:text-2xl mb-4 mx-8"
+              class="mx-8 mb-4 border-2 border-[#6C757D] p-6 text-xl text-white lg:text-2xl"
             >
-              {{ quote?.quote }}
+              {{ quote?.quote?.ka }}
             </div>
 
-            <div class="text-white p-6 leading-loose">
+            <div class="p-6 leading-loose text-white">
               <img :src="link + quote?.thumbnail" alt="post image" />
             </div>
 
-            <div class="flex text-xl p-6 text-white">
+            <div class="flex p-6 text-xl text-white">
               <p class="mx-2">{{ commentsCount }}</p>
               <IconComment />
               <p class="mx-2">{{ likesCount }}</p>
               <div
-                @click="likeQuote(quote.id)"
-                class="p-1 cursor-pointer -mt-1"
+                @click="likeQuote(quote?.id)"
+                class="-mt-1 cursor-pointer p-1"
               >
                 <IconHeart />
               </div>
             </div>
             <div class="max-h-60 overflow-auto">
-              <div v-for="comment in quote.comments" :key="comment">
-                <div class="text-white p-6 antialiased flex">
+              <div v-for="comment in quote?.comments" :key="comment">
+                <div class="flex p-6 text-white antialiased">
                   <img
-                    class="rounded-full w-12 h-12 mr-2 mt-1"
-                    :src="comment.user.thumbnail"
+                    class="mr-2 mt-1 h-12 w-12 rounded-full"
+                    :src="comment?.user?.thumbnail"
                   />
                   <div>
-                    <div class="px-4 pt-2 pb-2.5 ]">
+                    <div class="] px-4 pt-2 pb-2.5">
                       <div
-                        class="font-semibold text-white text-sm leading-relaxed"
+                        class="text-sm font-semibold leading-relaxed text-white"
                       >
-                        {{ comment.user.username }}
+                        {{ comment?.user?.username }}
                       </div>
                       <div
-                        class="text-normal leading-snug md:leading-normal pb-6 border-b-2 border-[#EFEFEF]"
+                        class="text-normal border-b-2 border-[#EFEFEF] pb-6 leading-snug md:leading-normal"
                       >
-                        {{ comment.body }}
+                        {{ comment?.body }}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="text-white p-6 antialiased flex">
+            <div class="flex p-6 text-white antialiased">
               <img
-                class="rounded-full w-12 h-12 mr-2 mt-1"
-                :src="currentUser.thumbnail"
+                class="mr-2 mt-1 h-12 w-12 rounded-full"
+                :src="currentUser?.thumbnail"
               />
               <div class="w-full">
                 <div class="px-4 pt-2 pb-2.5">
                   <input
-                    class="bg-[#24222F] rounded-md w-full p-4"
+                    class="w-full rounded-md bg-[#24222F] p-4"
                     type="text"
                     name="comment"
                     v-model="writtenComment"
                     @keyup.enter="postComment"
-                    placeholder="Write a comment"
+                    :placeholder="$t('newsfeed.write_a_comment')"
                   />
                 </div>
               </div>

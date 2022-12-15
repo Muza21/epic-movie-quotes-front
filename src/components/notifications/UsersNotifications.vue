@@ -1,52 +1,60 @@
 <template>
-  <div class="w-full max-w-lg px-10 py-8 mx-auto">
-    <div class="w-[750px] mx-auto space-y-6">
+  <div class="mx-auto w-full max-w-lg px-10 py-8">
+    <div class="mx-auto w-[750px] space-y-6">
       <div class="dropdown-menu">
-        <div class="bg-black rounded-lg shadow-xl px-4 relative mt-8">
+        <div class="relative mt-8 rounded-lg bg-black px-4 shadow-xl">
           <IconTriangle class="absolute bottom-full right-60" />
-          <div class="flex justify-between text-white pt-8 pb-6">
-            <h2 class="text-xl">Notifications</h2>
-            <p class="border-b-2 border-white">mark as all read</p>
+          <div class="flex justify-between pt-8 pb-6 text-white">
+            <h2 class="text-xl">{{ $t("texts.notifications") }}</h2>
+            <p
+              @click="
+                markAllRead();
+                emit('updateNotification', undread);
+              "
+              class="cursor-pointer border-b-2 border-white p-1"
+            >
+              {{ $t("texts.mark_as_all_read") }}
+            </p>
           </div>
-          <div
-            class="p-3 mb-3 flex items-center w-full hover:bg-gray-800 border-2 border-[#6C757D]"
-          >
-            <img
-              class="w-20 h-20 object-cover rounded-full"
-              src="/src/assets/ProfilePic.jpg"
-            />
-            <div class="mx-3 flex-1">
-              <div class="flex justify-between">
-                <h2 class="text-xl font-semibold text-white">Hello john</h2>
-                <p class="text-[#D9D9D9]">5 min ago</p>
-              </div>
-              <div class="flex justify-between">
-                <h2 class="text-[#CED4DA] flex items-center">
-                  <IconChat class="w-5" />
-                  <p class="ml-3">Commented to your movie quotes</p>
-                </h2>
-                <p class="text-[#198754]">New</p>
-              </div>
-            </div>
-          </div>
-          <div
-            class="p-3 mb-3 flex items-center w-full hover:bg-gray-800 border-2 border-[#6C757D]"
-          >
-            <img
-              class="w-20 h-20 object-cover rounded-full"
-              src="/src/assets/ProfilePic.jpg"
-            />
-            <div class="mx-3 flex-1">
-              <div class="flex justify-between">
-                <h2 class="text-xl font-semibold text-white">Hello john</h2>
-                <p class="text-[#D9D9D9]">5 min ago</p>
-              </div>
-              <div class="flex justify-between">
-                <h2 class="text-[#CED4DA] flex items-center">
-                  <RedHeart class="w-5" />
-                  <p class="ml-3">Reacted to your quote</p>
-                </h2>
-                <p class="text-[#198754]">New</p>
+          <div class="max-h-96 overflow-auto">
+            <div v-for="notification in notifications" :key="notification">
+              <div
+                class="mb-3 flex w-full items-center border-2 border-[#6C757D] p-3 hover:bg-gray-800"
+              >
+                <img
+                  class="h-20 w-20 rounded-full object-cover"
+                  :src="notification?.sender?.thumbnail"
+                />
+                <div class="mx-3 flex-1">
+                  <div class="flex justify-between">
+                    <h2 class="text-xl font-semibold text-white">
+                      {{ notification?.sender?.username }}
+                    </h2>
+                    <p class="text-[#D9D9D9]">
+                      {{ notification?.created_at }}
+                    </p>
+                  </div>
+                  <div class="flex justify-between">
+                    <h2
+                      v-if="notification?.type == 'comment'"
+                      class="flex items-center text-[#CED4DA]"
+                    >
+                      <IconChat class="w-5" />
+                      <p class="ml-3">
+                        {{ $t("texts.commented_to_your_movie_quotes") }}
+                      </p>
+                    </h2>
+                    <h2 v-else class="flex items-center text-[#CED4DA]">
+                      <RedHeart class="w-5" />
+                      <p class="ml-3">
+                        {{ $t("texts.reacted_to_your_quote") }}
+                      </p>
+                    </h2>
+                    <p v-if="!notification?.seen" class="text-[#198754]">
+                      {{ $t("texts.new") }}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -61,4 +69,37 @@
 import IconTriangle from "@/components/icons/IconTriangle.vue";
 import IconChat from "@/components/icons/IconChat.vue";
 import RedHeart from "@/components/icons/RedHeart.vue";
+import { onMounted, ref } from "vue";
+import axiosInstance from "@/config/axios/index.js";
+
+const notifications = ref({});
+const undread = ref({});
+
+const emit = defineEmits("updateNotification");
+
+function markAllRead() {
+  axiosInstance
+    .post(`/notification`)
+    .then((response) => {
+      notifications.value = response.data.notifications;
+      undread.value = response.data.undreadNotifications;
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+onMounted(() => {
+  axiosInstance
+    .get(`/notification`)
+    .then((response) => {
+      notifications.value = response.data.notifications;
+      undread.value = response.data.undreadNotifications;
+      console.log(response.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 </script>

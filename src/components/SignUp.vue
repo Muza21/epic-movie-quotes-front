@@ -1,21 +1,25 @@
 <template>
   <popup-layout>
-    <div class="text-center text-3xl text-white">Create an account</div>
-    <div class="text-center font-base text-[#6C757D]">
-      Start Your journey&#33;
+    <div class="text-center text-3xl text-white">
+      {{ $t("landing.create_an_account") }}
+    </div>
+    <div class="font-base text-center text-[#6C757D]">
+      {{ $t("landing.start_your_journey") }}&#33;
     </div>
     <ValidationForm @submit="onSubmit" class="mt-8">
       <div class="mx-auto max-w-lg">
         <div class="py-1">
-          <span class="px-1 text-sm text-white">Username</span>
+          <span class="px-1 text-sm text-white">
+            {{ $t("landing.username") }}
+          </span>
           <span class="text-[#DC3545]">&#42;</span>
           <Field
-            placeholder=""
+            :placeholder="$t('texts.at_least_3')"
             type="text"
             name="username"
-            rules="required|min:3"
+            rules="required|min:3|max:15|lowercase"
             @focus="clearError"
-            class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:outline-none"
           />
           <div v-if="errorData.usernameError">
             <div class="ml-4 text-orange-600">
@@ -27,15 +31,17 @@
           </div>
         </div>
         <div class="py-1">
-          <span class="px-1 text-sm text-white">Email</span>
+          <span class="px-1 text-sm text-white">
+            {{ $t("landing.email") }}
+          </span>
           <span class="text-[#DC3545]">&#42;</span>
           <Field
-            placeholder=""
+            :placeholder="$t('texts.enter_your_email')"
             type="email"
             name="email"
             rules="required|email|min:3"
             @focus="clearError"
-            class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:outline-none"
           />
           <div v-if="errorData.emailError">
             <div class="ml-4 text-orange-600">{{ errorData.emailError }}</div>
@@ -45,28 +51,32 @@
           </div>
         </div>
         <div class="py-1">
-          <span class="px-1 text-sm text-white">Password</span>
+          <span class="px-1 text-sm text-white">
+            {{ $t("landing.password") }}
+          </span>
           <span class="text-[#DC3545]">&#42;</span>
           <Field
-            placeholder=""
+            :placeholder="$t('texts.at_least_8')"
             type="password"
             name="password"
-            rules="required"
-            class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+            rules="required|min:8|max:15|lowercase"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:outline-none"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="password" />
           </div>
         </div>
         <div class="py-1">
-          <span class="px-1 text-sm text-white">Password Confirm</span>
+          <span class="px-1 text-sm text-white">
+            {{ $t("landing.password_confirm") }}
+          </span>
           <span class="text-[#DC3545]">&#42;</span>
           <Field
-            placeholder=""
+            :placeholder="$t('texts.confirm_password')"
             type="password"
             name="password_confirmation"
             rules="required|confirmed:password"
-            class="text-md block px-3 py-2 rounded-lg w-full bg-[#CED4DA] border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:outline-none"
           />
           <div>
             <ErrorMessage
@@ -77,23 +87,25 @@
         </div>
 
         <button
-          class="mt-3 text-lg font-semibold bg-[#E31221] w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-[#CC0E10] hover:text-white"
         >
-          Get started
+          {{ $t("landing.get_started") }}
         </button>
       </div>
     </ValidationForm>
 
-    <GoogleLogin>Sign up with Google</GoogleLogin>
+    <GoogleLogin>
+      {{ $t("landing.sign_up_with_google") }}
+    </GoogleLogin>
 
-    <div class="text-sm font-semibold py-6 flex justify-center">
-      <div class="text-[#6C757D] font-normal hover:border-teal-500">
-        Already have an account?
+    <div class="flex justify-center py-6 text-sm font-semibold">
+      <div class="font-normal text-[#6C757D] hover:border-teal-500">
+        {{ $t("landing.already_have_an_account") }}&#63;
         <router-link
           :to="{ name: 'login' }"
           class="font-semibold text-[#0D6EFD]"
         >
-          Login
+          {{ $t("landing.login") }}
         </router-link>
       </div>
     </div>

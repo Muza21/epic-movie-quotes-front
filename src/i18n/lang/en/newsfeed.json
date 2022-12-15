@@ -1,0 +1,23 @@
+{
+  "news_feed": "News feed",
+  "list_of_movies": "List of movies",
+  "edit_your_profile": "Edit your profile",
+
+  "write_new_quote": "Write new quote",
+  "enter": "Enter",
+  "to_search_movies": "to search movies",
+  "to_search_quotes": "to search quotes",
+  "write_a_comment": "Write a comment",
+  "no_results_found": "No results found!",
+
+  "commented_to_your_movie_quote": "Commented to your movie quote",
+  "reacted_to_your_quote": "Reacted to your quote",
+
+  "day_ago": "day ago",
+  "min_ago": "min ago",
+
+  "choose_file": "Choose file",
+  "drag_or_drop_your_image_here_or": "Drag & drop your image here or",
+  "post": "Post",
+  "choose_movie": "Choose movie"
+}

@@ -1,14 +1,18 @@
 <template>
   <form-layout>
     <template v-slot:header>
-      <div class="flex items-center w-full justify-between px-10">
-        <div @click="deleteQuote()" class="flex item-center cursor-pointer">
+      <div class="flex w-full items-center justify-between px-10">
+        <div @click="deleteQuote()" class="item-center flex cursor-pointer">
           <IconTrash />
-          <p class="text-[#CED4DA] ml-2">Delete</p>
+          <p class="ml-2 text-[#CED4DA]">
+            {{ $t("moviedescription.delete") }}
+          </p>
         </div>
-        <div class="text-center text-3xl text-white mx-14 my-6">Edit quote</div>
+        <div class="mx-14 my-6 text-center text-3xl text-white">
+          {{ $t("moviedescription.edit_quote") }}
+        </div>
 
-        <div @click="routerGoBack" class="p-1 cursor-pointer">
+        <div @click="routerGoBack" class="cursor-pointer p-1">
           <IconCross />
         </div>
       </div>
@@ -16,9 +20,9 @@
     <ValidationForm class="mt-8" @submit="onSubmit">
       <div class="mx-auto px-4">
         <div class="my-10 rounded-xl bg-[#11101A]">
-          <div class="flex items-center mb-6 rounded-md">
+          <div class="mb-6 flex items-center rounded-md">
             <img
-              class="rounded-full w-12 h-12 mr-2 mt-1"
+              class="mr-2 mt-1 h-12 w-12 rounded-full"
               :src="user?.thumbnail"
             />
             <div>
@@ -34,9 +38,9 @@
             as="textarea"
             placeholder="Quote on English"
             name="quote_en"
-            v-model="data.quote.quote"
-            rules="required"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            v-model="quoteEn"
+            rules="required|english_text"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
         </div>
         <div class="py-1">
@@ -44,13 +48,13 @@
             as="textarea"
             placeholder="ციტატა ქართულ ენაზე"
             name="quote_ka"
-            v-model="data.quote.quote"
-            rules="required"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] placeholder-white shadow-md"
+            v-model="quoteKa"
+            rules="required|georgian_text"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
         </div>
 
-        <div class="text-white w-full relative py-6 leading-loose">
+        <div class="relative w-full py-6 leading-loose text-white">
           <img
             v-if="!url"
             class="relative mx-auto block"
@@ -74,24 +78,26 @@
           <label
             for="quote_picture"
             refs="quote_picture"
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-28"
+            class="absolute top-1/2 left-1/2 h-28 w-32 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
           >
             <div
-              class="bg-black w-32 h-28 opacity-70 rounded-xl block shadow-xl"
+              class="block h-28 w-32 rounded-xl bg-black opacity-70 shadow-xl"
             ></div>
             <div
-              class="absolute flex flex-col items-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              class="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center"
             >
               <IconPhoto />
-              <p class="text-white w-32 text-center">Change photo</p>
+              <p class="w-32 text-center text-white">
+                {{ $t("moviedescription.change_photo") }}
+              </p>
             </div>
           </label>
         </div>
 
         <button
-          class="mt-3 text-lg font-semibold bg-[#E31221] w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-[#CC0E10] hover:text-white"
         >
-          Save Changes
+          {{ $t("moviedescription.save_changes") }}
         </button>
       </div>
     </ValidationForm>
@@ -107,11 +113,16 @@ import { Form as ValidationForm, Field } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
 import { useRoute, useRouter } from "vue-router";
 import { onBeforeMount, onMounted, reactive, ref } from "vue";
+import { useUpdateQuoteStore } from "@/stores/quote";
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
 
 const router = useRouter();
 const route = useRoute();
+const quoteUpdateData = useUpdateQuoteStore();
+
+const quoteEn = ref("");
+const quoteKa = ref("");
 
 const url = ref("");
 
@@ -150,10 +161,10 @@ const deleteQuote = async () => {
 const onSubmit = async (values) => {
   try {
     const formData = new FormData();
-    formData.append("quote_en", values.quote_en);
-    formData.append("quote_ka", values.quote_ka);
+    formData.append("quote_en", quoteEn.value);
+    formData.append("quote_ka", quoteKa.value);
     formData.append("quote_picture", values.quote_picture);
-    formData.append("movie_title", data.movie.title);
+    formData.append("movie_id", data.movie.id);
     formData.append("user_id", currentUser.value.id);
     formData.append("_method", "PATCH");
     console.log(formData);
@@ -166,6 +177,7 @@ const onSubmit = async (values) => {
         },
       }
     );
+    quoteUpdateData.quote = response.data;
     router.push({
       name: "movie-description",
       params: { id: data.quote.movie_id },
@@ -183,6 +195,8 @@ onBeforeMount(() => {
       data.quote = response.data.quote;
       data.movie = response.data.movie;
       user.value = response.data.user;
+      quoteEn.value = data.quote.quote.en;
+      quoteKa.value = data.quote.quote.ka;
       console.log(response);
     })
     .catch((err) => {

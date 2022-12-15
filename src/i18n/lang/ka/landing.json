@@ -1,0 +1,57 @@
+{
+  "sign_up": "რეგისტრაცია",
+  "log_in": "ავტორიზაცია",
+  "logout": "გასვლა",
+  "get_started": "დაწყება",
+  "go_back": "უკან",
+  "movie_quotes": "ფილმის ციტატები",
+  "you_have_to_leave_somethig_behind_to_go_forward": "წინ რომ წახვიდე, რაღაცის დატოვება მოგიწევს",
+  "i_think_were_just_gonna_have_to_be_secretly_in_love": "ვფიქრობ ჩვენ ჩუმად უნდა ვიყოთ შეყვარებული და ასე უნდა იყოს",
+  "i_see_in_your_eyes_the_same_fear": "იგივე შიშვს ვხედავ შენში, რომელსაც ჩემი გული ვერ გაუძლებდა....",
+  "interstellar": "ინტერსტელარი",
+  "the_royal_tenenbaums": "ტენენბაუმების ოჯახი",
+  "the_lord_of_the_rings": "ბეჭდების მბრძნებელი",
+  "movie_quotes_all_rights_reserved": "ფილმების ციტატები. ყველა უფლება დაცულია.",
+  "find_any_quote_in_millions_of_movie_lines": "იპოვე ნებისმიერი ციტატა მილიონობით ფილმიდან",
+
+  "create_an_account": "შექმენი ექაუნთი",
+  "username": "სახელი",
+  "email": "ელ-ფოსტა",
+  "password": "პაროლი",
+  "password_confirm": "დაადასტურე პაროლი",
+  "sign_up_with_google": "დარეგისტრირდით გუგლის ანგარიშით",
+  "already_have_an_account": "უკვე გაქვთ ექაუნთი",
+  "login": "ავტორიზაცია",
+  "start_your_journey": "დაიწყეთ შენი მოგზაურობა",
+
+  "log_in_to_your_account": "შედით თქვენს ექაუნთზე",
+  "welcome_back_please_eneter_your_details": "მოგესალმებით! გთხოვთ შეავსოთ მონაცემები!",
+  "remember_me": "დამახსოვრება",
+  "forgot_password": "დამავიწყდა პაროლი",
+  "sign_in": "ავტორიზაცია",
+  "sign_in_with_google": "ავტორიზაცია გუგლის ანგარიშით",
+  "do_not_have_an_account": "უკვე გააქვთ ექაუნთი?",
+  "signup": "რეგისტრაცია",
+
+  "create_new_password": "შექმენი ახალი პაროლი",
+  "your_new_password_must_be_different": "შენი ახალი პაროლი განსხვავებული უნდა იყოს ძველისგან!",
+  "back_to_log_in": "დაბრუნდით ავტორიზაციის გვერდზე",
+  "reset_password": "პაროლის აღდგენა",
+
+  "Enter_the_email_and_we": "შეიყვანეთ ელ-ფოსტა და ჩვენ გამოგიგზავნით პაროლის აღდგენის ინსტრუქციას",
+  "send_instructions": "ინსტრუქციის გაგზავნა",
+
+  "thank_you": "მადლობა!",
+  "please_check_your_email": "გთხოვთ შეამოწმოთ თქვენი ელ-ფოსტა და მიყევით ინსტრუქციებს ელ-ფოსტის აქტივაციისთვის.",
+  "go_to_my_email": "ჩემს მეილზე გადასვლა",
+
+  "success": "წარმატება!",
+  "your_password_changed_successfully": "თქვენი პაროლი წარმატებით შეიცვალა",
+  "go_to_my_news_feed": "ჩემს ახალი ამბებზე გადასვლა",
+
+  "check_your_email": "შეამოწმეთ ელ-ფოსტა",
+  "we_have_sent_a_password_recover_instructions": "ჩვენ გამოგიგზავნეთ პაროლის აღდგენის ინსტრუქციები ელ-ფოსტაზე",
+  "skip_confirm_later": "გამოტოვება, სხვა დროს დავადასტურებ",
+
+  "your_account_has_been_activated": "თქვენი ანგარიში გააქტიურდა."
+}

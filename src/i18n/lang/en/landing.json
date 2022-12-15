@@ -1,0 +1,57 @@
+{
+  "sign_up": "Sign Up",
+  "log_in": "Log In",
+  "logout": "Log Out",
+  "get_started": "Get started",
+  "go_back": "Go back",
+  "movie_quotes": "MOVIE QUOTES",
+  "you_have_to_leave_somethig_behind_to_go_forward": "You have to leave somethig behind to go forward",
+  "i_think_were_just_gonna_have_to_be_secretly_in_love": "I think were just gonna have to be secretly in love with earch other and leave it that",
+  "i_see_in_your_eyes_the_same_fear": "I see in your eyes the same fear that would take the heart of me....",
+  "interstellar": "Interstellar",
+  "the_royal_tenenbaums": "The Royal Tenenbaums",
+  "the_lord_of_the_rings": "The Lord of the Rings",
+  "movie_quotes_all_rights_reserved": "MOVIE QUOTES. ALL RIGHTS RESERVED.",
+  "find_any_quote_in_millions_of_movie_lines": "Find any quote in millions of movie lines",
+
+  "create_an_account": "Create an account",
+  "username": "Username",
+  "email": "Email",
+  "password": "Password",
+  "password_confirm": "Password Confirm",
+  "sign_up_with_google": "Sign up with Google",
+  "already_have_an_account": "Already have an account",
+  "login": "Login",
+  "start_your_journey": "Start Your journey",
+
+  "log_in_to_your_account": "Log in to your account",
+  "welcome_back_please_eneter_your_details": "Welcome back! Please eneter your details!",
+  "remember_me": "Remember me",
+  "forgot_password": "Forgot password",
+  "sign_in": "Sign in",
+  "sign_in_with_google": "Sign in with Google",
+  "do_not_have_an_account": "Do not have an account?",
+  "signup": "SignUp",
+
+  "create_new_password": "Create new password",
+  "your_new_password_must_be_different": "Your new password must be different from previous used passwords!",
+  "back_to_log_in": "Back to log in",
+  "reset_password": "Reset password",
+
+  "Enter_the_email_and_we": "Enter the email and we'll send an email with instructions to reset your password",
+  "send_instructions": "Send instructions",
+
+  "thank_you": "Thank you!",
+  "please_check_your_email": "Please check your email and follow the instructions to activate your account.",
+  "go_to_my_email": "Go to my email",
+
+  "success": "Success!",
+  "your_password_changed_successfully": "Your password changed successfully",
+  "go_to_my_news_feed": "Go to my news feed",
+
+  "check_your_email": "Check your email",
+  "we_have_sent_a_password_recover_instructions": "We have sent a password recover instructions to your email ",
+  "skip_confirm_later": "Skip, I'll confirm later ",
+
+  "your_account_has_been_activated": "Your account has been activated."
+}

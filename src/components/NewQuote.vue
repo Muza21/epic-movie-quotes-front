@@ -1,12 +1,12 @@
 <template>
   <form-layout>
     <template v-slot:header>
-      <div class="text-center text-3xl text-white mx-14 my-6">
-        Write new quote
+      <div class="mx-14 my-6 text-center text-3xl text-white">
+        {{ $t("newsfeed.write_new_quote") }}
       </div>
       <div
         @click="routerGoBack"
-        class="p-1 cursor-pointer absolute top-0 right-0 mt-8 mr-8"
+        class="absolute top-0 right-0 mt-8 mr-8 cursor-pointer p-1"
       >
         <IconCross />
       </div>
@@ -14,9 +14,9 @@
     <ValidationForm class="mt-8" @submit="onSubmit">
       <div class="mx-auto px-4">
         <div class="my-10 rounded-xl bg-[#11101A]">
-          <div class="flex items-center mb-6 rounded-md">
+          <div class="mb-6 flex items-center rounded-md">
             <img
-              class="rounded-full w-12 h-12 mr-2 mt-1"
+              class="mr-2 mt-1 h-12 w-12 rounded-full"
               :src="user?.thumbnail"
             />
             <div>
@@ -31,8 +31,8 @@
             as="textarea"
             placeholder="Start create new quote"
             name="quote_en"
-            rules="required"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] focus:outline-none"
+            rules="required|english_text"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white focus:outline-none"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="quote_en" />
@@ -44,58 +44,66 @@
             placeholder="ახალი ციტატა"
             name="quote_ka"
             rules="required|georgian_text"
-            class="text-white text-lg block px-3 py-2 rounded-lg w-full bg-[#11101A] border-2 border-[#6C757D] focus:outline-none"
+            class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white focus:outline-none"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="quote_ka" />
           </div>
         </div>
-        <div class="py-1">
-          <div class="p-2 flex items-center w-full border-2 border-[#6C757D]">
+        <div class="py-1" @dragover.prevent @drop.prevent>
+          <div
+            @drop="drag"
+            class="flex w-full items-center border-2 border-[#6C757D] p-2"
+          >
             <IconPhoto />
             <div class="mx-3 flex-1">
               <div class="flex items-center">
                 <h2 class="text-xl font-semibold text-white">
-                  Drag and drop your image here or
+                  {{ $t("newsfeed.drag_or_drop_your_image_here_or") }}
                 </h2>
                 <Field
                   type="file"
                   id="quote_picture"
                   name="quote_picture"
+                  v-model="imageFile"
                   class="hidden"
                   accept="image/jpeg, image/png"
                   rules="required"
+                  @change="onImageChange"
                 />
                 <label
                   for="quote_picture"
                   refs="quote_picture"
-                  class="p-2 ml-2 bg-[#9747FF] rounded-lg text-white cursor-pointer"
+                  class="ml-2 cursor-pointer rounded-lg bg-[#9747FF] p-2 text-white"
                 >
-                  Choose a file
+                  {{ $t("newsfeed.choose_file") }}
                 </label>
               </div>
+            </div>
+            <div v-if="url" class="float-right">
+              <img :src="url" class="h-24 w-24" alt="photo uploaded" />
             </div>
           </div>
         </div>
         <div>
           <ErrorMessage class="ml-4 text-orange-600" name="quote_picture" />
         </div>
-        <div class="py-1 cursor-pointer" @click="toggleChooseMovie">
-          <div class="p-2 flex items-center w-full border-2 border-[#6C757D]">
+        <div class="cursor-pointer py-1" @click="toggleChooseMovie">
+          <div class="flex w-full items-center border-2 border-[#6C757D] p-2">
             <IconCamera />
             <div class="mx-3 flex-1">
               <div class="flex items-center justify-between">
                 <h2
                   v-if="!selectedMovie"
-                  class="text-white text-xl font-semibold"
+                  class="text-xl font-semibold text-white"
                 >
-                  Choose a movie
+                  {{ $t("newsfeed.choose_movie") }}
                 </h2>
                 <h2
                   v-if="selectedMovie"
-                  class="text-white text-xl font-semibold"
+                  class="text-xl font-semibold text-white"
                 >
-                  {{ selectedMovie }}
+                  {{ selectedMovie?.[$i18n.locale] }}
                 </h2>
 
                 <IconDropdown />
@@ -105,25 +113,25 @@
         </div>
         <div
           v-if="chooseMovie"
-          class="absolute w-96 h-[112px] rounded-lg bg-[#11101A] mt-2"
+          class="absolute mt-2 h-[112px] w-96 rounded-lg bg-[#11101A]"
         >
           <div v-for="movie in data.movies" :key="movie">
             <div class="py-1 hover:bg-gray-500">
               <Field
-                @click="selectMovie"
-                class="p-3 rounded-md w-96 text-white bg-[#11101A] cursor-pointer outline-none"
+                @click="selectMovie(movie?.title, movie?.id)"
+                class="w-96 cursor-pointer rounded-md bg-[#11101A] p-3 text-white outline-none"
                 type="text"
-                :name="movie.title"
-                :value="movie.title"
+                :name="movie?.title?.[$i18n.locale]"
+                :value="movie?.title?.[$i18n.locale]"
                 readonly
               />
             </div>
           </div>
         </div>
         <button
-          class="mt-3 text-lg font-semibold bg-[#E31221] w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-[#CC0E10] hover:text-white"
         >
-          Post
+          {{ $t("newsfeed.post") }}
         </button>
       </div>
     </ValidationForm>
@@ -140,11 +148,25 @@ import { Form as ValidationForm, Field, ErrorMessage } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { useQuoteStore } from "@/stores/quote";
+
+const url = ref("");
+const imageFile = ref();
+const onImageChange = (e) => {
+  url.value = URL.createObjectURL(e.target.files[0]);
+  console.log(url.value);
+};
+
+function drag(file) {
+  url.value = URL.createObjectURL(file.dataTransfer.files[0]);
+  imageFile.value = file.dataTransfer.files[0];
+}
 
 const router = useRouter();
+const quoteData = useQuoteStore();
 const chooseMovie = ref(false);
 const selectedMovie = ref("");
-
+const movieId = ref();
 const toggleChooseMovie = () => {
   chooseMovie.value = !chooseMovie.value;
 };
@@ -154,9 +176,10 @@ const data = reactive({
 
 const user = ref({});
 
-const selectMovie = (e) => {
+const selectMovie = (movie, id) => {
   chooseMovie.value = false;
-  selectedMovie.value = e.target.name;
+  selectedMovie.value = movie;
+  movieId.value = id;
 };
 
 const routerGoBack = () => {
@@ -171,7 +194,7 @@ const onSubmit = async (values) => {
     formData.append("quote_en", values.quote_en);
     formData.append("quote_ka", values.quote_ka);
     formData.append("quote_picture", values.quote_picture);
-    formData.append("movie_title", selectedMovie.value);
+    formData.append("movie_id", movieId.value);
     formData.append("user_id", user.value.id);
     console.log(formData);
     const response = await axiosInstance.post(`/quote`, formData, {
@@ -179,6 +202,7 @@ const onSubmit = async (values) => {
         "Content-Type": "multipart/form-data;",
       },
     });
+    quoteData.quote = response.data;
     router.push({ name: "newsfeed" });
     console.log(response);
   } catch (err) {
@@ -188,7 +212,7 @@ const onSubmit = async (values) => {
 
 onMounted(() => {
   axiosInstance
-    .get(`/movielist`)
+    .get(`/movie`)
     .then((response) => {
       data.movies = response.data.movies;
       user.value = response.data.user;

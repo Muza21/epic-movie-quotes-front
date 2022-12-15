@@ -6,19 +6,21 @@
         <SideBar />
         <div class="w-full">
           <div
-            class="flex justify-between max-w-4xl rounded-xl md:w-[1000px] mx-auto"
+            class="mx-auto flex max-w-4xl justify-between rounded-xl md:w-[1000px]"
           >
             <router-link
               :to="{ name: 'new-quote' }"
-              class="flex p-4 bg-[#24222F] rounded-lg w-52"
+              class="flex w-52 rounded-lg bg-[#24222F] p-4"
             >
               <IconNewquote />
-              <p class="text-white ml-2">Write new quote</p>
+              <p class="ml-2 text-white">
+                {{ $t("newsfeed.write_new_quote") }}
+              </p>
             </router-link>
             <div class="flex items-center">
               <div class="relative">
                 <div
-                  class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                  class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
                 >
                   <IconSearch />
                 </div>
@@ -28,73 +30,83 @@
                   name="search"
                   v-model="searchValue"
                   @keyup.enter="searchByMovieOrQuote"
-                  class="bg-[#24222F] w-[688px] py-4 pr-4 pl-12 border-b border-[#EFEFEF] text-white text-sm rounded-lg placeholder-[#CED4DA]"
-                  placeholder="Enter @ to search movies, Enter # to search quotes "
+                  class="w-[688px] rounded-lg border-b border-[#EFEFEF] bg-[#24222F] py-4 pr-4 pl-12 text-sm text-white placeholder-[#CED4DA]"
+                  :placeholder="
+                    $t('newsfeed.enter') +
+                    ' @ ' +
+                    $t('newsfeed.to_search_movies') +
+                    ' ' +
+                    $t('newsfeed.enter') +
+                    ' # ' +
+                    $t('newsfeed.to_search_quotes')
+                  "
                   required
                 />
               </div>
             </div>
           </div>
           <div
-            class="text-center text-white text-6xl mt-52 hidden"
+            class="mt-52 hidden text-center text-6xl text-white"
             v-if="searchValue && !quotes.values.length"
           >
-            <p>No results found!</p>
+            <p>
+              {{ $t("newsfeed.no_results_found") }}
+            </p>
           </div>
           <div v-for="(quote, index) in quotes.values" :key="index">
             <article
-              class="max-w-4xl my-10 rounded-xl md:w-[1000px] bg-[#11101A] mx-auto"
+              class="my-10 mx-auto max-w-4xl rounded-xl bg-[#11101A] md:w-[1000px]"
             >
-              <div class="flex items-center mb-6 p-6 rounded-md">
+              <div class="mb-6 flex items-center rounded-md p-6">
                 <img
-                  class="rounded-full w-12 h-12 mr-2 mt-1"
-                  :src="quote.user?.thumbnail"
+                  class="mr-2 mt-1 h-12 w-12 rounded-full"
+                  :src="quote?.user?.thumbnail"
                 />
                 <div class="ml-4">
                   <h2 class="text-lg font-semibold text-white">
-                    {{ quote.user?.username }}
+                    {{ quote?.user?.username }}
                   </h2>
                 </div>
               </div>
 
-              <h1 class="text-white text-xl p-6 lg:text-4xl mb-10">
-                {{ quote.quote }}
+              <h1 class="mb-10 p-6 text-xl text-white lg:text-4xl">
+                {{ quote?.quote?.[$i18n.locale] }}
               </h1>
 
-              <div class="text-white p-6 leading-loose">
+              <div class="p-6 leading-loose text-white">
                 <img :src="link + quote?.thumbnail" alt="post image" />
               </div>
 
-              <div class="flex text-xl p-6 text-white">
-                <p class="mx-2">{{ quote.comments?.length }}</p>
+              <div class="flex p-6 text-xl text-white">
+                <p class="mx-2">{{ quote?.comments?.length }}</p>
                 <IconComment />
-                <p class="ml-6 mr-2">{{ quote.likes?.length }}</p>
+                <p class="ml-6 mr-2">{{ quote?.likes?.length }}</p>
                 <div
-                  @click="likeQuote(quote.id, index)"
-                  class="p-1 cursor-pointer -mt-1"
+                  @click="likeQuote(quote?.id, index)"
+                  class="-mt-1 cursor-pointer p-1"
                 >
                   <IconHeart />
                 </div>
               </div>
 
               <div class="max-h-60 overflow-auto">
-                <div v-for="comment in quote.comments" :key="comment">
-                  <div class="text-white p-6 antialiased flex">
+                <div v-for="comment in quote?.comments" :key="comment">
+                  <div class="flex p-6 text-white antialiased">
                     <img
-                      class="rounded-full w-12 h-12 mr-2 mt-1"
-                      :src="comment.user.thumbnail"
+                      class="mr-2 mt-1 h-12 w-12 rounded-full"
+                      :src="comment?.user?.thumbnail"
                     />
                     <div>
-                      <div class="px-4 pt-2 pb-2.5 ]">
+                      <div class="] px-4 pt-2 pb-2.5">
                         <div
-                          class="font-semibold text-white text-sm leading-relaxed"
+                          class="text-sm font-semibold leading-relaxed text-white"
                         >
-                          {{ comment.user.username }}
+                          {{ comment?.user?.username }}
                         </div>
                         <div
-                          class="text-normal leading-snug md:leading-normal pb-6 border-b-2 border-[#EFEFEF]"
+                          class="text-normal border-b-2 border-[#EFEFEF] pb-6 leading-snug md:leading-normal"
                         >
-                          {{ comment.body }}
+                          {{ comment?.body }}
                         </div>
                       </div>
                     </div>
@@ -102,20 +114,20 @@
                 </div>
               </div>
               <ValidationForm @submit="onSubmit">
-                <div class="text-white p-6 antialiased flex">
+                <div class="flex p-6 text-white antialiased">
                   <img
-                    class="rounded-full w-12 h-12 mr-2 mt-1"
+                    class="mr-2 mt-1 h-12 w-12 rounded-full"
                     :src="user?.thumbnail"
                   />
                   <div class="w-full">
                     <div class="px-4 pt-2 pb-2.5">
                       <Field
-                        class="bg-[#24222F] rounded-md w-full p-4"
+                        class="w-full rounded-md bg-[#24222F] p-4"
                         type="text"
                         name="comment"
                         v-model="quote.writtenComment"
-                        @keydown.enter="postComment(quote.id, index)"
-                        placeholder="Write a comment"
+                        @keydown.enter="postComment(quote?.id, index)"
+                        :placeholder="$t('newsfeed.write_a_comment')"
                       />
                     </div>
                   </div>
@@ -141,18 +153,26 @@ import IconNewquote from "@/components/icons/IconNewquote.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
 import { Form as ValidationForm, Field } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
-import { reactive, onMounted, onBeforeMount, ref } from "vue";
+import { reactive, onMounted, onBeforeMount, ref, watch } from "vue";
 import { useRoute } from "vue-router";
+import { useQuoteStore } from "@/stores/quote";
 
 const route = useRoute();
 const quotes = reactive({});
 const searchValue = ref("");
+const quoteData = useQuoteStore();
 
 const link = import.meta.env.VITE_BACKEND_IMAGES_URL;
 
 const user = ref({});
 const commentQuoteId = ref("");
 const quoteIndex = ref();
+
+watch(() => {
+  if (quoteData.quote) {
+    return quotes?.values.push(quoteData.quote);
+  }
+});
 
 function postComment(id, index) {
   commentQuoteId.value = id;
@@ -176,10 +196,12 @@ function searchByMovieOrQuote() {
 }
 
 function likeQuote(id, index) {
+  console.log(quotes.values[index].user_id);
   axiosInstance
     .post(`/reaction/${id}`, {
       user_id: user.value.id,
       quote_id: id,
+      reciver_id: quotes.values[index].user_id,
     })
     .then((response) => {
       quotes.values[index].likes = response.data;
@@ -199,6 +221,7 @@ const onSubmit = async (values) => {
           body: values.comment,
           user_id: user.value.id,
           quote_id: commentQuoteId.value,
+          reciver_id: quotes.values[quoteIndex.value].user_id,
         }
       );
       quotes.values[quoteIndex.value].writtenComment = "";
@@ -232,5 +255,29 @@ onMounted(() => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+window.Echo.channel("comment-channel").listen(".new-comment", (e) => {
+  axiosInstance
+    .get(`/quote`)
+    .then((response) => {
+      quotes.values = response.data.quotes;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  console.log(e);
+});
+
+window.Echo.channel("like-channel").listen(".new-like", (e) => {
+  axiosInstance
+    .get(`/quote`)
+    .then((response) => {
+      quotes.values = response.data.quotes;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  console.log(e);
 });
 </script>

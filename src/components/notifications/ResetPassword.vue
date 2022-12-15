@@ -3,28 +3,32 @@
     <div>
       <IconSent class="mx-auto" />
     </div>
-    <div class="text-center text-3xl text-white">Check your email</div>
-    <div class="text-center font-base text-white">
-      We have sent a password recover instructions to your email
+    <div class="text-center text-3xl text-white">
+      {{ $t("landing.check_your_email") }}
+    </div>
+    <div class="font-base text-center text-white">
+      {{ $t("landing.we_have_sent_a_password_recover_instructions") }}
     </div>
     <div class="mt-8">
       <div class="mx-auto max-w-lg">
         <a
           href="https://gmail.com"
           target="_blank"
-          class="mt-3 text-lg font-semibold bg-[#E31221] w-full text-white text-center rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-center text-lg font-semibold text-white shadow-xl hover:bg-[#CC0E10] hover:text-white"
         >
-          Go to my email
+          {{ $t("landing.success") }}
         </a>
       </div>
     </div>
 
-    <div class="text-sm font-semibold py-6 flex justify-center">
+    <div class="flex justify-center py-6 text-sm font-semibold">
       <router-link
         :to="{ name: 'landing' }"
-        class="font-normal flex justify-center"
+        class="flex justify-center font-normal"
       >
-        <span class="text-[#6C757D]"> Skip&#44; I&#39;ll confirm later </span>
+        <span class="text-[#6C757D]">
+          {{ $t("landing.skip_confirm_later") }}
+        </span>
       </router-link>
     </div>
   </popup-layout>
