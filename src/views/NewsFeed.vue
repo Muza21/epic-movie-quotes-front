@@ -170,7 +170,7 @@ const quoteIndex = ref();
 
 watch(() => {
   if (quoteData.quote) {
-    return quotes.values.push(quoteData.quote);
+    return quotes?.values.push(quoteData.quote);
   }
 });
 
