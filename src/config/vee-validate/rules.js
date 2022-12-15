@@ -31,7 +31,7 @@ defineRule("english_text", (value) => {
 });
 
 defineRule("lowercase", (value) => {
-  if (!value.match(/^[a-z _-]+$/)) {
+  if (!value.match(/^[a-z0-9 _-]+$/)) {
     return false;
   }
   return true;
