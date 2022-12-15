@@ -5,13 +5,15 @@
         <div class="relative mt-8 rounded-lg bg-black px-4 shadow-xl">
           <IconTriangle class="absolute bottom-full right-60" />
           <div class="flex justify-between pt-8 pb-6 text-white">
-            <h2 class="text-xl">Notifications</h2>
-            <!-- diffForHumans(); -->
+            <h2 class="text-xl">{{ $t("texts.notifications") }}</h2>
             <p
-              @click="markAllRead"
+              @click="
+                markAllRead();
+                emit('updateNotification', undread);
+              "
               class="cursor-pointer border-b-2 border-white p-1"
             >
-              mark as all read
+              {{ $t("texts.mark_as_all_read") }}
             </p>
           </div>
           <div class="max-h-96 overflow-auto">
@@ -38,13 +40,19 @@
                       class="flex items-center text-[#CED4DA]"
                     >
                       <IconChat class="w-5" />
-                      <p class="ml-3">Commented to your movie quotes</p>
+                      <p class="ml-3">
+                        {{ $t("texts.commented_to_your_movie_quotes") }}
+                      </p>
                     </h2>
                     <h2 v-else class="flex items-center text-[#CED4DA]">
                       <RedHeart class="w-5" />
-                      <p class="ml-3">Reacted to your quote</p>
+                      <p class="ml-3">
+                        {{ $t("texts.reacted_to_your_quote") }}
+                      </p>
                     </h2>
-                    <p v-if="!notification?.seen" class="text-[#198754]">New</p>
+                    <p v-if="!notification?.seen" class="text-[#198754]">
+                      {{ $t("texts.new") }}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -67,11 +75,14 @@ import axiosInstance from "@/config/axios/index.js";
 const notifications = ref({});
 const undread = ref({});
 
+const emit = defineEmits("updateNotification");
+
 function markAllRead() {
   axiosInstance
     .post(`/notification`)
     .then((response) => {
       notifications.value = response.data.notifications;
+      undread.value = response.data.undreadNotifications;
       console.log(response);
     })
     .catch((err) => {

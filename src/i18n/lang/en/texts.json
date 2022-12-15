@@ -6,5 +6,10 @@
   "password": "Password",
   "confirm_password": "Confirm password",
   "at_least_3": "At least 3 & max.15 lower case characters",
-  "at_least_8": "At least 8 & max.15 lower case characters"
+  "at_least_8": "At least 8 & max.15 lower case characters",
+  "notifications": "Notifications",
+  "mark_as_all_read": "mark as all read",
+  "commented_to_your_movie_quotes": "Commented to your movie quotes",
+  "reacted_to_your_quote": "Reacted to your quote",
+  "new": "New"
 }

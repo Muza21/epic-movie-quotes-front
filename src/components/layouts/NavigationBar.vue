@@ -11,15 +11,16 @@
               <div class="relative">
                 <IconNotification />
                 <div
-                  v-if="undread?.length"
+                  v-if="unread?.length"
                   class="absolute -top-[5px] -right-[10px] flex h-[25px] w-[25px] items-center justify-center rounded-full bg-[#E33812] font-semibold text-white"
                 >
-                  {{ undread?.length }}
+                  {{ unread?.length }}
                 </div>
               </div>
             </button>
             <UsersNotifications
               v-if="view.notificationView"
+              @update-notification="someFunction"
               class="absolute z-50 -translate-x-[515px] -translate-y-[20px]"
             />
           </div>
@@ -104,9 +105,13 @@ import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 import { reactive, onMounted, onBeforeMount, ref } from "vue";
 
-const undread = ref({});
+const unread = ref({});
 const user = ref({});
-
+function someFunction(value) {
+  unread.value.length = 0;
+  console.log(value);
+  console.log("here");
+}
 const view = reactive({
   notificationView: false,
   languageView: false,
@@ -153,7 +158,7 @@ onMounted(() => {
   axiosInstance
     .get(`/notification`)
     .then((response) => {
-      undread.value = response.data.undreadNotifications;
+      unread.value = response.data.unreadNotifications;
       console.log(response.data);
     })
     .catch((err) => {
@@ -168,7 +173,7 @@ setTimeout(() => {
       axiosInstance
         .get(`/notification`)
         .then((response) => {
-          undread.value = response.data.undreadNotifications;
+          unread.value = response.data.unreadNotifications;
           console.log(response.data);
         })
         .catch((err) => {
