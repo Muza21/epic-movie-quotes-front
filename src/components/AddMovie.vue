@@ -24,7 +24,7 @@
           <Field
             placeholder="Movie name"
             name="movie_name_en"
-            rules="required"
+            rules="required|english_text"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
@@ -35,7 +35,7 @@
           <Field
             placeholder="ფილმის სახელი"
             name="movie_name_ka"
-            rules="required"
+            rules="required|georgian_text"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
@@ -67,7 +67,9 @@
               </div>
             </div>
           </div>
-
+          <div v-if="genreNotSelected" class="ml-4 text-orange-600">
+            {{ $t("movielist.genre_field_is_required") }}
+          </div>
           <div>
             <div
               v-if="chooseGenres"
@@ -92,7 +94,7 @@
           <Field
             placeholder="Director"
             name="director_name_en"
-            rules="required"
+            rules="required|english_text"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
@@ -106,7 +108,7 @@
           <Field
             placeholder="რეჟისორი"
             name="director_name_ka"
-            rules="required"
+            rules="required|georgian_text"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
@@ -143,7 +145,7 @@
             as="textarea"
             placeholder="Movie description"
             name="movie_description_en"
-            rules="required"
+            rules="required|english_text"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
@@ -158,7 +160,7 @@
             as="textarea"
             placeholder="ფილმის აღწერა"
             name="movie_description_ka"
-            rules="required"
+            rules="required|georgian_text"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
@@ -168,8 +170,11 @@
             />
           </div>
         </div>
-        <div class="py-1">
-          <div class="flex w-full items-center border-2 border-[#6C757D] p-2">
+        <div class="py-1" @dragover.prevent @drop.prevent>
+          <div
+            @drop="drag"
+            class="flex w-full items-center border-2 border-[#6C757D] p-2"
+          >
             <IconPhoto />
             <div class="mx-3 flex-1">
               <div class="flex items-center">
@@ -180,9 +185,11 @@
                   type="file"
                   id="movie_picture"
                   name="movie_picture"
+                  v-model="imageFile"
                   class="hidden"
                   accept="image/jpeg, image/png"
                   rules="required"
+                  @change="onImageChange"
                 />
                 <label
                   for="movie_picture"
@@ -193,13 +200,16 @@
                 </label>
               </div>
             </div>
+            <div v-if="url" class="float-right">
+              <img :src="url" class="h-24 w-24" alt="photo uploaded" />
+            </div>
           </div>
         </div>
         <div>
           <ErrorMessage class="ml-4 text-orange-600" name="movie_picture" />
         </div>
         <button
-          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-[#CC0E10] hover:text-white"
         >
           {{ $t("movielist.add_movie") }}
         </button>
@@ -218,6 +228,19 @@ import { useRouter } from "vue-router";
 import { onMounted, ref, reactive } from "vue";
 import { useMovieStore } from "@/stores/movie";
 
+const url = ref("");
+const imageFile = ref();
+const onImageChange = (e) => {
+  url.value = URL.createObjectURL(e.target.files[0]);
+  console.log(url.value);
+};
+
+function drag(file) {
+  url.value = URL.createObjectURL(file.dataTransfer.files[0]);
+  imageFile.value = file.dataTransfer.files[0];
+  console.log(file.dataTransfer.files[0]);
+}
+
 const router = useRouter();
 
 const movieData = useMovieStore();
@@ -226,7 +249,7 @@ const genres = reactive({});
 const chooseGenres = ref(false);
 const selectedGenres = ref([]);
 const user = ref({});
-
+const genreNotSelected = ref(false);
 const reactiveSelectedGenres = reactive({});
 
 const toggleGenres = () => {
@@ -248,6 +271,9 @@ const deleteGenre = (genre) => {
 
 const onSubmit = async (values) => {
   try {
+    if (!selectedGenres.value.length) {
+      throw true;
+    }
     const formData = new FormData();
     formData.append("movie_name_en", values.movie_name_en);
     formData.append("movie_name_ka", values.movie_name_ka);
@@ -258,7 +284,7 @@ const onSubmit = async (values) => {
     formData.append("budget", values.budget);
     formData.append("movie_description_en", values.movie_description_en);
     formData.append("movie_description_ka", values.movie_description_ka);
-    formData.append("movie_picture", values.movie_picture);
+    formData.append("movie_picture", imageFile.value);
 
     const response = await axiosInstance.post(`/movie`, formData, {
       headers: {
@@ -270,6 +296,7 @@ const onSubmit = async (values) => {
     movieData.movie = response.data;
     console.log(useMovieStore);
   } catch (err) {
+    genreNotSelected.value = true;
     console.log(err);
   }
 };

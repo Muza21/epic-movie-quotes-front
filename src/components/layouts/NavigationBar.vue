@@ -44,7 +44,7 @@
                   @click="
                     $root.$i18n.locale = 'en';
                     view.languageView = false;
-                    setLocale('en');
+                    setLocaleMemory('en');
                   "
                   class="flex cursor-pointer items-center rounded-md p-3"
                 >
@@ -56,7 +56,7 @@
                   @click="
                     $root.$i18n.locale = 'ka';
                     view.languageView = false;
-                    setLocale('ka');
+                    setLocaleMemory('ka');
                   "
                   class="flex cursor-pointer items-center rounded-md p-3"
                 >
@@ -98,6 +98,7 @@ import IconDropdown from "@/components/icons/IconDropdown.vue";
 import UsersNotifications from "@/components/notifications/UsersNotifications.vue";
 import { Form as ValidationForm } from "vee-validate";
 import axiosInstance from "@/config/axios/index.js";
+import { setLocale } from "@vee-validate/i18n";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 import { reactive } from "vue";
@@ -113,8 +114,9 @@ function toggleNotification() {
   view.notificationView = !view.notificationView;
 }
 
-function setLocale(locale) {
+function setLocaleMemory(locale) {
   window.localStorage.setItem("selectedLocale", locale);
+  setLocale(locale);
 }
 
 const toggleLanguage = () => {

@@ -14,7 +14,7 @@
         <a
           href="https://gmail.com"
           target="_blank"
-          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-center text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-center text-lg font-semibold text-white shadow-xl hover:bg-[#CC0E10] hover:text-white"
         >
           {{ $t("landing.go_to_my_email") }}
         </a>

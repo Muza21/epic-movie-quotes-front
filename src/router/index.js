@@ -132,6 +132,10 @@ const router = createRouter({
       component: () => import("@/components/CallbackGoogle.vue"),
     },
     {
+      path: "/forbidden",
+      component: () => import("@/components/AccessForbidden.vue"),
+    },
+    {
       path: "/:pathMatch(.*)*",
       component: () => import("@/components/NotFound.vue"),
     },

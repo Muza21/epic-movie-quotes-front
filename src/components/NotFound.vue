@@ -6,13 +6,17 @@
       <IconGhost />
       <IconElipse class="my-5" />
     </div>
-    <h1 class="my-3 text-5xl font-bold">Whoops!</h1>
-    <p class="text-2xl">We can't see the page you are looking for</p>
+    <h1 class="my-3 text-5xl font-bold">
+      {{ $t("redirect.whoops") }}
+    </h1>
+    <p class="text-2xl">
+      {{ $t("redirect.we_cant_see_the_page_you_are_looking_for") }}
+    </p>
     <router-link
       :to="{ name: 'landing' }"
       class="mt-12 rounded-lg bg-[#E31221] px-4 py-2 text-white"
     >
-      Return home
+      {{ $t("redirect.return_home") }}
     </router-link>
   </div>
 </template>

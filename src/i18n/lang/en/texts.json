@@ -1,0 +1,10 @@
+{
+  "the_selected_username_is_invalid": "The credentials are invalid",
+  "the_provided_email_is_invalid": "The provided email is invalid",
+  "enter_your_email": "Enter your email",
+  "enter_new_email": "Enter new email",
+  "password": "Password",
+  "confirm_password": "Confirm password",
+  "at_least_3": "At least 3 & max.15 lower case characters",
+  "at_least_8": "At least 8 & max.15 lower case characters"
+}

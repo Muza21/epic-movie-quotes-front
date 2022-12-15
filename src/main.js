@@ -6,6 +6,7 @@ import router from "@/router";
 import i18n from "@/i18n/index.js";
 
 import "@/config/vee-validate/rules.js";
+import "@/config/vee-validate/messages.js";
 
 import "@/style.css";
 

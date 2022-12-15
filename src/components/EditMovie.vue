@@ -25,7 +25,7 @@
             v-model="movieNameEn"
             placeholder="Movie name"
             name="movie_name_en"
-            rules="required|alpha"
+            rules="required|english_text"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md placeholder:text-lg placeholder:text-white"
           />
           <div>
@@ -37,7 +37,7 @@
             v-model="movieNameKa"
             placeholder="ფილმის სახელი"
             name="movie_name_ka"
-            rules="required"
+            rules="required|georgian_text"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
@@ -93,7 +93,7 @@
             v-model="directorEn"
             name="director_name_en"
             placeholder="Director"
-            rules="required|alpha"
+            rules="required|english_text"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
@@ -108,7 +108,7 @@
             v-model="directorKa"
             name="director_name_ka"
             placeholder="რეჟისორი"
-            rules="required"
+            rules="required|georgian_text"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
@@ -148,7 +148,7 @@
             v-model="descriptionEn"
             placeholder="Movie description"
             name="movie_description_en"
-            rules="required"
+            rules="required|english_text"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
@@ -164,7 +164,7 @@
             v-model="descriptionKa"
             placeholder="ფილმის აღწერა"
             name="movie_description_ka"
-            rules="required"
+            rules="required|georgian_text"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white placeholder-white shadow-md"
           />
           <div>
@@ -174,8 +174,11 @@
             />
           </div>
         </div>
-        <div class="py-1">
-          <div class="flex w-full items-center border-2 border-[#6C757D] p-2">
+        <div class="py-1" @dragover.prevent @drop.prevent>
+          <div
+            @drop="drag"
+            class="flex w-full items-center border-2 border-[#6C757D] p-2"
+          >
             <IconPhoto />
             <div class="mx-3 flex-1">
               <div class="flex items-center">
@@ -186,8 +189,10 @@
                   type="file"
                   id="movie_picture"
                   name="movie_picture"
+                  v-model="imageFile"
                   class="hidden"
                   accept="image/jpeg, image/png"
+                  @change="onImageChange"
                 />
                 <label
                   for="movie_picture"
@@ -198,13 +203,16 @@
                 </label>
               </div>
             </div>
+            <div v-if="url" class="float-right">
+              <img :src="url" class="h-24 w-24" alt="photo uploaded" />
+            </div>
           </div>
         </div>
         <div>
           <ErrorMessage class="ml-4 text-orange-600" name="movie_picture" />
         </div>
         <button
-          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-[#CC0E10] hover:text-white"
         >
           {{ $t("moviedescription.edit_movie") }}
         </button>
@@ -222,6 +230,18 @@ import axiosInstance from "@/config/axios/index.js";
 import { useRouter, useRoute } from "vue-router";
 import { onMounted, onBeforeMount, ref, reactive } from "vue";
 import { useMovieStore } from "@/stores/movie";
+
+const url = ref("");
+const imageFile = ref();
+const onImageChange = (e) => {
+  url.value = URL.createObjectURL(e.target.files[0]);
+  console.log(url.value);
+};
+
+function drag(file) {
+  url.value = URL.createObjectURL(file.dataTransfer.files[0]);
+  imageFile.value = file.dataTransfer.files[0];
+}
 
 const movieNameEn = ref("");
 const movieNameKa = ref("");
@@ -276,7 +296,7 @@ const onSubmit = async (values) => {
     formData.append("budget", values.budget);
     formData.append("movie_description_en", descriptionEn.value);
     formData.append("movie_description_ka", descriptionKa.value);
-    formData.append("movie_picture", values.movie_picture);
+    formData.append("movie_picture", imageFile.value);
     formData.append("_method", "PATCH");
 
     const response = await axiosInstance.post(

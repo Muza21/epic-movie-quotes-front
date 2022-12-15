@@ -6,15 +6,17 @@
       <IconUnion class="mt-14" />
       <IconGandolf class="absolute top-0 ml-2" />
     </div>
-    <h1 class="my-3 text-5xl font-bold">You shall not pass!</h1>
+    <h1 class="my-3 text-5xl font-bold">
+      {{ $t("redirect.you_shall_not_pass") }}
+    </h1>
     <p class="text-2xl">
-      Sorry, but you don’t have permission to access this page
+      {{ $t("redirect.sorry_but_you_dont_have_permission") }}
     </p>
     <router-link
       :to="{ name: 'landing' }"
       class="mt-12 rounded-lg bg-[#E31221] px-4 py-2 text-white"
     >
-      Return home
+      {{ $t("redirect.return_home") }}
     </router-link>
   </div>
 </template>

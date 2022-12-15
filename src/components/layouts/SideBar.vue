@@ -1,11 +1,21 @@
 <template>
-  <div class="flex h-screen flex-col overflow-hidden">
+  <div
+    class="flex h-screen flex-col overflow-hidden"
+    :class="route.name == 'profile' ? 'absolute' : ''"
+  >
     <div class="flex flex-col justify-between">
       <div class="h-full w-96 space-y-2 p-3 pl-16">
         <div class="divide-y divide-gray-700">
           <ul class="space-y-1 pt-2 pb-4 text-sm">
             <li class="flex dark:bg-gray-800 dark:text-gray-50">
-              <div class="h-12 w-12 overflow-hidden rounded-full bg-gray-400">
+              <div
+                class="h-12 w-12 overflow-hidden rounded-full bg-gray-400"
+                :class="
+                  route.name == 'profile'
+                    ? 'border-4 border-red-500'
+                    : 'border-none'
+                "
+              >
                 <img alt="..." :src="user?.thumbnail" />
               </div>
               <div class="ml-4">
@@ -27,7 +37,7 @@
                 :to="{ name: 'newsfeed' }"
                 class="flex items-center rounded-md p-2"
               >
-                <IconHouseVue />
+                <IconHouseVue :color="newsfeedIsSelected ? 'red' : 'white'" />
                 <span class="ml-6 text-white">
                   {{ $t("newsfeed.news_feed") }}
                 </span>
@@ -38,7 +48,7 @@
                 :to="{ name: 'movielist' }"
                 class="flex items-center rounded-md p-2"
               >
-                <IconCameraVue />
+                <IconCameraVue :color="movielistIsSelected ? 'red' : 'white'" />
 
                 <span class="ml-6 text-white">
                   {{ $t("newsfeed.list_of_movies") }}
@@ -57,9 +67,23 @@ import IconCameraVue from "@/components/icons/IconCamera.vue";
 import IconHouseVue from "@/components/icons/IconHouse.vue";
 import { RouterLink } from "vue-router";
 import axiosInstance from "@/config/axios/index.js";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
+import { useRoute } from "vue-router";
 
 const user = ref([]);
+const route = useRoute();
+
+const newsfeedIsSelected = ref(false);
+const movielistIsSelected = ref(false);
+
+watch(() => {
+  if (route.name == "newsfeed" || route.name == "new-quote") {
+    return (newsfeedIsSelected.value = true);
+  }
+  if (route.name == "movielist" || route.name == "movie-description") {
+    return (movielistIsSelected.value = true);
+  }
+});
 
 onMounted(() => {
   axiosInstance

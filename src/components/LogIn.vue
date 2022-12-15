@@ -13,16 +13,16 @@
             {{ $t("landing.username") }}&#47;{{ $t("landing.email") }}
           </span>
           <Field
-            placeholder=""
+            :placeholder="$t('texts.enter_your_email')"
             type="username"
             name="username"
-            rules="required|min:3"
+            rules="required"
             @focus="clearError"
-            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:outline-none"
           />
           <div v-if="errorData.authError">
             <div class="ml-4 text-orange-600">
-              {{ errorData.authError }}
+              {{ $t("texts.the_selected_username_is_invalid") }}
             </div>
           </div>
           <div>
@@ -34,12 +34,12 @@
             {{ $t("landing.password") }}
           </span>
           <Field
-            placeholder=""
+            :placeholder="$t('texts.password')"
             type="password"
             name="password"
             rules="required"
             @focus="clearError"
-            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:outline-none"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="password" />
@@ -67,7 +67,7 @@
           </router-link>
         </div>
         <button
-          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-[#CC0E10] hover:text-white"
         >
           {{ $t("landing.sign_in") }}
         </button>

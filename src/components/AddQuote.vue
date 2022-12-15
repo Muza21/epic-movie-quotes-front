@@ -57,7 +57,7 @@
             as="textarea"
             placeholder="Quote in English"
             name="quote_en"
-            rules="required"
+            rules="required|english_text"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white focus:outline-none"
           />
           <div>
@@ -110,7 +110,7 @@
         </div>
 
         <button
-          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-[#CC0E10] hover:text-white"
         >
           {{ $t("moviedescription.add_quote") }}
         </button>

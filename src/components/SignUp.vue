@@ -14,12 +14,12 @@
           </span>
           <span class="text-[#DC3545]">&#42;</span>
           <Field
-            placeholder=""
+            :placeholder="$t('texts.at_least_3')"
             type="text"
             name="username"
-            rules="required|min:3"
+            rules="required|min:3|max:15|lowercase"
             @focus="clearError"
-            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:outline-none"
           />
           <div v-if="errorData.usernameError">
             <div class="ml-4 text-orange-600">
@@ -36,12 +36,12 @@
           </span>
           <span class="text-[#DC3545]">&#42;</span>
           <Field
-            placeholder=""
+            :placeholder="$t('texts.enter_your_email')"
             type="email"
             name="email"
             rules="required|email|min:3"
             @focus="clearError"
-            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:outline-none"
           />
           <div v-if="errorData.emailError">
             <div class="ml-4 text-orange-600">{{ errorData.emailError }}</div>
@@ -56,11 +56,11 @@
           </span>
           <span class="text-[#DC3545]">&#42;</span>
           <Field
-            placeholder=""
+            :placeholder="$t('texts.at_least_8')"
             type="password"
             name="password"
-            rules="required"
-            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
+            rules="required|min:8|max:15|lowercase"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:outline-none"
           />
           <div>
             <ErrorMessage class="ml-4 text-orange-600" name="password" />
@@ -72,11 +72,11 @@
           </span>
           <span class="text-[#DC3545]">&#42;</span>
           <Field
-            placeholder=""
+            :placeholder="$t('texts.confirm_password')"
             type="password"
             name="password_confirmation"
             rules="required|confirmed:password"
-            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:outline-none"
           />
           <div>
             <ErrorMessage
@@ -87,7 +87,7 @@
         </div>
 
         <button
-          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-[#CC0E10] hover:text-white"
         >
           {{ $t("landing.get_started") }}
         </button>

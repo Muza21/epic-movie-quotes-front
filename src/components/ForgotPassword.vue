@@ -13,24 +13,24 @@
             {{ $t("landing.email") }}
           </span>
           <Field
-            placeholder=""
+            :placeholder="$t('texts.enter_your_email')"
             type="email"
             name="email"
             @focus="clearError"
             rules="required|email|min:3"
-            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none"
+            class="text-md block w-full rounded-lg border-2 border-gray-300 bg-[#CED4DA] px-3 py-2 placeholder-gray-600 shadow-md focus:outline-none"
           />
         </div>
         <div v-if="errorData.emailError">
           <div class="ml-4 text-orange-600">
-            {{ errorData.emailError }}
+            {{ $t("texts.the_provided_email_is_invalid") }}
           </div>
         </div>
         <div>
           <ErrorMessage class="ml-4 text-orange-600" name="email" />
         </div>
         <button
-          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-[#CC0E10] hover:text-white"
         >
           {{ $t("landing.send_instructions") }}
         </button>

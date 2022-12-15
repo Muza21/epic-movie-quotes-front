@@ -6,6 +6,7 @@
   "add_movie": "ფილმის დამატება",
 
   "genre": "ჟანრი",
+  "genre_field_is_required": "ჟანრის არჩევა აუცილებელია",
   "year": "წელი",
   "budget": "ბიუჯეტი",
   "director": "დირექტორი"

@@ -31,7 +31,7 @@
             as="textarea"
             placeholder="Start create new quote"
             name="quote_en"
-            rules="required"
+            rules="required|english_text"
             class="block w-full rounded-lg border-2 border-[#6C757D] bg-[#11101A] px-3 py-2 text-lg text-white focus:outline-none"
           />
           <div>
@@ -50,8 +50,11 @@
             <ErrorMessage class="ml-4 text-orange-600" name="quote_ka" />
           </div>
         </div>
-        <div class="py-1">
-          <div class="flex w-full items-center border-2 border-[#6C757D] p-2">
+        <div class="py-1" @dragover.prevent @drop.prevent>
+          <div
+            @drop="drag"
+            class="flex w-full items-center border-2 border-[#6C757D] p-2"
+          >
             <IconPhoto />
             <div class="mx-3 flex-1">
               <div class="flex items-center">
@@ -62,9 +65,11 @@
                   type="file"
                   id="quote_picture"
                   name="quote_picture"
+                  v-model="imageFile"
                   class="hidden"
                   accept="image/jpeg, image/png"
                   rules="required"
+                  @change="onImageChange"
                 />
                 <label
                   for="quote_picture"
@@ -74,6 +79,9 @@
                   {{ $t("newsfeed.choose_file") }}
                 </label>
               </div>
+            </div>
+            <div v-if="url" class="float-right">
+              <img :src="url" class="h-24 w-24" alt="photo uploaded" />
             </div>
           </div>
         </div>
@@ -121,7 +129,7 @@
           </div>
         </div>
         <button
-          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-black hover:text-white"
+          class="mt-3 block w-full rounded-lg bg-[#E31221] px-6 py-3 text-lg font-semibold text-white shadow-xl hover:bg-[#CC0E10] hover:text-white"
         >
           {{ $t("newsfeed.post") }}
         </button>
@@ -141,6 +149,18 @@ import axiosInstance from "@/config/axios/index.js";
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useQuoteStore } from "@/stores/quote";
+
+const url = ref("");
+const imageFile = ref();
+const onImageChange = (e) => {
+  url.value = URL.createObjectURL(e.target.files[0]);
+  console.log(url.value);
+};
+
+function drag(file) {
+  url.value = URL.createObjectURL(file.dataTransfer.files[0]);
+  imageFile.value = file.dataTransfer.files[0];
+}
 
 const router = useRouter();
 const quoteData = useQuoteStore();

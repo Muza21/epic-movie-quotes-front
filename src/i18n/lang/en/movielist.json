@@ -6,6 +6,7 @@
   "add_movie": "Add movie",
 
   "genre": "Genre",
+  "genre_field_is_required": "Genre field is required",
   "year": "Year",
   "budget": "Budget",
   "director": "Director"
