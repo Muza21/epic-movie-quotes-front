@@ -11,9 +11,10 @@
               <div class="relative">
                 <IconNotification />
                 <div
+                  v-if="undread?.length"
                   class="absolute -top-[5px] -right-[10px] flex h-[25px] w-[25px] items-center justify-center rounded-full bg-[#E33812] font-semibold text-white"
                 >
-                  3
+                  {{ undread?.length }}
                 </div>
               </div>
             </button>
@@ -101,7 +102,10 @@ import axiosInstance from "@/config/axios/index.js";
 import { setLocale } from "@vee-validate/i18n";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
-import { reactive } from "vue";
+import { reactive, onMounted, onBeforeMount, ref } from "vue";
+
+const undread = ref({});
+const user = ref({});
 
 const view = reactive({
   notificationView: false,
@@ -133,4 +137,45 @@ const onSubmit = async () => {
     console.log(err);
   }
 };
+onBeforeMount(() => {
+  axiosInstance
+    .get(`/current-user`)
+    .then((response) => {
+      user.value = response.data.user;
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+onMounted(() => {
+  axiosInstance
+    .get(`/notification`)
+    .then((response) => {
+      undread.value = response.data.undreadNotifications;
+      console.log(response.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+setTimeout(() => {
+  window.Echo.private("user-notification." + user.value.id).listen(
+    ".new-notification",
+    (e) => {
+      axiosInstance
+        .get(`/notification`)
+        .then((response) => {
+          undread.value = response.data.undreadNotifications;
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      console.log(e);
+    }
+  );
+}, 500);
 </script>

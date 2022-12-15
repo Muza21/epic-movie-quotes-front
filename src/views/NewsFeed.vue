@@ -196,10 +196,12 @@ function searchByMovieOrQuote() {
 }
 
 function likeQuote(id, index) {
+  console.log(quotes.values[index].user_id);
   axiosInstance
     .post(`/reaction/${id}`, {
       user_id: user.value.id,
       quote_id: id,
+      reciver_id: quotes.values[index].user_id,
     })
     .then((response) => {
       quotes.values[index].likes = response.data;
@@ -219,6 +221,7 @@ const onSubmit = async (values) => {
           body: values.comment,
           user_id: user.value.id,
           quote_id: commentQuoteId.value,
+          reciver_id: quotes.values[quoteIndex.value].user_id,
         }
       );
       quotes.values[quoteIndex.value].writtenComment = "";
@@ -259,7 +262,6 @@ window.Echo.channel("comment-channel").listen(".new-comment", (e) => {
     .get(`/quote`)
     .then((response) => {
       quotes.values = response.data.quotes;
-      console.log(response);
     })
     .catch((err) => {
       console.log(err);
@@ -272,20 +274,10 @@ window.Echo.channel("like-channel").listen(".new-like", (e) => {
     .get(`/quote`)
     .then((response) => {
       quotes.values = response.data.quotes;
-      console.log(response.data.quotes);
     })
     .catch((err) => {
       console.log(err);
     });
   console.log(e);
 });
-
-setTimeout(() => {
-  window.Echo.private("user-notification." + user.value.id).listen(
-    ".new-notification",
-    (e) => {
-      console.log(e);
-    }
-  );
-}, 500);
 </script>
