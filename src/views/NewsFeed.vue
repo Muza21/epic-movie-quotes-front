@@ -253,4 +253,39 @@ onMounted(() => {
       console.log(err);
     });
 });
+
+window.Echo.channel("comment-channel").listen(".new-comment", (e) => {
+  axiosInstance
+    .get(`/quote`)
+    .then((response) => {
+      quotes.values = response.data.quotes;
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  console.log(e);
+});
+
+window.Echo.channel("like-channel").listen(".new-like", (e) => {
+  axiosInstance
+    .get(`/quote`)
+    .then((response) => {
+      quotes.values = response.data.quotes;
+      console.log(response.data.quotes);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  console.log(e);
+});
+
+setTimeout(() => {
+  window.Echo.private("user-notification." + user.value.id).listen(
+    ".new-notification",
+    (e) => {
+      console.log(e);
+    }
+  );
+}, 500);
 </script>

@@ -25,12 +25,12 @@
           <div>
             <button @click="toggleLanguage">
               <span
-                v-if="$root.$i18n.locale == 'en'"
+                v-if="$i18n.locale == 'en'"
                 class="mx-4 flex items-center text-white"
                 >Eng <IconDropdown class="ml-2" />
               </span>
               <span
-                v-if="$root.$i18n.locale == 'ka'"
+                v-if="$i18n.locale == 'ka'"
                 class="mx-4 flex items-center text-white"
                 >ქარ <IconDropdown class="ml-2" />
               </span>
@@ -42,7 +42,7 @@
               <div class="py-1 hover:bg-gray-800">
                 <div
                   @click="
-                    $root.$i18n.locale = 'en';
+                    $i18n.locale = 'en';
                     view.languageView = false;
                     setLocaleMemory('en');
                   "
@@ -54,7 +54,7 @@
               <div class="py-1 hover:bg-gray-800">
                 <div
                   @click="
-                    $root.$i18n.locale = 'ka';
+                    $i18n.locale = 'ka';
                     view.languageView = false;
                     setLocaleMemory('ka');
                   "
